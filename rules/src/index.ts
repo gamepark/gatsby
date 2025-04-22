@@ -1,3 +1,3 @@
-export { GameTemplateRules } from './GameTemplateRules'
-export { GameTemplateOptionsSpec } from './GameTemplateOptions'
-export { GameTemplateSetup } from './GameTemplateSetup'
+export { GatsbyRules } from './GatsbyRules'
+export { GatsbyOptionsSpec } from './GatsbyOptions'
+export { GatsbySetup } from './GatsbySetup'

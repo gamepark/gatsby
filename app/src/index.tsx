@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { GameTemplateOptionsSpec } from '@gamepark/game-template/GameTemplateOptions'
-import { GameTemplateRules } from '@gamepark/game-template/GameTemplateRules'
-import { GameTemplateSetup } from '@gamepark/game-template/GameTemplateSetup'
+import { GatsbyOptionsSpec } from '@gamepark/gatsby/GatsbyOptions'
+import { GatsbyRules } from '@gamepark/gatsby/GatsbyRules'
+import { GatsbySetup } from '@gamepark/gatsby/GatsbySetup'
 import { GameProvider, setupTranslation } from '@gamepark/react-game'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
@@ -16,10 +16,10 @@ setupTranslation(translations, { debug: false })
 ReactDOM.render(
   <StrictMode>
     <GameProvider
-      game="game-template"
-      Rules={GameTemplateRules}
-      optionsSpec={GameTemplateOptionsSpec}
-      GameSetup={GameTemplateSetup}
+      game="gatsby"
+      Rules={GatsbyRules}
+      optionsSpec={GatsbyOptionsSpec}
+      GameSetup={GatsbySetup}
       material={Material}
       locators={Locators}
       animations={gameAnimations}

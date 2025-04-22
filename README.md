@@ -123,7 +123,7 @@ export class PlayerHandLocator extends HandLocator<PlayerColor, MaterialType, Lo
 
 ### 3.3 The setup
 
-Once you have one Material type and one Location type, you can start to setup a new game in [GameTemplateRules.ts](/rules/src/GameTemplateRules.ts)
+Once you have one Material type and one Location type, you can start to setup a new game in [GatsbyRules.ts](/rules/src/GatsbyRules.ts)
 
 You can easily create and manipulate the material in the setup:
 

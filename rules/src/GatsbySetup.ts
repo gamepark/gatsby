@@ -6,13 +6,12 @@ import { cabaretTiles } from './material/CabaretTile'
 import { characterTiles } from './material/CharacterTile'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
-import { PlayerColor } from './PlayerColor'
 import { RuleId } from './rules/RuleId'
 
 /**
  * This class creates a new Game based on the game options
  */
-export class GatsbySetup extends MaterialGameSetup<PlayerColor, MaterialType, LocationType, GatsbyOptions> {
+export class GatsbySetup extends MaterialGameSetup<number, MaterialType, LocationType, GatsbyOptions> {
   Rules = GatsbyRules
 
   setupMaterial(_options: GatsbyOptions) {
@@ -25,7 +24,10 @@ export class GatsbySetup extends MaterialGameSetup<PlayerColor, MaterialType, Lo
     shuffle(characterTiles)
       .slice(0, 12)
       .forEach((tile, index) => {
-        this.material(MaterialType.CharacterTile).createItem({ location: { type: LocationType.CharacterTile, id: index, rotation: !returned.includes(index) }, id: tile })
+        this.material(MaterialType.CharacterTile).createItem({
+          location: { type: LocationType.CharacterTile, id: index, rotation: !returned.includes(index) },
+          id: tile
+        })
       })
   }
 

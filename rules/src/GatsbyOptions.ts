@@ -1,10 +1,9 @@
 import { OptionsSpec } from '@gamepark/rules-api'
-import { PlayerColor, playerColors } from './PlayerColor'
 
 /**
  * This is the options for each player in the game.
  */
-type PlayerOptions = { id: PlayerColor }
+type PlayerOptions = { id: number }
 
 /**
  * This is the type of object that the game receives when a new game is started.
@@ -22,7 +21,7 @@ export const GatsbyOptionsSpec: OptionsSpec<GatsbyOptions> = {
   players: {
     id: {
       label: (t) => t('player.id'),
-      values: playerColors,
+      values: [1, 2],
       valueSpec: (id) => ({ label: (t) => t(`player.${id}`) })
     }
   }

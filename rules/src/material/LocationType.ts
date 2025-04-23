@@ -2,5 +2,10 @@ export enum LocationType {
   GameBoard = 1,
   CabaretSpace,
   CharacterSpace,
-  FinanceCenter
+  FinanceCenter,
+  PlayerInfluenceTokenPile,
+  RaceTrack,
+  CabaretTokenSpace,
+  ActionSpace,
+  ActionTokenIdle
 }

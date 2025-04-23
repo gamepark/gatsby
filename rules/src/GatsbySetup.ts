@@ -15,6 +15,9 @@ export class GatsbySetup extends MaterialGameSetup<number, MaterialType, Locatio
   Rules = GatsbyRules
 
   setupMaterial(_options: GatsbyOptions) {
+
+    this.material(MaterialType.ActionToken).createItem({ location: { type: LocationType.ActionTokenIdle }, id: 1})
+
     shuffle(cabaretTiles).forEach((tile, index) => {
       const id = index * 10 + sample([1, 3, 5, 7])
       this.material(MaterialType.CabaretTile).createItem({ location: { type: LocationType.CabaretSpace, id }, id: tile })
@@ -30,17 +33,25 @@ export class GatsbySetup extends MaterialGameSetup<number, MaterialType, Locatio
         })
       })
 
-    this.material(MaterialType.AscensionToken).createItem({
-      location: { type: LocationType.FinanceCenter, id: 0, player: 1 },
-      id: 1
-    })
-    this.material(MaterialType.AscensionToken).createItem({
-      location: { type: LocationType.FinanceCenter, id: 0, player: 2 },
-      id: 2
-    })
+    this.setupPlayers()
   }
 
   start() {
     this.startPlayerTurn(RuleId.TheFirstStep, this.players[0])
+  }
+
+  setupPlayers() {
+    for (const player of this.players) {
+      this.material(MaterialType.AscensionToken).createItem({
+        location: { type: LocationType.FinanceCenter, id: 0, player },
+        id: player
+      })
+      for(let i = 0; i < 21; i++) {
+        this.material(MaterialType.InfluenceToken).createItem({
+          location: { type: LocationType.PlayerInfluenceTokenPile, player },
+          id: player
+        })
+      }
+    }
   }
 }

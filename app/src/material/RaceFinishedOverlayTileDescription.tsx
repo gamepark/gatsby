@@ -5,6 +5,7 @@ import Raceover from '../images/Raceover.jpg'
 export class RaceFinishedOverlayTileDescription extends TokenDescription {
   height = 2
   width = 12
+  borderRadius = 0.3
 
   image = Raceover
 }

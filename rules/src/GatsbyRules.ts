@@ -1,4 +1,4 @@
-import { MaterialGame, MaterialMove, MaterialRules, TimeLimit } from '@gamepark/rules-api'
+import { HiddenMaterialRules, MaterialGame, MaterialItem, MaterialMove, TimeLimit } from '@gamepark/rules-api'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { PlayerColor } from './PlayerColor'
@@ -10,14 +10,21 @@ import { RuleId } from './rules/RuleId'
  * It must follow Game Park "Rules" API so that the Game Park server can enforce the rules.
  */
 export class GatsbyRules
-  extends MaterialRules<PlayerColor, MaterialType, LocationType>
+  extends HiddenMaterialRules<PlayerColor, MaterialType, LocationType>
   implements TimeLimit<MaterialGame<PlayerColor, MaterialType, LocationType>, MaterialMove<PlayerColor, MaterialType, LocationType>, PlayerColor>
 {
   rules = {
     [RuleId.TheFirstStep]: TheFirstStepRule
   }
 
+  hidingStrategies = {
+    [MaterialType.CharacterTile]: {
+      [LocationType.CharacterTile]: hideIdIfRotated
+    }
+  }
+
   giveTime(): number {
     return 60
   }
 }
+const hideIdIfRotated = (item: MaterialItem) => !item.location.rotation? []: ['id']

@@ -2,7 +2,7 @@
 import { Locator } from '@gamepark/react-game'
 
 class GameBoardLocator extends Locator {
-  coordinates = { y: 0 }
+  coordinates = { y: -10 }
 }
 
 export const gameBoardLocator = new GameBoardLocator()

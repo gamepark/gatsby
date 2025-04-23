@@ -1,6 +1,8 @@
 import { MaterialGameSetup } from '@gamepark/rules-api'
+import { sample, shuffle } from 'lodash'
 import { GatsbyOptions } from './GatsbyOptions'
 import { GatsbyRules } from './GatsbyRules'
+import { cabaretTiles } from './material/CabaretTile'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { PlayerColor } from './PlayerColor'
@@ -13,7 +15,10 @@ export class GatsbySetup extends MaterialGameSetup<PlayerColor, MaterialType, Lo
   Rules = GatsbyRules
 
   setupMaterial(_options: GatsbyOptions) {
-    // TODO
+    shuffle(cabaretTiles).forEach((tile, index) => {
+      const id = index * 10 + sample([1, 3, 5, 7])
+      this.material(MaterialType.CabaretTile).createItem({ location: { type: LocationType.CabaretTile, id }, id: tile })
+    })
   }
 
   start() {

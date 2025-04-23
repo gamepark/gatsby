@@ -1,4 +1,4 @@
-import { HiddenMaterialRules, MaterialGame, MaterialItem, MaterialMove, TimeLimit } from '@gamepark/rules-api'
+import { HiddenMaterialRules, hideItemId, MaterialGame, MaterialItem, MaterialMove, PositiveSequenceStrategy, TimeLimit } from '@gamepark/rules-api'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { TheFirstStepRule } from './rules/TheFirstStepRule'
@@ -23,6 +23,18 @@ export class GatsbyRules
     [MaterialType.ActionToken]: {
       [LocationType.ActionTokenIdle]: hideIdIfRotated,
       [LocationType.ActionSpace]: hideIdIfRotated
+    },
+    [MaterialType.SpecialActionTile]: {
+      [LocationType.SpecialActionDeck]: hideItemId
+    }
+  }
+
+  locationsStrategies = {
+    [MaterialType.SpecialActionTile]: {
+      [LocationType.SpecialActionDeck]: new PositiveSequenceStrategy()
+    },
+    [MaterialType.RaceFinishedOverlayTile]: {
+      [LocationType.RaceFinishedDeck]: new PositiveSequenceStrategy()
     }
   }
 

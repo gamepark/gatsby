@@ -6,6 +6,8 @@ import { cabaretTileDescription } from './CabaretTileDescription'
 import { characterTileDescription } from './CharacterTileDescription'
 import { gameBoardDescription } from './GameBoardDescription'
 import { influenceTokenDescription } from './InfluenceTokenDescription'
+import { raceFinishedOverlayTileDescription } from './RaceFinishedOverlayTileDescription'
+import { specialActionTileDescription } from './SpecialActionTileDescription'
 
 export const Material: Partial<Record<MaterialType, MaterialDescription>> = {
   [MaterialType.GameBoard]: gameBoardDescription,
@@ -13,5 +15,7 @@ export const Material: Partial<Record<MaterialType, MaterialDescription>> = {
   [MaterialType.CharacterTile]: characterTileDescription,
   [MaterialType.AscensionToken]: ascensionTokenDescription,
   [MaterialType.InfluenceToken]: influenceTokenDescription,
-  [MaterialType.ActionToken]: actionTokenDescription
+  [MaterialType.ActionToken]: actionTokenDescription,
+  [MaterialType.SpecialActionTile]: specialActionTileDescription,
+  [MaterialType.RaceFinishedOverlayTile]: raceFinishedOverlayTileDescription
 }

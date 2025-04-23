@@ -7,5 +7,7 @@ export enum LocationType {
   RaceTrack,
   CabaretTokenSpace,
   ActionSpace,
-  ActionTokenIdle
+  ActionTokenIdle,
+  SpecialActionDeck,
+  RaceFinishedDeck
 }

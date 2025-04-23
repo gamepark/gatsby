@@ -20,9 +20,19 @@ export const PlayerPanels = () => {
   )
 }
 
-const panelPosition = (index: number) => css`
-  position: absolute;
-  right: 1em;
-  top: ${8.5 + index * 16}em;
-  width: 28em;
-`
+const panelPosition = (index: number) => {
+  if (index === 0) {
+    return css`
+      position: absolute;
+      left: 1em;
+      top: 8.5em;
+      width: 28em;
+    `
+  }
+  return css`
+    position: absolute;
+    right: 1em;
+    top: 8.5em;
+    width: 28em;
+  `
+}

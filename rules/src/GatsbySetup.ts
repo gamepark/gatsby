@@ -17,7 +17,7 @@ export class GatsbySetup extends MaterialGameSetup<number, MaterialType, Locatio
   setupMaterial(_options: GatsbyOptions) {
     shuffle(cabaretTiles).forEach((tile, index) => {
       const id = index * 10 + sample([1, 3, 5, 7])
-      this.material(MaterialType.CabaretTile).createItem({ location: { type: LocationType.CabaretTile, id }, id: tile })
+      this.material(MaterialType.CabaretTile).createItem({ location: { type: LocationType.CabaretSpace, id }, id: tile })
     })
 
     const returned = [0, 2, 3, 6, 7, 11]
@@ -25,10 +25,19 @@ export class GatsbySetup extends MaterialGameSetup<number, MaterialType, Locatio
       .slice(0, 12)
       .forEach((tile, index) => {
         this.material(MaterialType.CharacterTile).createItem({
-          location: { type: LocationType.CharacterTile, id: index, rotation: !returned.includes(index) },
+          location: { type: LocationType.CharacterSpace, id: index, rotation: !returned.includes(index) },
           id: tile
         })
       })
+
+    this.material(MaterialType.AscensionToken).createItem({
+      location: { type: LocationType.FinanceCenter, id: 0, player: 1 },
+      id: 1
+    })
+    this.material(MaterialType.AscensionToken).createItem({
+      location: { type: LocationType.FinanceCenter, id: 0, player: 2 },
+      id: 2
+    })
   }
 
   start() {

@@ -3,15 +3,15 @@ import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { Locator } from '@gamepark/react-game'
 import { Location, XYCoordinates } from '@gamepark/rules-api'
 
-class CharacterTileLocator extends Locator {
+class CharacterSpaceLocator extends Locator {
   parentItemType = MaterialType.GameBoard
 
   getPositionOnParent(location: Location): XYCoordinates {
-    return cabaretTilesCoordinates[location.id]
+    return cabaretSpacesCoordinates[location.id]
   }
 }
 
-const cabaretTilesCoordinates = [
+const cabaretSpacesCoordinates = [
   { x: 6, y: 47.2 },
   { x: 16.5, y: 73.7 },
   { x: 26.9, y: 47.2 },
@@ -26,4 +26,4 @@ const cabaretTilesCoordinates = [
   { x: 94, y: 74.8 }
 ]
 
-export const characterTileLocator = new CharacterTileLocator()
+export const characterSpaceLocator = new CharacterSpaceLocator()

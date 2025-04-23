@@ -18,7 +18,7 @@ export class GatsbyRules
 
   hidingStrategies = {
     [MaterialType.CharacterTile]: {
-      [LocationType.CharacterTile]: hideIdIfRotated
+      [LocationType.CharacterSpace]: hideIdIfRotated
     }
   }
 

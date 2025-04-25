@@ -72,6 +72,6 @@ export class GatsbySetup extends MaterialGameSetup<number, MaterialType, Locatio
   }
 
   start() {
-    this.startPlayerTurn(RuleId.TheFirstStep, this.players[0])
+    this.startPlayerTurn(RuleId.ChooseSpecialActionTile, this.players[1])
   }
 }

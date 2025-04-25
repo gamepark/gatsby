@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
+import { LocationType } from '@gamepark/gatsby/material/LocationType'
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { DropAreaDescription, Locator, MaterialContext } from '@gamepark/react-game'
-import { Location, MaterialItem, XYCoordinates } from '@gamepark/rules-api'
+import { isMoveItem, Location, MaterialItem, MaterialMove, XYCoordinates } from '@gamepark/rules-api'
 
 class CabaretTokenSpaceLocator extends Locator {
   parentItemType = MaterialType.CabaretTile
@@ -29,6 +30,12 @@ export class CabaretTokenSpaceDescription extends DropAreaDescription {
   height = 1.5
   width = 1.5
   borderRadius = 1
+
+  canShortClick(move: MaterialMove, location: Location): boolean {
+    return (
+      isMoveItem(move) && move.location.type === LocationType.CabaretTokenSpace && move.location.id === location.id && move.location.parent === location.parent
+    )
+  }
 }
 
 export const cabaretTokenSpaceLocator = new CabaretTokenSpaceLocator()

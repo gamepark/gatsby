@@ -1,6 +1,12 @@
 {
   "en": {
     "translation": {
+      "header.choose.special.action.you": "You can choose One special action tile",
+      "header.choose.special.action.player": "{player} can choose One special action tile",
+      "header.action.you": "You can choose an action",
+      "header.action.player": "{player} can choose an action",
+      "header.cabaret.you": "You can place an influence token on cabaret",
+      "header.cabaret.player": "{player} can place an influence token on cabaret",
       "Menu": "Menu",
       "OK": "OK",
       "Validate": "Validate",

@@ -12,16 +12,16 @@ export const PlayerPanels = () => {
 
   return createPortal(
     <>
-      {players.map((player, index) => (
-        <StyledPlayerPanel key={player.id} player={player} css={panelPosition(index)} />
+      {players.map((player) => (
+        <StyledPlayerPanel key={player.id} player={player} css={panelPosition(player.id)} />
       ))}
     </>,
     root
   )
 }
 
-const panelPosition = (index: number) => {
-  if (index === 0) {
+const panelPosition = (player: number) => {
+  if (player === 1) {
     return css`
       position: absolute;
       left: 1em;

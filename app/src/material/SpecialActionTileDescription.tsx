@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
+import { LocationType } from '@gamepark/gatsby/material/LocationType'
+import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { SpecialActionTile } from '@gamepark/gatsby/material/SpecialActionTile'
-import { CardDescription } from '@gamepark/react-game'
+import { CardDescription, ItemContext } from '@gamepark/react-game'
+import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import BonusTile1 from '../images/bonuses/BonusTile1.jpg'
 import BonusTile2 from '../images/bonuses/BonusTile2.jpg'
 import BonusTile3 from '../images/bonuses/BonusTile3.jpg'
@@ -21,6 +24,10 @@ export class SpecialActionTileDescription extends CardDescription {
   backImage = Back
 
   images = images
+
+  canLongClick(move: MaterialMove, context: ItemContext): boolean {
+    return isMoveItemType(MaterialType.SpecialActionTile)(move) && move.location.type === LocationType.ActionSpace && move.itemIndex === context.index
+  }
 }
 
 const images = {

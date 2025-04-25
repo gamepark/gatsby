@@ -1,12 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { getRelativePlayerIndex, MaterialContext, PileLocator } from '@gamepark/react-game'
+import { PileLocator } from '@gamepark/react-game'
 import { Location, MaterialItem } from '@gamepark/rules-api'
 
 class PlayerInfluenceTokenPileLocator extends PileLocator {
   radius = 2
-  getCoordinates(location: Location, context: MaterialContext) {
-    const index = getRelativePlayerIndex(context, location.player)
-    if(index === 0) {
+  getCoordinates(location: Location) {
+    if(location.player === 1) {
       return { x: -45, y: 15 }
     }
     return { x: 45, y: 15 }

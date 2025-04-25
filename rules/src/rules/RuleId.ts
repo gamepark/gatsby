@@ -1,3 +1,5 @@
 export enum RuleId {
-  TheFirstStep = 1
+  ChooseSpecialActionTile = 1,
+  PlaceTokenOnCabaret,
+  ChooseAction
 }

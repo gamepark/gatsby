@@ -8,6 +8,8 @@ export enum LocationType {
   CabaretTokenSpace,
   ActionSpace,
   ActionTokenIdle,
+  SpecialActionDiscard,
   SpecialActionDeck,
+  SpecialActionLayout,
   RaceFinishedDeck
 }

@@ -1,7 +1,18 @@
-import { HiddenMaterialRules, hideItemId, MaterialGame, MaterialItem, MaterialMove, PositiveSequenceStrategy, TimeLimit } from '@gamepark/rules-api'
+import {
+  hideItemId,
+  hideItemIdToOthers,
+  MaterialGame,
+  MaterialItem,
+  MaterialMove,
+  PositiveSequenceStrategy,
+  SecretMaterialRules,
+  TimeLimit
+} from '@gamepark/rules-api'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
-import { TheFirstStepRule } from './rules/TheFirstStepRule'
+import { ChooseActionRule } from './rules/ChooseActionRule'
+import { ChooseSpecialActionTileRule } from './rules/ChooseSpecialActionTileRule'
+import { PlaceTokenOnCabaretRule } from './rules/PlaceTokenOnCabaretRule'
 import { RuleId } from './rules/RuleId'
 
 /**
@@ -9,11 +20,13 @@ import { RuleId } from './rules/RuleId'
  * It must follow Game Park "Rules" API so that the Game Park server can enforce the rules.
  */
 export class GatsbyRules
-  extends HiddenMaterialRules<number, MaterialType, LocationType>
+  extends SecretMaterialRules<number, MaterialType, LocationType>
   implements TimeLimit<MaterialGame<number, MaterialType, LocationType>, MaterialMove<number, MaterialType, LocationType>>
 {
   rules = {
-    [RuleId.TheFirstStep]: TheFirstStepRule
+    [RuleId.ChooseSpecialActionTile]: ChooseSpecialActionTileRule,
+    [RuleId.PlaceTokenOnCabaret]: PlaceTokenOnCabaretRule,
+    [RuleId.ChooseAction]: ChooseActionRule
   }
 
   hidingStrategies = {
@@ -25,13 +38,21 @@ export class GatsbyRules
       [LocationType.ActionSpace]: hideIdIfRotated
     },
     [MaterialType.SpecialActionTile]: {
-      [LocationType.SpecialActionDeck]: hideItemId
+      [LocationType.SpecialActionDeck]: hideItemId,
+      [LocationType.SpecialActionDiscard]: hideItemId,
+      [LocationType.SpecialActionLayout]: hideItemIdToOthers
     }
   }
 
   locationsStrategies = {
     [MaterialType.SpecialActionTile]: {
-      [LocationType.SpecialActionDeck]: new PositiveSequenceStrategy()
+      [LocationType.SpecialActionDeck]: new PositiveSequenceStrategy(),
+      [LocationType.SpecialActionDiscard]: new PositiveSequenceStrategy(),
+      [LocationType.SpecialActionLayout]: new PositiveSequenceStrategy('y'),
+      [LocationType.ActionSpace]: new PositiveSequenceStrategy()
+    },
+    [MaterialType.ActionToken]: {
+      [LocationType.ActionSpace]: new PositiveSequenceStrategy()
     },
     [MaterialType.RaceFinishedOverlayTile]: {
       [LocationType.RaceFinishedDeck]: new PositiveSequenceStrategy()

@@ -1,6 +1,8 @@
 import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
+import { ActionType, actionTypes, rulesForAction } from './ActionHelper'
+import { Memory } from './Memory'
 import { RuleId } from './RuleId'
 
 export class ChooseActionRule extends PlayerTurnRule {
@@ -16,11 +18,11 @@ export class ChooseActionRule extends PlayerTurnRule {
 
   getPossiblePlaces() {
     const res: Location[] = []
-    for (let i = 1; i < 5; i++) {
+    for (const actionType of actionTypes) {
       const actionTokenIsNotAlreadyInSpace =
-        this.material(MaterialType.ActionToken).location((loc) => loc.type === LocationType.ActionSpace && loc.id === i).length === 0
+        this.material(MaterialType.ActionToken).location((loc) => loc.type === LocationType.ActionSpace && loc.id === actionType).length === 0
       if (actionTokenIsNotAlreadyInSpace) {
-        res.push({ type: LocationType.ActionSpace, id: i })
+        res.push({ type: LocationType.ActionSpace, id: actionType })
       }
     }
 
@@ -47,8 +49,11 @@ export class ChooseActionRule extends PlayerTurnRule {
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
-    if(isMoveItem(move) && move.location.type === LocationType.ActionSpace) {
-      return [this.startPlayerTurn(RuleId.ChooseAction, this.nextPlayer)]
+    if (isMoveItem(move) && move.location.type === LocationType.ActionSpace && actionTypes.includes(move.location.id as ActionType)) {
+      const index: ActionType = move.location.id
+      const rules: RuleId[] = rulesForAction[index]
+      this.memorize(Memory.NextRules, [rules[1]])
+      return [this.startRule(rules[0])]
     }
     return []
   }

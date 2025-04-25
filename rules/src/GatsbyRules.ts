@@ -12,6 +12,8 @@ import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { ChooseActionRule } from './rules/ChooseActionRule'
 import { ChooseSpecialActionTileRule } from './rules/ChooseSpecialActionTileRule'
+import { PlaceTokenOnCabaretNearToLastRule } from './rules/PlaceTokenOnCabaretNearToLastRule'
+import { PlaceTokenOnCabaretNearToOtherRule } from './rules/PlaceTokenOnCabaretNearToOtherRule'
 import { PlaceTokenOnCabaretRule } from './rules/PlaceTokenOnCabaretRule'
 import { RuleId } from './rules/RuleId'
 
@@ -26,6 +28,8 @@ export class GatsbyRules
   rules = {
     [RuleId.ChooseSpecialActionTile]: ChooseSpecialActionTileRule,
     [RuleId.PlaceTokenOnCabaret]: PlaceTokenOnCabaretRule,
+    [RuleId.PlaceTokenOnCabaretNearToOther]: PlaceTokenOnCabaretNearToOtherRule,
+    [RuleId.PlaceTokenOnCabaretNearToLast]: PlaceTokenOnCabaretNearToLastRule,
     [RuleId.ChooseAction]: ChooseActionRule
   }
 

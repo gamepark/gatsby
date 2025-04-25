@@ -1,10 +1,12 @@
 import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
-import { cabaretTiles } from '../material/CabaretTile'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
+import { CabaretHelper } from './helpers/CabaretHelper'
+import { Memory } from './Memory'
 import { RuleId } from './RuleId'
 
 export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
+  cabaretHelper = new CabaretHelper(this.game)
   getPlayerMoves() {
     const moves: MaterialMove[] = []
     this.getPossiblePlace().forEach((place) => {
@@ -14,7 +16,17 @@ export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
-    if(isMoveItem(move) && move.location.type === LocationType.CabaretTokenSpace) {
+    if (isMoveItem(move) && move.location.type === LocationType.CabaretTokenSpace) {
+      this.memorize(Memory.LastTokenOnCabaretForPlayer, move.location, this.player)
+      const nextRules: RuleId[] | undefined = this.remind(Memory.NextRules) ?? []
+      if (nextRules.length > 1) {
+        this.memorize(Memory.NextRules, nextRules.slice(1))
+        return [this.startRule(nextRules[0])]
+      }
+      if (nextRules.length > 0) {
+        this.forget(Memory.NextRules)
+        return [this.startRule(nextRules[0])]
+      }
       return [this.startPlayerTurn(RuleId.ChooseAction, this.nextPlayer)]
     }
     return []
@@ -22,11 +34,16 @@ export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
 
   getPossiblePlace() {
     const res: Location[] = []
-    cabaretTiles.forEach((tile) => {
-      for (let i = 0; i < 9; i++) {
-        res.push({ type: LocationType.CabaretTokenSpace, id: i, parent: tile })
-      }
-    })
+    this.material(MaterialType.CabaretTile)
+      .getIndexes()
+      .forEach((tile) => {
+        for (let i = 0; i < 9; i++) {
+          const hasNotAlreadyTokenPlaced = this.cabaretHelper.checkIfPlaceIsEmpty({ id: i, parent: tile } as Location)
+          if (hasNotAlreadyTokenPlaced) {
+            res.push({ type: LocationType.CabaretTokenSpace, id: i, parent: tile })
+          }
+        }
+      })
     return res
   }
 

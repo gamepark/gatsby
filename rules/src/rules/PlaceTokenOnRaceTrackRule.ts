@@ -1,13 +1,13 @@
 import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
-import { CharacterTilesHelper } from './helpers/CharacterTilesHelper'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
+import { RaceTrackHelper } from './helpers/RaceTrackHelper'
 import { Memory } from './Memory'
 
 export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
   nextRuleHelper = new NextRuleHelper(this.game)
-  characterTilesHelper = new CharacterTilesHelper(this.game)
+  raceTrackHelper = new RaceTrackHelper(this.game)
 
   onRuleStart(): MaterialMove[] {
     if (this.playerInfluenceTokens.length === 0 || this.getPossiblePlace().length === 0) {
@@ -33,7 +33,7 @@ export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
         .getItem()
       this.memorize(Memory.LastTokenOnRaceTrackForPlayer, move.location.id, this.player)
       if (tokenPlaced) {
-        moves.push(...this.characterTilesHelper.checkAndGetRaceTrackCharacters(move.location.id, tokenPlaced.location.x!))
+        moves.push(...this.raceTrackHelper.checkAndGetRaceTrackCharacters(move.location.id, tokenPlaced.location.x!))
       }
       moves.push(...this.nextRuleHelper.moveToNextRule(this.nextPlayer))
     }

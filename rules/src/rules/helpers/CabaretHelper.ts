@@ -1,8 +1,22 @@
-import { Location, MaterialRulesPart } from '@gamepark/rules-api'
+import { Location, MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
+import { CabaretTile, checkIfLocationIsStarCase } from '../../material/CabaretTile'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 
+interface CasesIdFromRotation {
+  [Rotation.Rotation1]: number[]
+  [Rotation.Rotation3]: number[]
+  [Rotation.Rotation5]: number[]
+  [Rotation.Rotation7]: number[]
+}
+
 export class CabaretHelper extends MaterialRulesPart {
+  player?: number
+
+  constructor(game: MaterialGame, player = game.rule?.player) {
+    super(game)
+    this.player = player
+  }
 
   getPlacesNear(id: number, parent: number): Location[] {
     if (id === 4) {
@@ -11,7 +25,7 @@ export class CabaretHelper extends MaterialRulesPart {
         { type: LocationType.CabaretTokenSpace, id: 3, parent },
         { type: LocationType.CabaretTokenSpace, id: 5, parent },
         { type: LocationType.CabaretTokenSpace, id: 7, parent }
-      ].filter((place) => this.checkIfPlaceIsEmpty(place))
+      ]
     }
     const parentRotation = this.material(MaterialType.CabaretTile).location(LocationType.CabaretSpace).index(parent).getItem()?.location.id % 10
     const tilesNextOfRotation = tokenPlacesNearToOtherTiles[parent][parentRotation as Rotation]
@@ -73,7 +87,7 @@ export class CabaretHelper extends MaterialRulesPart {
         break
     }
 
-    return places.filter((place) => this.checkIfPlaceIsEmpty(place))
+    return places
   }
 
   checkIfPlaceIsEmpty(location: Location) {
@@ -81,6 +95,122 @@ export class CabaretHelper extends MaterialRulesPart {
       this.material(MaterialType.InfluenceToken).location(
         (loc) => loc.type === LocationType.CabaretTokenSpace && loc.parent === location.parent && loc.id === location.id
       ).length === 0
+    )
+  }
+
+  checkIfPlayerTokenIsInPlace(location: Location) {
+    return (
+      this.material(MaterialType.InfluenceToken)
+        .location((loc) => loc.type === LocationType.CabaretTokenSpace && loc.parent === location.parent && loc.id === location.id)
+        .id(this.player).length > 0
+    )
+  }
+
+  checkAnGetCharacters() {
+    const moves: MaterialMove[] = []
+    moves.push(...this.checkAnGetStarCharacter())
+    moves.push(...this.checkAndGetRightCharacter())
+    moves.push(...this.checkAndGetLeftCharacter())
+    return moves
+  }
+
+  checkAnGetStarCharacter() {
+    const playerTokenInStarCases = this.material(MaterialType.InfluenceToken)
+      .id(this.player)
+      .location(LocationType.CabaretTokenSpace)
+      .filter((item) => {
+        const tile = this.material(MaterialType.CabaretTile).index(item.location.parent).getItem()?.id as CabaretTile
+        return checkIfLocationIsStarCase(tile, item.location.id as number)
+      }).length
+
+    if (playerTokenInStarCases === 4) {
+      const characterTile = this.material(MaterialType.CharacterTile).location((loc) => loc.type === LocationType.CharacterSpace && loc.id === 1)
+      return [characterTile.moveItem(({ location }) => ({ type: LocationType.PlayerCharacterTiles, rotation: location.rotation, player: this.player }))]
+    }
+    return []
+  }
+
+  checkAndGetRightCharacter() {
+    const startTilesIndexs = [0, 1]
+    const endTilesIndexs = [2, 3]
+    const startCasesIds = {
+      [Rotation.Rotation1]: [0, 3, 6],
+      [Rotation.Rotation3]: [6, 7, 8],
+      [Rotation.Rotation5]: [2, 5, 8],
+      [Rotation.Rotation7]: [0, 1, 2]
+    }
+    const endCasesIds = {
+      [Rotation.Rotation1]: [2, 5, 8],
+      [Rotation.Rotation3]: [0, 1, 2],
+      [Rotation.Rotation5]: [0, 3, 6],
+      [Rotation.Rotation7]: [6, 7, 8]
+    }
+
+    const characterTile = this.material(MaterialType.CharacterTile).location((loc) => loc.type === LocationType.CharacterSpace && loc.id === 2)
+    if (characterTile.length) {
+      if (this.checkPath(startCasesIds, startTilesIndexs, endCasesIds, endTilesIndexs)) {
+        return [characterTile.moveItem(({ location }) => ({ type: LocationType.PlayerCharacterTiles, rotation: location.rotation, player: this.player }))]
+      }
+    }
+
+    return []
+  }
+
+  checkAndGetLeftCharacter() {
+    const startTilesIndexs = [1, 2]
+    const endTilesIndexs = [0, 3]
+    const startCasesIds = {
+      [Rotation.Rotation1]: [0, 1, 2],
+      [Rotation.Rotation3]: [0, 3, 6],
+      [Rotation.Rotation5]: [6, 7, 8],
+      [Rotation.Rotation7]: [2, 5, 8]
+    }
+    const endCasesIds = {
+      [Rotation.Rotation1]: [6, 7, 8],
+      [Rotation.Rotation3]: [2, 5, 8],
+      [Rotation.Rotation5]: [0, 1, 2],
+      [Rotation.Rotation7]: [0, 3, 6]
+    }
+
+    const characterTile = this.material(MaterialType.CharacterTile).location((loc) => loc.type === LocationType.CharacterSpace && loc.id === 0)
+    if (characterTile.length) {
+      if (this.checkPath(startCasesIds, startTilesIndexs, endCasesIds, endTilesIndexs)) {
+        return [characterTile.moveItem(({ location }) => ({ type: LocationType.PlayerCharacterTiles, rotation: location.rotation, player: this.player }))]
+      }
+    }
+
+    return []
+  }
+
+  checkPath(startCasesIds: CasesIdFromRotation, startTilesIndexs: number[], endCasesIds: CasesIdFromRotation, endTilesIndexs: number[]) {
+    const playerTokensInStartCases = this.material(MaterialType.InfluenceToken)
+      .location((loc) => {
+        const parentRotation = this.material(MaterialType.CabaretTile).location(LocationType.CabaretSpace).index(loc.parent).getItem()?.location.id % 10
+        const startCaseIdsForRotation = startCasesIds[parentRotation as Rotation]
+        return loc.type === LocationType.CabaretTokenSpace && startTilesIndexs.includes(loc.parent!) && startCaseIdsForRotation.includes(loc.id as number)
+      })
+      .id(this.player)
+      .getItems()
+
+    if (playerTokensInStartCases.length === 0) return false
+
+    const playerTokenPath: Location[] = playerTokensInStartCases.map((item) => item.location)
+
+    for (const location of playerTokenPath) {
+      const placesNear = this.getPlacesNear(location.id as number, location.parent!).filter((loc) => this.checkIfPlayerTokenIsInPlace(loc))
+      placesNear.forEach((place) => {
+        if (!playerTokenPath.find((loc) => loc.id === place.id && loc.parent === place.parent)) {
+          playerTokenPath.push(place)
+        }
+      })
+    }
+
+    return (
+      playerTokenPath.filter((loc) => {
+        const parentRotation = this.material(MaterialType.CabaretTile).location(LocationType.CabaretSpace).index(loc.parent).getItem()?.location.id % 10
+        const endCaseIdsForRotation = endCasesIds[parentRotation as Rotation]
+        return loc.type === LocationType.CabaretTokenSpace && endTilesIndexs.includes(loc.parent!) && endCaseIdsForRotation.includes(loc.id as number)
+      }).length > 0
     )
   }
 }

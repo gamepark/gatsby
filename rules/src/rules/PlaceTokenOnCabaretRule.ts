@@ -25,11 +25,13 @@ export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
+    const moves: MaterialMove[] = []
     if (isMoveItem(move) && move.location.type === LocationType.CabaretTokenSpace) {
       this.memorize(Memory.LastTokenOnCabaretForPlayer, move.location, this.player)
-      return this.nextRuleHelper.moveToNextRule(this.nextPlayer)
+      moves.push(...this.cabaretHelper.checkAnGetCharacters())
+      moves.push(...this.nextRuleHelper.moveToNextRule(this.nextPlayer))
     }
-    return []
+    return moves
   }
 
   getPossiblePlace() {

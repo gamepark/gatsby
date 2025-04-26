@@ -5,6 +5,15 @@ import { NextRuleHelper } from './helpers/NextRuleHelper'
 import { Memory } from './Memory'
 
 export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
+  nextRuleHelper = new NextRuleHelper(this.game)
+
+  onRuleStart(): MaterialMove[] {
+    if (this.playerInfluenceTokens.length === 0) {
+      return this.nextRuleHelper.moveToNextRule(this.nextPlayer)
+    }
+    return []
+  }
+
   getPlayerMoves() {
     const moves: MaterialMove[] = []
     this.getPossiblePlace().forEach((place) => {
@@ -15,9 +24,13 @@ export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove): MaterialMove[] {
     if (isMoveItem(move) && move.location.type === LocationType.RaceTrack) {
-      console.log(this.material(MaterialType.InfluenceToken).location(loc => loc.type === LocationType.RaceTrack && loc.id === move.location.id).maxBy(item => item.location.x!))
+      console.log(
+        this.material(MaterialType.InfluenceToken)
+          .location((loc) => loc.type === LocationType.RaceTrack && loc.id === move.location.id)
+          .maxBy((item) => item.location.x!)
+      )
       this.memorize(Memory.LastTokenOnRaceTrackForPlayer, move.location.id, this.player)
-      return new NextRuleHelper(this.game).moveToNextRule(this.nextPlayer)
+      return this.nextRuleHelper.moveToNextRule(this.nextPlayer)
     }
     return []
   }

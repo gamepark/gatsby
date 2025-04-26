@@ -8,6 +8,7 @@ import { cabaretTokenSpaceLocator } from './CabaretTokenSpaceLocator'
 import { characterSpaceLocator } from './CharacterSpaceLocator'
 import { financeCenterLocator } from './FinanceCenterLocator'
 import { gameBoardLocator } from './GameBoardLocator'
+import { playerCharacterTilesLocator } from './PlayerCharacterTilesLocator'
 import { playerInfluenceTokenPileLocator } from './PlayerInfluenceTokenPileLocator'
 import { raceFinishedOverlayTileDeckLocator } from './RaceFinishedOverlayTileDeckLocator'
 import { raceTrackLocator } from './RaceTrackLocator'
@@ -21,6 +22,7 @@ export const Locators: Partial<Record<LocationType, Locator<number, MaterialType
   [LocationType.CharacterSpace]: characterSpaceLocator,
   [LocationType.FinanceCenter]: financeCenterLocator,
   [LocationType.PlayerInfluenceTokenPile]: playerInfluenceTokenPileLocator,
+  [LocationType.PlayerCharacterTiles]: playerCharacterTilesLocator,
   [LocationType.RaceTrack]: raceTrackLocator,
   [LocationType.CabaretTokenSpace]: cabaretTokenSpaceLocator,
   [LocationType.ActionSpace]: actionSpaceLocator,

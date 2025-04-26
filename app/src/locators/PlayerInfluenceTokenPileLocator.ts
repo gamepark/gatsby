@@ -6,9 +6,9 @@ class PlayerInfluenceTokenPileLocator extends PileLocator {
   radius = 2
   getCoordinates(location: Location) {
     if(location.player === 1) {
-      return { x: -45, y: 15 }
+      return { x: -32, y: 15 }
     }
-    return { x: 45, y: 15 }
+    return { x: 32, y: 15 }
   }
 
   getPileId(item: MaterialItem) {

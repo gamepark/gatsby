@@ -7,6 +7,15 @@ import { Memory } from './Memory'
 
 export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
   cabaretHelper = new CabaretHelper(this.game)
+  nextRuleHelper = new NextRuleHelper(this.game)
+
+  onRuleStart(): MaterialMove[] {
+    if (this.playerInfluenceTokens.length === 0) {
+      return this.nextRuleHelper.moveToNextRule(this.nextPlayer)
+    }
+    return []
+  }
+
   getPlayerMoves() {
     const moves: MaterialMove[] = []
     this.getPossiblePlace().forEach((place) => {
@@ -18,7 +27,7 @@ export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove): MaterialMove[] {
     if (isMoveItem(move) && move.location.type === LocationType.CabaretTokenSpace) {
       this.memorize(Memory.LastTokenOnCabaretForPlayer, move.location, this.player)
-      return new NextRuleHelper(this.game).moveToNextRule(this.nextPlayer)
+      return this.nextRuleHelper.moveToNextRule(this.nextPlayer)
     }
     return []
   }

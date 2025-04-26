@@ -41,7 +41,8 @@ export class GatsbyRules
 
   hidingStrategies = {
     [MaterialType.CharacterTile]: {
-      [LocationType.CharacterSpace]: hideIdIfRotated
+      [LocationType.CharacterSpace]: hideIdIfRotated,
+      [LocationType.PlayerCharacterTiles]: hideItemIdToOthersIfRotated
     },
     [MaterialType.ActionToken]: {
       [LocationType.ActionTokenIdle]: hideIdIfRotated,
@@ -69,6 +70,9 @@ export class GatsbyRules
     },
     [MaterialType.InfluenceToken]: {
       [LocationType.RaceTrack]: new PositiveSequenceStrategy()
+    },
+    [MaterialType.CharacterTile]: {
+      [LocationType.PlayerCharacterTiles]: new PositiveSequenceStrategy()
     }
   }
 
@@ -77,3 +81,6 @@ export class GatsbyRules
   }
 }
 const hideIdIfRotated = (item: MaterialItem) => (!item.location.rotation ? [] : ['id'])
+const hideItemIdToOthersIfRotated = (item: MaterialItem, player?: number) => {
+  return !item.location.rotation ? [] : player === item.location.player ? [] : ['id']
+}

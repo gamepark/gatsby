@@ -1,7 +1,7 @@
 import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
-import { ActionType, actionTypes, rulesForAction } from './ActionHelper'
+import { ActionType, actionTypes, rulesForAction } from './helpers/ActionHelper'
 import { Memory } from './Memory'
 import { RuleId } from './RuleId'
 

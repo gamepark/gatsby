@@ -16,8 +16,7 @@ export class ChooseSpecialActionTileRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove, _context?: PlayMoveContext): MaterialMove[] {
     const moves: MaterialMove[] = []
     if (isMoveItem(move) && move.location.type === LocationType.ActionSpace) {
-      const otherTile = this.specialActionTilesToChoose.filter((item) => item.id !== move.location.id)
-      moves.push(otherTile.moveItem(() => ({ type: LocationType.SpecialActionDiscard })))
+      moves.push(this.specialActionTilesToChoose.moveItem(() => ({ type: LocationType.SpecialActionDiscard })))
       moves.push(this.startRule(RuleId.PlaceTokenOnCabaret))
     }
     return moves

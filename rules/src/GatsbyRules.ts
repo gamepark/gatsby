@@ -10,11 +10,14 @@ import {
 } from '@gamepark/rules-api'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
+import { AdvanceInFinanceCenterRule } from './rules/AdvanceInFinanceCenterRule'
 import { ChooseActionRule } from './rules/ChooseActionRule'
 import { ChooseSpecialActionTileRule } from './rules/ChooseSpecialActionTileRule'
+import { PlaceTokenOnAnotherRaceTrackRule } from './rules/PlaceTokenOnAnotherRaceTrackRule'
 import { PlaceTokenOnCabaretNearToLastRule } from './rules/PlaceTokenOnCabaretNearToLastRule'
 import { PlaceTokenOnCabaretNearToOtherRule } from './rules/PlaceTokenOnCabaretNearToOtherRule'
 import { PlaceTokenOnCabaretRule } from './rules/PlaceTokenOnCabaretRule'
+import { PlaceTokenOnRaceTrackRule } from './rules/PlaceTokenOnRaceTrackRule'
 import { RuleId } from './rules/RuleId'
 
 /**
@@ -30,7 +33,10 @@ export class GatsbyRules
     [RuleId.PlaceTokenOnCabaret]: PlaceTokenOnCabaretRule,
     [RuleId.PlaceTokenOnCabaretNearToOther]: PlaceTokenOnCabaretNearToOtherRule,
     [RuleId.PlaceTokenOnCabaretNearToLast]: PlaceTokenOnCabaretNearToLastRule,
-    [RuleId.ChooseAction]: ChooseActionRule
+    [RuleId.AdvanceInFinanceCenter]: AdvanceInFinanceCenterRule,
+    [RuleId.ChooseAction]: ChooseActionRule,
+    [RuleId.PlaceTokenOnRaceTrack]: PlaceTokenOnRaceTrackRule,
+    [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackRule
   }
 
   hidingStrategies = {
@@ -60,6 +66,9 @@ export class GatsbyRules
     },
     [MaterialType.RaceFinishedOverlayTile]: {
       [LocationType.RaceFinishedDeck]: new PositiveSequenceStrategy()
+    },
+    [MaterialType.InfluenceToken]: {
+      [LocationType.RaceTrack]: new PositiveSequenceStrategy()
     }
   }
 

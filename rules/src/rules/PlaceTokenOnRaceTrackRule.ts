@@ -1,12 +1,10 @@
 import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
-import { CabaretHelper } from './helpers/CabaretHelper'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 import { Memory } from './Memory'
 
-export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
-  cabaretHelper = new CabaretHelper(this.game)
+export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
   getPlayerMoves() {
     const moves: MaterialMove[] = []
     this.getPossiblePlace().forEach((place) => {
@@ -16,8 +14,9 @@ export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
-    if (isMoveItem(move) && move.location.type === LocationType.CabaretTokenSpace) {
-      this.memorize(Memory.LastTokenOnCabaretForPlayer, move.location, this.player)
+    if (isMoveItem(move) && move.location.type === LocationType.RaceTrack) {
+      console.log(this.material(MaterialType.InfluenceToken).location(loc => loc.type === LocationType.RaceTrack && loc.id === move.location.id).maxBy(item => item.location.x!))
+      this.memorize(Memory.LastTokenOnRaceTrackForPlayer, move.location.id, this.player)
       return new NextRuleHelper(this.game).moveToNextRule(this.nextPlayer)
     }
     return []
@@ -25,16 +24,13 @@ export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
 
   getPossiblePlace() {
     const res: Location[] = []
-    this.material(MaterialType.CabaretTile)
-      .getIndexes()
-      .forEach((tile) => {
-        for (let i = 0; i < 9; i++) {
-          const hasNotAlreadyTokenPlaced = this.cabaretHelper.checkIfPlaceIsEmpty({ id: i, parent: tile } as Location)
-          if (hasNotAlreadyTokenPlaced) {
-            res.push({ type: LocationType.CabaretTokenSpace, id: i, parent: tile })
-          }
-        }
-      })
+    for (let i = 0; i < 5; i++) {
+      const raceIsNotFinished =
+        this.material(MaterialType.RaceFinishedOverlayTile).location((loc) => loc.type === LocationType.RaceTrack && loc.id === i).length === 0
+      if (raceIsNotFinished) {
+        res.push({ type: LocationType.RaceTrack, id: i })
+      }
+    }
     return res
   }
 

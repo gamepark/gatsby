@@ -11,7 +11,7 @@ export class CabaretHelper extends MaterialRulesPart {
         { type: LocationType.CabaretTokenSpace, id: 3, parent },
         { type: LocationType.CabaretTokenSpace, id: 5, parent },
         { type: LocationType.CabaretTokenSpace, id: 7, parent }
-      ]
+      ].filter((place) => this.checkIfPlaceIsEmpty(place))
     }
     const parentRotation = this.material(MaterialType.CabaretTile).location(LocationType.CabaretSpace).index(parent).getItem()?.location.id % 10
     const tilesNextOfRotation = tokenPlacesNearToOtherTiles[parent][parentRotation as Rotation]

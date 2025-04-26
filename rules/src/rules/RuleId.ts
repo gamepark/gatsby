@@ -3,5 +3,8 @@ export enum RuleId {
   PlaceTokenOnCabaret,
   PlaceTokenOnCabaretNearToOther,
   PlaceTokenOnCabaretNearToLast,
-  ChooseAction
+  ChooseAction,
+  AdvanceInFinanceCenter,
+  PlaceTokenOnRaceTrack,
+  PlaceTokenOnAnotherRaceTrack
 }

@@ -1,14 +1,16 @@
 import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
+import { CharacterTilesHelper } from './helpers/CharacterTilesHelper'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 import { Memory } from './Memory'
 
 export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
   nextRuleHelper = new NextRuleHelper(this.game)
+  characterTilesHelper = new CharacterTilesHelper(this.game)
 
   onRuleStart(): MaterialMove[] {
-    if (this.playerInfluenceTokens.length === 0) {
+    if (this.playerInfluenceTokens.length === 0 || this.getPossiblePlace().length === 0) {
       return this.nextRuleHelper.moveToNextRule(this.nextPlayer)
     }
     return []
@@ -23,16 +25,19 @@ export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
+    const moves: MaterialMove[] = []
     if (isMoveItem(move) && move.location.type === LocationType.RaceTrack) {
-      console.log(
-        this.material(MaterialType.InfluenceToken)
-          .location((loc) => loc.type === LocationType.RaceTrack && loc.id === move.location.id)
-          .maxBy((item) => item.location.x!)
-      )
+      const tokenPlaced = this.material(MaterialType.InfluenceToken)
+        .location((loc) => loc.type === LocationType.RaceTrack && loc.id === move.location.id)
+        .maxBy((item) => item.location.x!)
+        .getItem()
       this.memorize(Memory.LastTokenOnRaceTrackForPlayer, move.location.id, this.player)
-      return this.nextRuleHelper.moveToNextRule(this.nextPlayer)
+      if (tokenPlaced) {
+        moves.push(...this.characterTilesHelper.checkAndGetRaceTrackCharacters(move.location.id, tokenPlaced.location.x!))
+      }
+      moves.push(...this.nextRuleHelper.moveToNextRule(this.nextPlayer))
     }
-    return []
+    return moves
   }
 
   getPossiblePlace() {

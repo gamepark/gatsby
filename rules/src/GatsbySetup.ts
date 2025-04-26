@@ -18,7 +18,7 @@ export class GatsbySetup extends MaterialGameSetup<number, MaterialType, Locatio
   setupMaterial(_options: GatsbyOptions) {
     this.material(MaterialType.ActionToken).createItem({ location: { type: LocationType.ActionTokenIdle }, id: 1 })
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
       this.material(MaterialType.RaceFinishedOverlayTile).createItem({ location: { type: LocationType.RaceFinishedDeck } })
     }
 

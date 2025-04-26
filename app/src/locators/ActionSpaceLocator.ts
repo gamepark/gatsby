@@ -11,7 +11,6 @@ class ActionSpaceLocator extends Locator {
   }
 
   getItemCoordinates(item: MaterialItem): Partial<Coordinates> {
-    console.log(item)
     return item.location
   }
 

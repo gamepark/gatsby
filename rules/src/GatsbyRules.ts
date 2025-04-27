@@ -19,6 +19,7 @@ import { PlaceTokenOnCabaretNearToOtherRule } from './rules/PlaceTokenOnCabaretN
 import { PlaceTokenOnCabaretRule } from './rules/PlaceTokenOnCabaretRule'
 import { PlaceTokenOnRaceTrackRule } from './rules/PlaceTokenOnRaceTrackRule'
 import { RuleId } from './rules/RuleId'
+import { ShowAndSwitchTwoCharacterTilesRule } from './rules/ShowAndSwitchTwoCharacterTilesRule'
 
 /**
  * This class implements the rules of the board game.
@@ -36,7 +37,8 @@ export class GatsbyRules
     [RuleId.AdvanceInFinanceCenter]: AdvanceInFinanceCenterRule,
     [RuleId.ChooseAction]: ChooseActionRule,
     [RuleId.PlaceTokenOnRaceTrack]: PlaceTokenOnRaceTrackRule,
-    [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackRule
+    [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackRule,
+    [RuleId.ShowAndSwitchTwoCharacterTiles]: ShowAndSwitchTwoCharacterTilesRule
   }
 
   hidingStrategies = {

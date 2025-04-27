@@ -9,6 +9,7 @@ import { PlaceTokenOnCabaretHeader } from './PlaceTokenOnCabaretHeader'
 import { PlaceTokenOnCabaretNearToLastHeader } from './PlaceTokenOnCabaretNearToLastHeader'
 import { PlaceTokenOnCabaretNearToOtherHeader } from './PlaceTokenOnCabaretNearToOtherHeader'
 import { PlaceTokenOnRaceTrackHeader } from './PlaceTokenOnRaceTrackHeader'
+import { ShowAndSwitchTwoCharacterTilesHeader } from './ShowAndSwitchTwoCharacterTilesHeader'
 
 export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.ChooseSpecialActionTile]: ChooseSpecialActionTileHeader,
@@ -18,5 +19,6 @@ export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.AdvanceInFinanceCenter]: AdvanceInFinanceCenterHeader,
   [RuleId.ChooseAction]: ChooseActionHeader,
   [RuleId.PlaceTokenOnRaceTrack]: PlaceTokenOnRaceTrackHeader,
-  [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackHeader
+  [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackHeader,
+  [RuleId.ShowAndSwitchTwoCharacterTiles]: ShowAndSwitchTwoCharacterTilesHeader
 }

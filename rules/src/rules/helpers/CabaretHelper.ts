@@ -1,7 +1,8 @@
 import { Location, MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
-import { CabaretTile, checkIfLocationIsStarCase } from '../../material/CabaretTile'
+import { CabaretTile, BonusByCabaretTiles, checkIfLocationIsStarCase } from '../../material/CabaretTile'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
+import { NextRuleHelper } from './NextRuleHelper'
 
 interface CasesIdFromRotation {
   [Rotation.Rotation1]: number[]
@@ -212,6 +213,12 @@ export class CabaretHelper extends MaterialRulesPart {
         return loc.type === LocationType.CabaretTokenSpace && endTilesIndexs.includes(loc.parent!) && endCaseIdsForRotation.includes(loc.id as number)
       }).length > 0
     )
+  }
+
+  getBonus(moveLocationParent: number, moveLocationId: number) {
+    const tile = this.material(MaterialType.CabaretTile).index(moveLocationParent).getItem()?.id as CabaretTile
+    const locationBonus = BonusByCabaretTiles[tile][moveLocationId]
+    new NextRuleHelper(this.game).addActionSpecialInNextRules(locationBonus)
   }
 }
 

@@ -33,7 +33,8 @@ export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
         .getItem()
       this.memorize(Memory.LastTokenOnRaceTrackForPlayer, move.location.id, this.player)
       if (tokenPlaced) {
-        moves.push(...this.raceTrackHelper.checkAndGetRaceTrackCharacters(move.location.id, tokenPlaced.location.x!))
+        this.raceTrackHelper.getBonus(move.location.id as number, tokenPlaced.location.x!)
+        moves.push(...this.raceTrackHelper.checkAndGetRaceTrackCharacters(move.location.id as number, tokenPlaced.location.x!))
       }
       moves.push(...this.nextRuleHelper.moveToNextRule(this.nextPlayer))
     }

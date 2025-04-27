@@ -17,6 +17,8 @@
       "header.race.track.player": "{player} can place an influence token on a race track",
       "header.race.track.another.you": "You can place an influence token on another race track",
       "header.race.track.another.player": "{player} can place an influence token on another race track",
+      "header.show.character.you": "You can show two character tiles and switch them",
+      "header.show.character.player": "{player} can show two character tiles and switch them",
       "Menu": "Menu",
       "OK": "OK",
       "Validate": "Validate",

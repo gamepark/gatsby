@@ -22,4 +22,15 @@ export class NextRuleHelper extends MaterialRulesPart {
     }
     return [this.startPlayerTurn(RuleId.ChooseAction, nextPlayer)]
   }
+
+  addActionSpecialInNextRules(locationBonus: string | RuleId) {
+    if (typeof locationBonus === 'number') {
+      const nextRules: RuleId[] | undefined = this.remind(Memory.NextRules) ?? []
+      if (locationBonus === RuleId.ChooseActionForOpponent) {
+        this.memorize(Memory.NextRules, [...nextRules, RuleId.ChooseActionForOpponent])
+      } else {
+        this.memorize(Memory.NextRules, [RuleId.ChooseActionForOpponent, ...nextRules])
+      }
+    }
+  }
 }

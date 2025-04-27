@@ -1,6 +1,8 @@
 import { MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
+import { RuleId } from '../RuleId'
+import { NextRuleHelper } from './NextRuleHelper'
 
 export class RaceTrackHelper extends MaterialRulesPart {
   player?: number
@@ -31,4 +33,17 @@ export class RaceTrackHelper extends MaterialRulesPart {
     }
     return moves
   }
+
+  getBonus(moveLocationId: number, moveLocationX: number) {
+    const locationBonus = bonus[moveLocationId][moveLocationX]
+    new NextRuleHelper(this.game).addActionSpecialInNextRules(locationBonus)
+  }
 }
+
+const bonus = [
+  [RuleId.ShowAndSwitchTwoCharacterTiles, RuleId.TakeThreeSpecialActionTilesAndChooseOne, RuleId.ChooseActionForOpponent, '', ''],
+  ['', RuleId.ChooseActionForOpponent, RuleId.TakeThreeSpecialActionTilesAndChooseOne, RuleId.SwitchInfluenceTokens, ''],
+  ['', '', RuleId.AdvanceInFinanceCenter, RuleId.TakeThreeSpecialActionTilesAndChooseOne, RuleId.SwitchInfluenceTokens],
+  ['', RuleId.ShowAndSwitchTwoCharacterTiles, ''],
+  ['', '', RuleId.AdvanceInFinanceCenter]
+]

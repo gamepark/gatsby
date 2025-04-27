@@ -14,7 +14,7 @@ export class NextRuleHelper extends MaterialRulesPart {
     const nextRules: RuleId[] | undefined = this.remind(Memory.NextRules) ?? []
     if (nextRules.length > 1) {
       this.memorize(Memory.NextRules, nextRules.slice(1))
-      return [this.startRule(nextRules[0])]
+      return [this.startPlayerTurn(nextRules[0], this.player!)]
     }
     if (nextRules.length > 0) {
       this.forget(Memory.NextRules)
@@ -29,7 +29,7 @@ export class NextRuleHelper extends MaterialRulesPart {
       if (locationBonus === RuleId.ChooseActionForOpponent) {
         this.memorize(Memory.NextRules, [...nextRules, RuleId.ChooseActionForOpponent])
       } else {
-        this.memorize(Memory.NextRules, [RuleId.ChooseActionForOpponent, ...nextRules])
+        this.memorize(Memory.NextRules, [locationBonus, ...nextRules])
       }
     }
   }

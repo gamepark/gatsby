@@ -50,7 +50,6 @@ export class FinanceCenterHelper extends MaterialRulesPart {
 
   private checkIfCharacterTileIsNotTaked(characterTileId: number) {
     const characterTile = this.material(MaterialType.CharacterTile).location((loc) => loc.type === LocationType.CharacterSpace && loc.id === characterTileId)
-    console.log(characterTile.length)
     return characterTile.length !== 0
   }
 }

@@ -10,6 +10,7 @@ import { financeCenterLocator } from './FinanceCenterLocator'
 import { gameBoardLocator } from './GameBoardLocator'
 import { playerCharacterTilesLocator } from './PlayerCharacterTilesLocator'
 import { playerInfluenceTokenPileLocator } from './PlayerInfluenceTokenPileLocator'
+import { playerSpecialTilesDiscardLocator } from './PlayerSpecialTilesDiscardLocator'
 import { raceFinishedOverlayTileDeckLocator } from './RaceFinishedOverlayTileDeckLocator'
 import { raceTrackLocator } from './RaceTrackLocator'
 import { specialActionLayoutLocator } from './SpecialActionLayoutLocator'
@@ -23,6 +24,7 @@ export const Locators: Partial<Record<LocationType, Locator<number, MaterialType
   [LocationType.FinanceCenter]: financeCenterLocator,
   [LocationType.PlayerInfluenceTokenPile]: playerInfluenceTokenPileLocator,
   [LocationType.PlayerCharacterTiles]: playerCharacterTilesLocator,
+  [LocationType.PlayerSpecialTilesDiscard]: playerSpecialTilesDiscardLocator,
   [LocationType.RaceTrack]: raceTrackLocator,
   [LocationType.CabaretTokenSpace]: cabaretTokenSpaceLocator,
   [LocationType.ActionSpace]: actionSpaceLocator,

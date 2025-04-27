@@ -4,6 +4,7 @@ import { MaterialType } from '../material/MaterialType'
 import { RuleId } from './RuleId'
 
 export class ChooseSpecialActionTileRule extends PlayerTurnRule {
+  nbTilesToShow = 2
   onRuleStart(): MaterialMove[] {
     return this.specialActionTilesToShow.moveItems(() => ({ type: LocationType.SpecialActionLayout, player: this.player }))
   }
@@ -16,8 +17,8 @@ export class ChooseSpecialActionTileRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove, _context?: PlayMoveContext): MaterialMove[] {
     const moves: MaterialMove[] = []
     if (isMoveItem(move) && move.location.type === LocationType.ActionSpace) {
-      moves.push(this.specialActionTilesToChoose.moveItem(() => ({ type: LocationType.SpecialActionDiscard })))
-      moves.push(this.startRule(RuleId.PlaceTokenOnCabaret))
+      moves.push(...this.specialActionTilesToChoose.moveItems(() => ({ type: LocationType.SpecialActionDiscard })))
+      moves.push(this.startRule(RuleId.PlaceTokenOnCabaretOnStarCase))
     }
     return moves
   }
@@ -26,7 +27,7 @@ export class ChooseSpecialActionTileRule extends PlayerTurnRule {
     return this.material(MaterialType.SpecialActionTile)
       .location(LocationType.SpecialActionDeck)
       .sort((item) => -item.location.x!)
-      .limit(2)
+      .limit(this.nbTilesToShow)
   }
 
   get specialActionTilesToChoose() {

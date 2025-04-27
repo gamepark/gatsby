@@ -1,4 +1,5 @@
 import {
+  FillGapStrategy,
   hideItemId,
   hideItemIdToOthers,
   MaterialGame,
@@ -16,10 +17,13 @@ import { ChooseSpecialActionTileRule } from './rules/ChooseSpecialActionTileRule
 import { PlaceTokenOnAnotherRaceTrackRule } from './rules/PlaceTokenOnAnotherRaceTrackRule'
 import { PlaceTokenOnCabaretNearToLastRule } from './rules/PlaceTokenOnCabaretNearToLastRule'
 import { PlaceTokenOnCabaretNearToOtherRule } from './rules/PlaceTokenOnCabaretNearToOtherRule'
+import { PlaceTokenOnCabaretOnStarCaseRule } from './rules/PlaceTokenOnCabaretOnStarCaseRule'
 import { PlaceTokenOnCabaretRule } from './rules/PlaceTokenOnCabaretRule'
 import { PlaceTokenOnRaceTrackRule } from './rules/PlaceTokenOnRaceTrackRule'
 import { RuleId } from './rules/RuleId'
 import { ShowAndSwitchTwoCharacterTilesRule } from './rules/ShowAndSwitchTwoCharacterTilesRule'
+import { SwitchInfluenceTokensRule } from './rules/SwitchInfluenceTokensRule'
+import { TakeThreeSpecialActionTileAndTakeOneRule } from './rules/TakeThreeSpecialActionTileAndTakeOneRule'
 
 /**
  * This class implements the rules of the board game.
@@ -32,13 +36,16 @@ export class GatsbyRules
   rules = {
     [RuleId.ChooseSpecialActionTile]: ChooseSpecialActionTileRule,
     [RuleId.PlaceTokenOnCabaret]: PlaceTokenOnCabaretRule,
+    [RuleId.PlaceTokenOnCabaretOnStarCase]: PlaceTokenOnCabaretOnStarCaseRule,
     [RuleId.PlaceTokenOnCabaretNearToOther]: PlaceTokenOnCabaretNearToOtherRule,
     [RuleId.PlaceTokenOnCabaretNearToLast]: PlaceTokenOnCabaretNearToLastRule,
     [RuleId.AdvanceInFinanceCenter]: AdvanceInFinanceCenterRule,
     [RuleId.ChooseAction]: ChooseActionRule,
     [RuleId.PlaceTokenOnRaceTrack]: PlaceTokenOnRaceTrackRule,
     [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackRule,
-    [RuleId.ShowAndSwitchTwoCharacterTiles]: ShowAndSwitchTwoCharacterTilesRule
+    [RuleId.ShowAndSwitchTwoCharacterTiles]: ShowAndSwitchTwoCharacterTilesRule,
+    [RuleId.TakeThreeSpecialActionTilesAndChooseOne]: TakeThreeSpecialActionTileAndTakeOneRule,
+    [RuleId.SwitchInfluenceTokens]: SwitchInfluenceTokensRule
   }
 
   hidingStrategies = {
@@ -71,7 +78,7 @@ export class GatsbyRules
       [LocationType.RaceFinishedDeck]: new PositiveSequenceStrategy()
     },
     [MaterialType.InfluenceToken]: {
-      [LocationType.RaceTrack]: new PositiveSequenceStrategy()
+      [LocationType.RaceTrack]: new FillGapStrategy()
     },
     [MaterialType.CharacterTile]: {
       [LocationType.PlayerCharacterTiles]: new PositiveSequenceStrategy()

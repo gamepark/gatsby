@@ -56,7 +56,7 @@ export class FinanceCenterHelper extends MaterialRulesPart {
 
 const bonus = [
   '',
-  RuleId.ShowAndSwitchTwoCharacterTiles,
+  RuleId.ShowTwoCharacterTiles,
   '',
   RuleId.PlaceTokenOnCabaretOrRaceTrack,
   '',

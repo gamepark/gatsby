@@ -2,5 +2,6 @@ export enum Memory {
   NextRules = 1,
   LastTokenOnCabaretForPlayer,
   LastTokenOnRaceTrackForPlayer,
-  NbCasesToAdd
+  NbCasesToAdd,
+  CharacterTilesLocations
 }

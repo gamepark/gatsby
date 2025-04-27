@@ -1,7 +1,7 @@
 import { DeckLocator } from '@gamepark/react-game'
 
 export class RaceFinishedOverlayTileDeckLocator extends DeckLocator {
-  coordinates = { x: 29, y: 0 }
+  coordinates = { x: 29, y: -10 }
 
   rotateZ = 90
 }

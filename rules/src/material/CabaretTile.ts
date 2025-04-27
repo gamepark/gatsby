@@ -11,10 +11,10 @@ export enum CabaretTile {
 export const cabaretTiles = getEnumValues(CabaretTile)
 
 export const BonusByCabaretTiles = {
-  [CabaretTile.CabaretTile1]: [RuleId.ChooseActionForOpponent, '', '', '', RuleId.AdvanceInFinanceCenter, '', 'S', '', RuleId.ShowAndSwitchTwoCharacterTiles],
-  [CabaretTile.CabaretTile2]: [RuleId.ShowAndSwitchTwoCharacterTiles, '', '', '', RuleId.AdvanceInFinanceCenter, 'S', '', '', RuleId.SwitchInfluenceTokens],
+  [CabaretTile.CabaretTile1]: [RuleId.ChooseActionForOpponent, '', '', '', RuleId.AdvanceInFinanceCenter, '', 'S', '', RuleId.ShowTwoCharacterTiles],
+  [CabaretTile.CabaretTile2]: [RuleId.ShowTwoCharacterTiles, '', '', '', RuleId.AdvanceInFinanceCenter, 'S', '', '', RuleId.SwitchInfluenceTokens],
   [CabaretTile.CabaretTile3]: [RuleId.SwitchInfluenceTokens, '', RuleId.AdvanceInFinanceCenter, '', 'S', '', '', '', RuleId.ChooseActionForOpponent],
-  [CabaretTile.CabaretTile4]: [RuleId.SwitchInfluenceTokens, '', 'S', '', RuleId.ChooseSpecialActionTile, '', '', '', RuleId.ShowAndSwitchTwoCharacterTiles]
+  [CabaretTile.CabaretTile4]: [RuleId.SwitchInfluenceTokens, '', 'S', '', RuleId.ChooseSpecialActionTile, '', '', '', RuleId.ShowTwoCharacterTiles]
 }
 
 export const checkIfLocationIsStarCase = (tile: CabaretTile, caseId: number): boolean => {

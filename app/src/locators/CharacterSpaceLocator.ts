@@ -1,17 +1,24 @@
 /** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
-import { Locator } from '@gamepark/react-game'
+import { DropAreaDescription, Locator } from '@gamepark/react-game'
 import { Location, XYCoordinates } from '@gamepark/rules-api'
 
 class CharacterSpaceLocator extends Locator {
   parentItemType = MaterialType.GameBoard
 
   getPositionOnParent(location: Location): XYCoordinates {
-    return cabaretSpacesCoordinates[location.id]
+    return characterSpacesCoordinates[location.id as number]
   }
+
+  locationDescription = new CharacterSpaceLocatorDescription()
 }
 
-const cabaretSpacesCoordinates = [
+export class CharacterSpaceLocatorDescription extends DropAreaDescription {
+  height = 4
+  width = 4
+}
+
+const characterSpacesCoordinates = [
   { x: 6, y: 47.2 },
   { x: 16.5, y: 73.7 },
   { x: 26.9, y: 47.2 },

@@ -53,9 +53,9 @@ export class RaceTrackHelper extends MaterialRulesPart {
 }
 
 const bonus = [
-  [RuleId.ShowAndSwitchTwoCharacterTiles, RuleId.TakeThreeSpecialActionTilesAndChooseOne, RuleId.ChooseActionForOpponent, '', ''],
+  [RuleId.ShowTwoCharacterTiles, RuleId.TakeThreeSpecialActionTilesAndChooseOne, RuleId.ChooseActionForOpponent, '', ''],
   ['', RuleId.ChooseActionForOpponent, RuleId.TakeThreeSpecialActionTilesAndChooseOne, RuleId.SwitchInfluenceTokens, ''],
   ['', '', RuleId.AdvanceInFinanceCenter, RuleId.TakeThreeSpecialActionTilesAndChooseOne, RuleId.SwitchInfluenceTokens],
-  ['', RuleId.ShowAndSwitchTwoCharacterTiles, ''],
+  ['', RuleId.ShowTwoCharacterTiles, ''],
   ['', '', RuleId.AdvanceInFinanceCenter]
 ]

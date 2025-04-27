@@ -22,8 +22,9 @@ import { PlaceTokenOnCabaretOnStarCaseRule } from './rules/PlaceTokenOnCabaretOn
 import { PlaceTokenOnCabaretOrRaceTrackRule } from './rules/PlaceTokenOnCabaretOrRaceTrackRule'
 import { PlaceTokenOnCabaretRule } from './rules/PlaceTokenOnCabaretRule'
 import { PlaceTokenOnRaceTrackRule } from './rules/PlaceTokenOnRaceTrackRule'
+import { ReplaceCharacterTilesRule } from './rules/ReplaceCharacterTilesRule'
 import { RuleId } from './rules/RuleId'
-import { ShowAndSwitchTwoCharacterTilesRule } from './rules/ShowAndSwitchTwoCharacterTilesRule'
+import { ShowTwoCharacterTilesRule } from './rules/ShowTwoCharacterTilesRule'
 import { SwitchInfluenceTokensRule } from './rules/SwitchInfluenceTokensRule'
 import { TakeThreeSpecialActionTileAndTakeOneRule } from './rules/TakeThreeSpecialActionTileAndTakeOneRule'
 
@@ -45,17 +46,19 @@ export class GatsbyRules
     [RuleId.ChooseAction]: ChooseActionRule,
     [RuleId.PlaceTokenOnRaceTrack]: PlaceTokenOnRaceTrackRule,
     [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackRule,
-    [RuleId.ShowAndSwitchTwoCharacterTiles]: ShowAndSwitchTwoCharacterTilesRule,
     [RuleId.TakeThreeSpecialActionTilesAndChooseOne]: TakeThreeSpecialActionTileAndTakeOneRule,
     [RuleId.SwitchInfluenceTokens]: SwitchInfluenceTokensRule,
     [RuleId.PlaceTokenOnCabaretOrRaceTrack]: PlaceTokenOnCabaretOrRaceTrackRule,
-    [RuleId.ChooseActionForOpponent]: ChooseActionForOpponentRule
+    [RuleId.ChooseActionForOpponent]: ChooseActionForOpponentRule,
+    [RuleId.ShowTwoCharacterTiles]: ShowTwoCharacterTilesRule,
+    [RuleId.ReplaceCharacterTiles]: ReplaceCharacterTilesRule
   }
 
   hidingStrategies = {
     [MaterialType.CharacterTile]: {
       [LocationType.CharacterSpace]: hideIdIfRotated,
-      [LocationType.PlayerCharacterTiles]: hideItemIdToOthersIfRotated
+      [LocationType.PlayerCharacterTiles]: hideItemIdToOthersIfRotated,
+      [LocationType.PlayerCharacterTilesShowLayout]: hideItemIdToOthers
     },
     [MaterialType.ActionToken]: {
       [LocationType.ActionTokenIdle]: hideIdIfRotated,
@@ -85,7 +88,8 @@ export class GatsbyRules
       [LocationType.RaceTrack]: new FillGapStrategy()
     },
     [MaterialType.CharacterTile]: {
-      [LocationType.PlayerCharacterTiles]: new PositiveSequenceStrategy()
+      [LocationType.PlayerCharacterTiles]: new PositiveSequenceStrategy(),
+      [LocationType.PlayerCharacterTilesShowLayout]: new PositiveSequenceStrategy()
     }
   }
 

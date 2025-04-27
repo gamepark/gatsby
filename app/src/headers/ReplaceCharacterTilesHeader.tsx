@@ -3,7 +3,7 @@ import { GatsbyRules } from '@gamepark/gatsby/GatsbyRules'
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { Trans } from 'react-i18next'
 
-export const ShowAndSwitchTwoCharacterTilesHeader = () => {
+export const ReplaceCharacterTilesHeader = () => {
   const player = usePlayerId()
   const rules = useRules<GatsbyRules>()!
   const activePlayer = rules.game.rule?.player

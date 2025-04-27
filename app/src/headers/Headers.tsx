@@ -12,7 +12,8 @@ import { PlaceTokenOnCabaretNearToOtherHeader } from './PlaceTokenOnCabaretNearT
 import { PlaceTokenOnCabaretOnStarCaseHeader } from './PlaceTokenOnCabaretOnStarCaseHeader'
 import { PlaceTokenOnCabaretOrRaceTrackHeader } from './PlaceTokenOnCabaretOrRaceTrackHeader'
 import { PlaceTokenOnRaceTrackHeader } from './PlaceTokenOnRaceTrackHeader'
-import { ShowAndSwitchTwoCharacterTilesHeader } from './ShowAndSwitchTwoCharacterTilesHeader'
+import { ReplaceCharacterTilesHeader } from './ReplaceCharacterTilesHeader'
+import { ShowTwoCharacterTilesHeader } from './ShowTwoCharacterTilesHeader'
 import { SwitchInfluenceTokensHeader } from './SwitchInfluenceTokensHeader'
 
 export const Headers: Partial<Record<RuleId, ComponentType>> = {
@@ -26,8 +27,9 @@ export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.ChooseAction]: ChooseActionHeader,
   [RuleId.PlaceTokenOnRaceTrack]: PlaceTokenOnRaceTrackHeader,
   [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackHeader,
-  [RuleId.ShowAndSwitchTwoCharacterTiles]: ShowAndSwitchTwoCharacterTilesHeader,
   [RuleId.SwitchInfluenceTokens]: SwitchInfluenceTokensHeader,
   [RuleId.PlaceTokenOnCabaretOrRaceTrack]: PlaceTokenOnCabaretOrRaceTrackHeader,
-  [RuleId.ChooseActionForOpponent]: ChooseActionForOpponentHeader
+  [RuleId.ChooseActionForOpponent]: ChooseActionForOpponentHeader,
+  [RuleId.ShowTwoCharacterTiles]: ShowTwoCharacterTilesHeader,
+  [RuleId.ReplaceCharacterTiles]: ReplaceCharacterTilesHeader
 }

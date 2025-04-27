@@ -1,16 +1,18 @@
 import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
+import { CabaretHelper } from './helpers/CabaretHelper'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 import { RaceTrackHelper } from './helpers/RaceTrackHelper'
 import { Memory } from './Memory'
 
-export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
+export class PlaceTokenOnCabaretOrRaceTrackRule extends PlayerTurnRule {
   nextRuleHelper = new NextRuleHelper(this.game)
   raceTrackHelper = new RaceTrackHelper(this.game)
+  cabaretHelper = new CabaretHelper(this.game)
 
   onRuleStart(): MaterialMove[] {
-    if (this.playerInfluenceTokens.length === 0 || this.getPossiblePlace().length === 0) {
+    if (this.playerInfluenceTokens.length === 0 || this.getPlayerMoves().length === 0) {
       return this.nextRuleHelper.moveToNextRule(this.nextPlayer)
     }
     return []
@@ -18,7 +20,8 @@ export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
 
   getPlayerMoves() {
     const moves: MaterialMove[] = []
-    this.getPossiblePlace().forEach((place) => {
+
+    this.getPossiblePlaces().forEach((place) => {
       moves.push(this.playerInfluenceTokens.moveItem(() => place))
     })
     return moves
@@ -38,11 +41,17 @@ export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
       }
       moves.push(...this.nextRuleHelper.moveToNextRule(this.nextPlayer))
     }
+    if (isMoveItem(move) && move.location.type === LocationType.CabaretTokenSpace) {
+      this.memorize(Memory.LastTokenOnCabaretForPlayer, move.location, this.player)
+      this.cabaretHelper.getBonus(move.location.parent!, move.location.id as number)
+      moves.push(...this.cabaretHelper.checkAnGetCharacters())
+      moves.push(...this.nextRuleHelper.moveToNextRule(this.nextPlayer))
+    }
     return moves
   }
 
-  getPossiblePlace() {
-    return this.raceTrackHelper.getPossibleRacePlace()
+  getPossiblePlaces() {
+    return [...this.cabaretHelper.getPossiblePlaceNearToOtherTokens(), ...this.raceTrackHelper.getPossibleRacePlace()]
   }
 
   get playerInfluenceTokens() {

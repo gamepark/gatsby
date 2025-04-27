@@ -1,4 +1,4 @@
-import { MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
+import { Location, MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { RuleId } from '../RuleId'
@@ -10,6 +10,18 @@ export class RaceTrackHelper extends MaterialRulesPart {
   constructor(game: MaterialGame, player = game.rule?.player) {
     super(game)
     this.player = player
+  }
+
+  getPossibleRacePlace() {
+    const res: Location[] = []
+    for (let i = 0; i < 5; i++) {
+      const raceIsNotFinished =
+        this.material(MaterialType.RaceFinishedOverlayTile).location((loc) => loc.type === LocationType.RaceTrack && loc.id === i).length === 0
+      if (raceIsNotFinished) {
+        res.push({ type: LocationType.RaceTrack, id: i })
+      }
+    }
+    return res
   }
 
   checkAndGetRaceTrackCharacters(moveLocationId: number, moveLocationX: number) {

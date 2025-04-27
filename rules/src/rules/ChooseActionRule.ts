@@ -6,9 +6,10 @@ import { Memory } from './Memory'
 import { RuleId } from './RuleId'
 
 export class ChooseActionRule extends PlayerTurnRule {
+  playerWhoPlayActions = this.player
   getPlayerMoves() {
     const moves: MaterialMove[] = []
-    const rotation = this.player === 2
+    const rotation = this.playerWhoPlayActions === 2
     for (const place of this.getPossiblePlaces()) {
       moves.push(this.actionToken.moveItem(() => ({ ...place, rotation })))
     }
@@ -36,7 +37,7 @@ export class ChooseActionRule extends PlayerTurnRule {
   }
 
   getSpecialActionSpace(player: number, id: number) {
-    if (this.player !== player) return null
+    if (this.playerWhoPlayActions !== player) return null
 
     const actionTokenIsNotAlreadyInSpace =
       this.material(MaterialType.ActionToken).location((loc) => loc.type === LocationType.ActionSpace && loc.id === id).length === 0
@@ -53,7 +54,7 @@ export class ChooseActionRule extends PlayerTurnRule {
       const index: ActionType = move.location.id
       const rules: RuleId[] = rulesForAction[index]
       this.memorize(Memory.NextRules, [rules[1]])
-      return [this.startRule(rules[0])]
+      return [this.startPlayerTurn(rules[0], this.playerWhoPlayActions)]
     }
     return []
   }

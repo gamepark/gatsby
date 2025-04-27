@@ -12,12 +12,14 @@ import {
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { AdvanceInFinanceCenterRule } from './rules/AdvanceInFinanceCenterRule'
+import { ChooseActionForOpponentRule } from './rules/ChooseActionForOpponentRule'
 import { ChooseActionRule } from './rules/ChooseActionRule'
 import { ChooseSpecialActionTileRule } from './rules/ChooseSpecialActionTileRule'
 import { PlaceTokenOnAnotherRaceTrackRule } from './rules/PlaceTokenOnAnotherRaceTrackRule'
 import { PlaceTokenOnCabaretNearToLastRule } from './rules/PlaceTokenOnCabaretNearToLastRule'
 import { PlaceTokenOnCabaretNearToOtherRule } from './rules/PlaceTokenOnCabaretNearToOtherRule'
 import { PlaceTokenOnCabaretOnStarCaseRule } from './rules/PlaceTokenOnCabaretOnStarCaseRule'
+import { PlaceTokenOnCabaretOrRaceTrackRule } from './rules/PlaceTokenOnCabaretOrRaceTrackRule'
 import { PlaceTokenOnCabaretRule } from './rules/PlaceTokenOnCabaretRule'
 import { PlaceTokenOnRaceTrackRule } from './rules/PlaceTokenOnRaceTrackRule'
 import { RuleId } from './rules/RuleId'
@@ -45,7 +47,9 @@ export class GatsbyRules
     [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackRule,
     [RuleId.ShowAndSwitchTwoCharacterTiles]: ShowAndSwitchTwoCharacterTilesRule,
     [RuleId.TakeThreeSpecialActionTilesAndChooseOne]: TakeThreeSpecialActionTileAndTakeOneRule,
-    [RuleId.SwitchInfluenceTokens]: SwitchInfluenceTokensRule
+    [RuleId.SwitchInfluenceTokens]: SwitchInfluenceTokensRule,
+    [RuleId.PlaceTokenOnCabaretOrRaceTrack]: PlaceTokenOnCabaretOrRaceTrackRule,
+    [RuleId.ChooseActionForOpponent]: ChooseActionForOpponentRule
   }
 
   hidingStrategies = {

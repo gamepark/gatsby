@@ -19,6 +19,18 @@ export class CabaretHelper extends MaterialRulesPart {
     this.player = player
   }
 
+  getPossiblePlaceNearToOtherTokens() {
+    const places: Location[] = []
+    this.tokensInCabaretTiles.getItems().forEach((item) => {
+      places.push(...this.getPlacesNear(item.location.id as number, item.location.parent!).filter((place) => this.checkIfPlaceIsEmpty(place)))
+    })
+    return places
+  }
+
+  get tokensInCabaretTiles() {
+    return this.material(MaterialType.InfluenceToken).location(LocationType.CabaretTokenSpace)
+  }
+
   getPlacesNear(id: number, parent: number): Location[] {
     if (id === 4) {
       return [

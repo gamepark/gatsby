@@ -2,6 +2,7 @@
 import { RuleId } from '@gamepark/gatsby/rules/RuleId'
 import { ComponentType } from 'react'
 import { AdvanceInFinanceCenterHeader } from './AdvanceInFinanceCenterHeader'
+import { ChooseActionForOpponentHeader } from './ChooseActionForOpponentHeader'
 import { ChooseActionHeader } from './ChooseActionHeader'
 import { ChooseSpecialActionTileHeader } from './ChooseSpecialActionTileHeader'
 import { PlaceTokenOnAnotherRaceTrackHeader } from './PlaceTokenOnAnotherRaceTrackHeader'
@@ -9,6 +10,7 @@ import { PlaceTokenOnCabaretHeader } from './PlaceTokenOnCabaretHeader'
 import { PlaceTokenOnCabaretNearToLastHeader } from './PlaceTokenOnCabaretNearToLastHeader'
 import { PlaceTokenOnCabaretNearToOtherHeader } from './PlaceTokenOnCabaretNearToOtherHeader'
 import { PlaceTokenOnCabaretOnStarCaseHeader } from './PlaceTokenOnCabaretOnStarCaseHeader'
+import { PlaceTokenOnCabaretOrRaceTrackHeader } from './PlaceTokenOnCabaretOrRaceTrackHeader'
 import { PlaceTokenOnRaceTrackHeader } from './PlaceTokenOnRaceTrackHeader'
 import { ShowAndSwitchTwoCharacterTilesHeader } from './ShowAndSwitchTwoCharacterTilesHeader'
 import { SwitchInfluenceTokensHeader } from './SwitchInfluenceTokensHeader'
@@ -25,5 +27,7 @@ export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.PlaceTokenOnRaceTrack]: PlaceTokenOnRaceTrackHeader,
   [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackHeader,
   [RuleId.ShowAndSwitchTwoCharacterTiles]: ShowAndSwitchTwoCharacterTilesHeader,
-  [RuleId.SwitchInfluenceTokens]: SwitchInfluenceTokensHeader
+  [RuleId.SwitchInfluenceTokens]: SwitchInfluenceTokensHeader,
+  [RuleId.PlaceTokenOnCabaretOrRaceTrack]: PlaceTokenOnCabaretOrRaceTrackHeader,
+  [RuleId.ChooseActionForOpponent]: ChooseActionForOpponentHeader
 }

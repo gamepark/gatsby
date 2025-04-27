@@ -5,12 +5,13 @@ export enum RuleId {
   PlaceTokenOnCabaretNearToOther,
   PlaceTokenOnCabaretNearToLast,
   ChooseAction,
-  ChooseActionForOpponent,
   AdvanceInFinanceCenter,
   PlaceTokenOnRaceTrack,
   PlaceTokenOnAnotherRaceTrack,
-  ShowAndSwitchTwoCharacterTiles,
   SwitchInfluenceTokens,
   PlaceTokenOnCabaretOrRaceTrack,
-  TakeThreeSpecialActionTilesAndChooseOne
+  TakeThreeSpecialActionTilesAndChooseOne,
+  PlaceTwoInfluenceTokensOnTheSameRaceTrack,
+  ShowAndSwitchTwoCharacterTiles,
+  ChooseActionForOpponent
 }

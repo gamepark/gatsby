@@ -1,17 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
-import { Locator, DropAreaDescription } from '@gamepark/react-game'
-import { Coordinates, Location, MaterialItem, XYCoordinates } from '@gamepark/rules-api'
+import { DropAreaDescription, DeckLocator } from '@gamepark/react-game'
+import { Location, XYCoordinates } from '@gamepark/rules-api'
 
-class ActionSpaceLocator extends Locator {
+class ActionSpaceLocator extends DeckLocator {
   parentItemType = MaterialType.GameBoard
 
   getPositionOnParent(location: Location): XYCoordinates {
     return { x: 8.4 + 16.65 * location.id, y: 91 }
-  }
-
-  getItemCoordinates(item: MaterialItem): Partial<Coordinates> {
-    return item.location
   }
 
   locationDescription = new ActionSpaceDescription()

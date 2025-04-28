@@ -1,6 +1,7 @@
 import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
+import { ActionsForSpecialActionTiles, SpecialActionTile } from '../material/SpecialActionTile'
 import { ActionType, actionTypes, rulesForAction } from './helpers/ActionHelper'
 import { Memory } from './Memory'
 import { RuleId } from './RuleId'
@@ -41,8 +42,7 @@ export class ChooseActionRule extends PlayerTurnRule {
 
     const actionTokenIsNotAlreadyInSpace =
       this.material(MaterialType.ActionToken).location((loc) => loc.type === LocationType.ActionSpace && loc.id === id).length === 0
-    const specialActionTileIsInSpace =
-      this.material(MaterialType.SpecialActionTile).location((loc) => loc.type === LocationType.ActionSpace && loc.id === id).length === 1
+    const specialActionTileIsInSpace = this.getSpecialActionTile(id).length === 1
     if (actionTokenIsNotAlreadyInSpace && specialActionTileIsInSpace) {
       return { type: LocationType.ActionSpace, id: id, x: 1 }
     }
@@ -50,16 +50,28 @@ export class ChooseActionRule extends PlayerTurnRule {
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
-    if (isMoveItem(move) && move.location.type === LocationType.ActionSpace && actionTypes.includes(move.location.id as ActionType)) {
-      const index: ActionType = move.location.id
-      const rules: RuleId[] = rulesForAction[index]
-      this.memorize(Memory.NextRules, [rules[1]])
-      return [this.startPlayerTurn(rules[0], this.playerWhoPlayActions)]
+    if (isMoveItem(move) && move.location.type === LocationType.ActionSpace) {
+      if (actionTypes.includes(move.location.id as ActionType)) {
+        const index: ActionType = move.location.id
+        const rules: RuleId[] = rulesForAction[index]
+        this.memorize(Memory.NextRules, [rules[1]])
+        return [this.startPlayerTurn(rules[0], this.playerWhoPlayActions)]
+      }
+      const specialActionTile = this.getSpecialActionTile(move.location.id as number)
+      const rules: RuleId[] = ActionsForSpecialActionTiles[specialActionTile.getItem()?.id as SpecialActionTile]
+      console.log(specialActionTile)
+      console.log(rules)
+      this.memorize(Memory.NextRules, rules.splice(1))
+      return [specialActionTile.moveItem(() => ({ type: LocationType.SpecialActionDiscard })), this.startPlayerTurn(rules[0], this.playerWhoPlayActions)]
     }
     return []
   }
 
   get actionToken() {
     return this.material(MaterialType.ActionToken)
+  }
+
+  getSpecialActionTile(locationId: number) {
+    return this.material(MaterialType.SpecialActionTile).location((loc) => loc.type === LocationType.ActionSpace && loc.id === locationId)
   }
 }

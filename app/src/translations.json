@@ -21,6 +21,8 @@
       "header.race.track.player": "{player} can place an influence token on a race track",
       "header.race.track.another.you": "You can place an influence token on another race track",
       "header.race.track.another.player": "{player} can place an influence token on another race track",
+      "header.race.track.same.you": "You can place an influence token on same race track",
+      "header.race.track.same.player": "{player} can place an influence token on same race track",
       "header.show.character.you": "You can show two character tiles and switch them",
       "header.show.character.player": "{player} can show two character tiles and switch them",
       "header.switch.tokens.you": "You can switch one token with opponent's token",

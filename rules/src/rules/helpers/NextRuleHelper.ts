@@ -12,6 +12,7 @@ export class NextRuleHelper extends MaterialRulesPart {
 
   moveToNextRule(nextPlayer: number) {
     const nextRules: RuleId[] | undefined = this.remind(Memory.NextRules) ?? []
+    console.log(nextRules)
     if (nextRules.length > 1) {
       this.memorize(Memory.NextRules, nextRules.slice(1))
       return [this.startPlayerTurn(nextRules[0], this.player!)]

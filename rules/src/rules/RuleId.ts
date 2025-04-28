@@ -11,7 +11,7 @@ export enum RuleId {
   SwitchInfluenceTokens,
   PlaceTokenOnCabaretOrRaceTrack,
   TakeThreeSpecialActionTilesAndChooseOne,
-  PlaceTwoInfluenceTokensOnTheSameRaceTrack,
+  PlaceTokenOnSameRaceTrack,
   ShowTwoCharacterTiles,
   ReplaceCharacterTiles,
   ChooseActionForOpponent

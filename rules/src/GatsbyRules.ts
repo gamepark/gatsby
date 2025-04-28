@@ -22,6 +22,7 @@ import { PlaceTokenOnCabaretOnStarCaseRule } from './rules/PlaceTokenOnCabaretOn
 import { PlaceTokenOnCabaretOrRaceTrackRule } from './rules/PlaceTokenOnCabaretOrRaceTrackRule'
 import { PlaceTokenOnCabaretRule } from './rules/PlaceTokenOnCabaretRule'
 import { PlaceTokenOnRaceTrackRule } from './rules/PlaceTokenOnRaceTrackRule'
+import { PlaceTokenOnSameRaceTrackRule } from './rules/PlaceTokenOnSameRaceTrackRule'
 import { ReplaceCharacterTilesRule } from './rules/ReplaceCharacterTilesRule'
 import { RuleId } from './rules/RuleId'
 import { ShowTwoCharacterTilesRule } from './rules/ShowTwoCharacterTilesRule'
@@ -46,6 +47,7 @@ export class GatsbyRules
     [RuleId.ChooseAction]: ChooseActionRule,
     [RuleId.PlaceTokenOnRaceTrack]: PlaceTokenOnRaceTrackRule,
     [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackRule,
+    [RuleId.PlaceTokenOnSameRaceTrack]: PlaceTokenOnSameRaceTrackRule,
     [RuleId.TakeThreeSpecialActionTilesAndChooseOne]: TakeThreeSpecialActionTileAndTakeOneRule,
     [RuleId.SwitchInfluenceTokens]: SwitchInfluenceTokensRule,
     [RuleId.PlaceTokenOnCabaretOrRaceTrack]: PlaceTokenOnCabaretOrRaceTrackRule,
@@ -75,11 +77,7 @@ export class GatsbyRules
     [MaterialType.SpecialActionTile]: {
       [LocationType.SpecialActionDeck]: new PositiveSequenceStrategy(),
       [LocationType.SpecialActionDiscard]: new PositiveSequenceStrategy(),
-      [LocationType.SpecialActionLayout]: new PositiveSequenceStrategy('y'),
-      [LocationType.ActionSpace]: new PositiveSequenceStrategy()
-    },
-    [MaterialType.ActionToken]: {
-      [LocationType.ActionSpace]: new PositiveSequenceStrategy()
+      [LocationType.SpecialActionLayout]: new PositiveSequenceStrategy('y')
     },
     [MaterialType.RaceFinishedOverlayTile]: {
       [LocationType.RaceFinishedDeck]: new PositiveSequenceStrategy()

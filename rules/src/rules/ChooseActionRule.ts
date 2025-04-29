@@ -59,9 +59,7 @@ export class ChooseActionRule extends PlayerTurnRule {
       }
       const specialActionTile = this.getSpecialActionTile(move.location.id as number)
       const rules: RuleId[] = ActionsForSpecialActionTiles[specialActionTile.getItem()?.id as SpecialActionTile]
-      console.log(specialActionTile)
-      console.log(rules)
-      this.memorize(Memory.NextRules, rules.splice(1))
+      this.memorize(Memory.NextRules, rules.slice(1))
       return [specialActionTile.moveItem(() => ({ type: LocationType.SpecialActionDiscard })), this.startPlayerTurn(rules[0], this.playerWhoPlayActions)]
     }
     return []

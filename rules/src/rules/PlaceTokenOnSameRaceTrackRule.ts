@@ -9,7 +9,6 @@ export class PlaceTokenOnSameRaceTrackRule extends PlaceTokenOnRaceTrackRule {
   }
 
   onRuleEnd(): MaterialMove[] {
-    this.forget(Memory.LastTokenOnRaceTrackForPlayer, this.player)
     return []
   }
 }

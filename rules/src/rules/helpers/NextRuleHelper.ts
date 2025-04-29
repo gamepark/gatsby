@@ -1,18 +1,19 @@
 import { MaterialGame, MaterialRulesPart } from '@gamepark/rules-api'
 import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
+import { EndOfGameHelper } from './EndOfGameHelper'
 
 export class NextRuleHelper extends MaterialRulesPart {
   player?: number
-
+  endOfGameHelper: EndOfGameHelper
   constructor(game: MaterialGame, player = game.rule?.player) {
     super(game)
     this.player = player
+    this.endOfGameHelper = new EndOfGameHelper(game)
   }
 
   moveToNextRule(nextPlayer: number) {
     const nextRules: RuleId[] | undefined = this.remind(Memory.NextRules) ?? []
-    console.log(nextRules)
     if (nextRules.length > 1) {
       this.memorize(Memory.NextRules, nextRules.slice(1))
       return [this.startPlayerTurn(nextRules[0], this.player!)]

@@ -1,4 +1,4 @@
-import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { isMoveItem, isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
@@ -34,7 +34,10 @@ export class SwitchInfluenceTokensRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
-    if (isMoveItem(move) && (move.location.type === LocationType.CabaretTokenSpace || move.location.type === LocationType.RaceTrack)) {
+    if (
+      isMoveItemType(MaterialType.InfluenceToken)(move) &&
+      (move.location.type === LocationType.CabaretTokenSpace || move.location.type === LocationType.RaceTrack)
+    ) {
       moves.push(...this.nextRuleHelper.moveToNextRule(this.nextPlayer))
     }
     return moves

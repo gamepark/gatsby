@@ -1,4 +1,5 @@
 import {
+  CompetitiveRank,
   FillGapStrategy,
   hideItemId,
   hideItemIdToOthers,
@@ -15,6 +16,7 @@ import { AdvanceInFinanceCenterRule } from './rules/AdvanceInFinanceCenterRule'
 import { ChooseActionForOpponentRule } from './rules/ChooseActionForOpponentRule'
 import { ChooseActionRule } from './rules/ChooseActionRule'
 import { ChooseSpecialActionTileRule } from './rules/ChooseSpecialActionTileRule'
+import { EndOfGameHelper } from './rules/helpers/EndOfGameHelper'
 import { PlaceTokenOnAnotherRaceTrackRule } from './rules/PlaceTokenOnAnotherRaceTrackRule'
 import { PlaceTokenOnCabaretNearToLastRule } from './rules/PlaceTokenOnCabaretNearToLastRule'
 import { PlaceTokenOnCabaretNearToOtherRule } from './rules/PlaceTokenOnCabaretNearToOtherRule'
@@ -33,10 +35,8 @@ import { TakeThreeSpecialActionTileAndTakeOneRule } from './rules/TakeThreeSpeci
  * This class implements the rules of the board game.
  * It must follow Game Park "Rules" API so that the Game Park server can enforce the rules.
  */
-export class GatsbyRules
-  extends SecretMaterialRules<number, MaterialType, LocationType>
-  implements TimeLimit<MaterialGame<number, MaterialType, LocationType>, MaterialMove<number, MaterialType, LocationType>>
-{
+export class GatsbyRules extends SecretMaterialRules implements TimeLimit<MaterialGame, MaterialMove>, CompetitiveRank<MaterialGame, MaterialMove, number> {
+  endOfGameHelper = new EndOfGameHelper(this.game)
   rules = {
     [RuleId.ChooseSpecialActionTile]: ChooseSpecialActionTileRule,
     [RuleId.PlaceTokenOnCabaret]: PlaceTokenOnCabaretRule,
@@ -93,6 +93,10 @@ export class GatsbyRules
 
   giveTime(): number {
     return 60
+  }
+
+  rankPlayers(playerA: number, playerB: number): number {
+    return this.endOfGameHelper.rankPlayers(playerA, playerB)
   }
 }
 const hideIdIfRotated = (item: MaterialItem) => (!item.location.rotation ? [] : ['id'])

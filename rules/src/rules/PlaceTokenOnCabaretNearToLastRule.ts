@@ -11,7 +11,6 @@ export class PlaceTokenOnCabaretNearToLastRule extends PlaceTokenOnCabaretRule {
     return []
   }
   onRuleEnd(): MaterialMove[] {
-    this.forget(Memory.LastTokenOnCabaretForPlayer, this.player)
     return []
   }
 }

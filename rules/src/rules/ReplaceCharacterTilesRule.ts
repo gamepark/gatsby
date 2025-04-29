@@ -26,7 +26,10 @@ export class ReplaceCharacterTilesRule extends ShowTwoCharacterTilesRule {
 
   afterItemMove(move: ItemMove): MaterialMove[] {
     if (isMoveItem(move) && move.location.type === LocationType.CharacterSpace) {
-      return [...this.movesToCharacterSpaces(), ...this.nextRuleHelper.moveToNextRule(this.nextPlayer)]
+      if(this.characterTilesInShowingLayout.length === 0) {
+        return this.nextRuleHelper.moveToNextRule(this.nextPlayer)
+      }
+      return this.movesToCharacterSpaces()
     }
     return []
   }

@@ -12,8 +12,9 @@ export class NextRuleHelper extends MaterialRulesPart {
     this.endOfGameHelper = new EndOfGameHelper(game)
   }
 
-  moveToNextRule(nextPlayer: number) {
+  moveToNextRule() {
     const nextRules: RuleId[] | undefined = this.remind(Memory.NextRules) ?? []
+    console.log(nextRules)
     if (nextRules.length > 1) {
       this.memorize(Memory.NextRules, nextRules.slice(1))
       return [this.startPlayerTurn(nextRules[0], this.player!)]
@@ -22,14 +23,14 @@ export class NextRuleHelper extends MaterialRulesPart {
       this.forget(Memory.NextRules)
       return [this.startPlayerTurn(nextRules[0], this.player!)]
     }
-    return [this.startPlayerTurn(RuleId.ChooseAction, nextPlayer)]
+    return [this.startPlayerTurn(RuleId.GetCharacterTiles, this.player!)]
   }
 
   addActionSpecialInNextRules(locationBonus: string | RuleId) {
     if (typeof locationBonus === 'number') {
       const nextRules: RuleId[] | undefined = this.remind(Memory.NextRules) ?? []
       if (locationBonus === RuleId.ChooseActionForOpponent) {
-        this.memorize(Memory.NextRules, [...nextRules, RuleId.ChooseActionForOpponent])
+        this.memorize(Memory.ChooseActionToOpponent, true)
       } else {
         this.memorize(Memory.NextRules, [locationBonus, ...nextRules])
       }

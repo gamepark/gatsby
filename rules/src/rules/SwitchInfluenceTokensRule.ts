@@ -8,7 +8,7 @@ export class SwitchInfluenceTokensRule extends PlayerTurnRule {
 
   onRuleStart(): MaterialMove[] {
     if (this.playerInfluenceTokens.length === 0) {
-      return this.nextRuleHelper.moveToNextRule(this.nextPlayer)
+      return this.nextRuleHelper.moveToNextRule()
     }
     return []
   }
@@ -36,9 +36,12 @@ export class SwitchInfluenceTokensRule extends PlayerTurnRule {
     const moves: MaterialMove[] = []
     if (
       isMoveItemType(MaterialType.InfluenceToken)(move) &&
-      (move.location.type === LocationType.CabaretTokenSpace || move.location.type === LocationType.RaceTrack)
+      (move.location.type === LocationType.RaceTrack || move.location.type === LocationType.CabaretTokenSpace)
     ) {
-      moves.push(...this.nextRuleHelper.moveToNextRule(this.nextPlayer))
+      const tokenId = this.material(MaterialType.InfluenceToken).index(move.itemIndex).getItem()?.id
+      if(tokenId === this.player) {
+        moves.push(...this.nextRuleHelper.moveToNextRule())
+      }
     }
     return moves
   }

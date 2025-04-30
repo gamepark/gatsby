@@ -2,18 +2,16 @@ import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@g
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { CabaretHelper } from './helpers/CabaretHelper'
-import { EndOfGameHelper } from './helpers/EndOfGameHelper'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 import { Memory } from './Memory'
 
 export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
   cabaretHelper = new CabaretHelper(this.game)
   nextRuleHelper = new NextRuleHelper(this.game)
-  endOfGameHelper = new EndOfGameHelper(this.game)
 
   onRuleStart(): MaterialMove[] {
-    if (this.playerInfluenceTokens.length === 0) {
-      return this.nextRuleHelper.moveToNextRule(this.nextPlayer)
+    if (this.playerInfluenceTokens.length === 0 || this.getPossiblePlace().length === 0) {
+      return this.nextRuleHelper.moveToNextRule()
     }
     return []
   }
@@ -27,17 +25,11 @@ export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
-    if (isMoveItem(move) && move.itemType === MaterialType.CharacterTile && move.location.type === LocationType.PlayerCharacterTiles) {
-      return this.endOfGameHelper.checkEndOfGame(move.location.player!) ? [this.endGame()] : this.nextRuleHelper.moveToNextRule(this.nextPlayer)
-    }
     const moves: MaterialMove[] = []
     if (isMoveItem(move) && move.location.type === LocationType.CabaretTokenSpace) {
       this.memorize(Memory.LastTokenOnCabaretForPlayer, move.location, this.player)
       this.cabaretHelper.getBonus(move.location.parent!, move.location.id as number)
-      moves.push(...this.cabaretHelper.checkAnGetCharacters())
-      if (moves.length === 0) {
-        moves.push(...this.nextRuleHelper.moveToNextRule(this.nextPlayer))
-      }
+      moves.push(...this.nextRuleHelper.moveToNextRule())
     }
     return moves
   }

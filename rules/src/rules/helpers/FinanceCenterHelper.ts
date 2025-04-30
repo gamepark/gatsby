@@ -13,12 +13,13 @@ export class FinanceCenterHelper extends MaterialRulesPart {
     this.player = player
   }
 
-  checkAndGetFinanceCenterCharacters(moveLocationId: number) {
+  checkAndGetFinanceCenterCharacters() {
+    const playerAscensionTokenLocationId = this.material(MaterialType.AscensionToken).player(this.player).getItem()?.location.id as number
     const moves: MaterialMove[] = []
-    moves.push(...this.checkAndGetFinanceCenterCharacter(moveLocationId, 3, 6))
-    moves.push(...this.checkAndGetFinanceCenterCharacter(moveLocationId, 7, 5))
-    moves.push(...this.checkAndGetFinanceCenterCharacter(moveLocationId, 10, 4))
-    moves.push(...this.checkAndGetFinanceCenterCharacter(moveLocationId, 13, 3))
+    moves.push(...this.checkAndGetFinanceCenterCharacter(playerAscensionTokenLocationId, 3, 6))
+    moves.push(...this.checkAndGetFinanceCenterCharacter(playerAscensionTokenLocationId, 7, 5))
+    moves.push(...this.checkAndGetFinanceCenterCharacter(playerAscensionTokenLocationId, 10, 4))
+    moves.push(...this.checkAndGetFinanceCenterCharacter(playerAscensionTokenLocationId, 13, 3))
     return moves
   }
 

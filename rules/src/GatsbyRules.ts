@@ -16,6 +16,7 @@ import { AdvanceInFinanceCenterRule } from './rules/AdvanceInFinanceCenterRule'
 import { ChooseActionForOpponentRule } from './rules/ChooseActionForOpponentRule'
 import { ChooseActionRule } from './rules/ChooseActionRule'
 import { ChooseSpecialActionTileRule } from './rules/ChooseSpecialActionTileRule'
+import { GetCharacterTilesRule } from './rules/GetCharacterTilesRule'
 import { EndOfGameHelper } from './rules/helpers/EndOfGameHelper'
 import { PlaceTokenOnAnotherRaceTrackRule } from './rules/PlaceTokenOnAnotherRaceTrackRule'
 import { PlaceTokenOnCabaretNearToLastRule } from './rules/PlaceTokenOnCabaretNearToLastRule'
@@ -53,7 +54,8 @@ export class GatsbyRules extends SecretMaterialRules implements TimeLimit<Materi
     [RuleId.PlaceTokenOnCabaretOrRaceTrack]: PlaceTokenOnCabaretOrRaceTrackRule,
     [RuleId.ChooseActionForOpponent]: ChooseActionForOpponentRule,
     [RuleId.ShowTwoCharacterTiles]: ShowTwoCharacterTilesRule,
-    [RuleId.ReplaceCharacterTiles]: ReplaceCharacterTilesRule
+    [RuleId.ReplaceCharacterTiles]: ReplaceCharacterTilesRule,
+    [RuleId.GetCharacterTiles]: GetCharacterTilesRule
   }
 
   hidingStrategies = {
@@ -99,6 +101,7 @@ export class GatsbyRules extends SecretMaterialRules implements TimeLimit<Materi
     return this.endOfGameHelper.rankPlayers(playerA, playerB)
   }
 }
+
 const hideIdIfRotated = (item: MaterialItem) => (!item.location.rotation ? [] : ['id'])
 const hideItemIdToOthersIfRotated = (item: MaterialItem, player?: number) => {
   return !item.location.rotation ? [] : player === item.location.player ? [] : ['id']

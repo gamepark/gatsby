@@ -14,5 +14,6 @@ export enum RuleId {
   PlaceTokenOnSameRaceTrack,
   ShowTwoCharacterTiles,
   ReplaceCharacterTiles,
-  ChooseActionForOpponent
+  ChooseActionForOpponent,
+  GetCharacterTiles
 }

@@ -3,5 +3,7 @@ export enum Memory {
   LastTokenOnCabaretForPlayer,
   LastTokenOnRaceTrackForPlayer,
   NbCasesToAdd,
-  CharacterTilesLocations
+  CharacterTilesLocations,
+  ChooseActionToOpponent,
+  GameEnded
 }

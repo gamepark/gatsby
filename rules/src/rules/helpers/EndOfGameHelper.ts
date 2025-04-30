@@ -2,13 +2,16 @@ import { MaterialItem, MaterialRulesPart } from '@gamepark/rules-api'
 import { CharacterColor, characterScore, CharacterTile, getCharacterColor } from '../../material/CharacterTile'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
+import { Memory } from '../Memory'
 
 export class EndOfGameHelper extends MaterialRulesPart {
   checkEndOfGame(player: number) {
     const playerHasThreeSameColor = this.checkPlayerHasThreeSameColor(player)
     const playerHasAllColors = this.checkPlayerHasAllColors(player)
     const noCharacterTilesLeft = this.checkNoCharacterTilesLeft()
-    return playerHasThreeSameColor || playerHasAllColors || noCharacterTilesLeft
+    if (playerHasThreeSameColor || playerHasAllColors || noCharacterTilesLeft) {
+      this.memorize(Memory.GameEnded, true)
+    }
   }
 
   checkPlayerHasThreeSameColor(player: number) {
@@ -52,7 +55,9 @@ export class EndOfGameHelper extends MaterialRulesPart {
 
     let score = 0
     for (const characterTile of playerCharacterTiles) {
-      score += characterScore[characterTile.id as CharacterTile]
+      if(characterTile.id) {
+        score += characterScore[characterTile.id as CharacterTile]
+      }
     }
 
     return score + playerSpecialActionTiles.length

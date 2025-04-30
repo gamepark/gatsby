@@ -28,7 +28,7 @@ export class TakeThreeSpecialActionTileAndTakeOneRule extends ChooseSpecialActio
     const moves: MaterialMove[] = []
     if (isMoveItem(move) && (move.location.type === LocationType.ActionSpace || move.location.type === LocationType.PlayerSpecialTilesDiscard)) {
       moves.push(...this.specialActionTilesToChoose.moveItems(() => ({ type: LocationType.SpecialActionDiscard })))
-      moves.push(...this.nextRuleHelper.moveToNextRule(this.nextPlayer))
+      moves.push(...this.nextRuleHelper.moveToNextRule())
     }
     return moves
   }

@@ -24,23 +24,31 @@ export class RaceTrackHelper extends MaterialRulesPart {
     return res
   }
 
-  checkAndGetRaceTrackCharacters(moveLocationId: number, moveLocationX: number) {
+  checkAndGetRaceTrackCharacters() {
     const moves: MaterialMove[] = []
-    if ((moveLocationId < 3 && moveLocationX === 4) || (moveLocationId > 2 && moveLocationX === 2)) {
-      const characterTile = this.material(MaterialType.CharacterTile).location(
-        (loc) => loc.type === LocationType.CharacterSpace && loc.id === 7 + moveLocationId
-      )
-      const tokensInTrack = this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === moveLocationId)
-      const tokensInTrackIds = tokensInTrack.getItems().map((item) => item.id as number)
-      const playerWoWinCharacter = tokensInTrackIds.filter((n) => n === 1).length > tokensInTrackIds.filter((n) => n === 2).length ? 1 : 2
-      moves.push(
-        characterTile.moveItem(({ location }) => ({ type: LocationType.PlayerCharacterTiles, rotation: location.rotation, player: playerWoWinCharacter }))
-      )
-      moves.push(...tokensInTrack.moveItems((item) => ({ type: LocationType.PlayerInfluenceTokenPile, player: item.id })))
+    const playerTokens = this.material(MaterialType.InfluenceToken)
+      .id(this.player)
+      .location(LocationType.RaceTrack)
+      .getItems()
+      .map((item) => item.location)
+    console.log(this.player)
+    console.log(playerTokens)
 
-      const raceFinishedOverlayTiles = this.material(MaterialType.RaceFinishedOverlayTile).location(LocationType.RaceFinishedDeck)
-      if (raceFinishedOverlayTiles.length > 0) {
-        moves.push(raceFinishedOverlayTiles.maxBy((item) => item.location.x!).moveItem(() => ({ type: LocationType.RaceTrack, id: moveLocationId, x: 2 })))
+    for (const { id, x } of playerTokens) {
+      if ((id < 3 && x === 4) || (id > 2 && x === 2)) {
+        const characterTile = this.material(MaterialType.CharacterTile).location((loc) => loc.type === LocationType.CharacterSpace && loc.id === 7 + id)
+        const tokensInTrack = this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === id)
+        const tokensInTrackIds = tokensInTrack.getItems().map((item) => item.id as number)
+        const playerWoWinCharacter = tokensInTrackIds.filter((n) => n === 1).length > tokensInTrackIds.filter((n) => n === 2).length ? 1 : 2
+        moves.push(
+          characterTile.moveItem(({ location }) => ({ type: LocationType.PlayerCharacterTiles, rotation: location.rotation, player: playerWoWinCharacter }))
+        )
+        moves.push(...tokensInTrack.moveItems((item) => ({ type: LocationType.PlayerInfluenceTokenPile, player: item.id })))
+
+        const raceFinishedOverlayTiles = this.material(MaterialType.RaceFinishedOverlayTile).location(LocationType.RaceFinishedDeck)
+        if (raceFinishedOverlayTiles.length > 0) {
+          moves.push(raceFinishedOverlayTiles.maxBy((item) => item.location.x!).moveItem(() => ({ type: LocationType.RaceTrack, id, x: 2 })))
+        }
       }
     }
     return moves

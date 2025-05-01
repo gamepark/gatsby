@@ -6,7 +6,7 @@ class PlayerCharacterTilesShowLayoutLocator extends ListLocator {
   gap = { x: 4.5 }
   maxCount = 2
   getCoordinates(location: Location) {
-    if(location.player === 1) {
+    if (location.player === 1) {
       return { x: -34, y: 0 }
     }
     return { x: 30, y: 0 }

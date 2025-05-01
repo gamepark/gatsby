@@ -17,6 +17,7 @@ import CharacterBlack1 from '../images/character/CharacterBlack1.jpg'
 import CharacterBlack2 from '../images/character/CharacterBlack2.jpg'
 import CharacterBlack3 from '../images/character/CharacterBlack3.jpg'
 import CharacterBack from '../images/character/CharacterBack.jpg'
+import { CharacterTileHelp } from './help/CharacterTileHelp'
 
 export class CharacterTileDescription extends CardDescription {
   height = 4
@@ -25,6 +26,8 @@ export class CharacterTileDescription extends CardDescription {
   backImage = CharacterBack
 
   images = images
+
+  help = CharacterTileHelp
 }
 
 const images = {

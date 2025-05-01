@@ -27,16 +27,15 @@ export class RaceTrackHelper extends MaterialRulesPart {
   checkAndGetRaceTrackCharacters() {
     const moves: MaterialMove[] = []
     const playerTokens = this.material(MaterialType.InfluenceToken)
-      .id(this.player)
       .location(LocationType.RaceTrack)
       .getItems()
       .map((item) => item.location)
-    console.log(this.player)
-    console.log(playerTokens)
 
     for (const { id, x } of playerTokens) {
       if ((id < 3 && x === 4) || (id > 2 && x === 2)) {
-        const characterTile = this.material(MaterialType.CharacterTile).location((loc) => loc.type === LocationType.CharacterSpace && loc.id === 7 + id)
+        const characterTile = this.material(MaterialType.CharacterTile).location(
+          (loc) => loc.type === LocationType.CharacterSpace && loc.id === 7 + (id as number)
+        )
         const tokensInTrack = this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === id)
         const tokensInTrackIds = tokensInTrack.getItems().map((item) => item.id as number)
         const playerWoWinCharacter = tokensInTrackIds.filter((n) => n === 1).length > tokensInTrackIds.filter((n) => n === 2).length ? 1 : 2

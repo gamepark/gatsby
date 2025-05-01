@@ -3,6 +3,7 @@ import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { Locator } from '@gamepark/react-game'
 import { actionSpaceLocator } from './ActionSpaceLocator'
 import { actionTokenIdleLocator } from './ActionTokenIdleLocator'
+import { bonusCaseLocator } from './bonusCaseLocator'
 import { cabaretSpaceLocator } from './CabaretSpaceLocator'
 import { cabaretTokenSpaceLocator } from './CabaretTokenSpaceLocator'
 import { characterSpaceLocator } from './CharacterSpaceLocator'
@@ -34,5 +35,6 @@ export const Locators: Partial<Record<LocationType, Locator<number, MaterialType
   [LocationType.SpecialActionDeck]: specialActionTileDeckLocator,
   [LocationType.SpecialActionLayout]: specialActionLayoutLocator,
   [LocationType.RaceFinishedDeck]: raceFinishedOverlayTileDeckLocator,
-  [LocationType.PlayerCharacterTilesShowLayout]: playerCharacterTilesShowLayoutLocator
+  [LocationType.PlayerCharacterTilesShowLayout]: playerCharacterTilesShowLayoutLocator,
+  [LocationType.BonusCase]: bonusCaseLocator
 }

@@ -16,6 +16,7 @@ import BonusTile9 from '../images/bonuses/BonusTile9.jpg'
 import BonusTile10 from '../images/bonuses/BonusTile10.jpg'
 import BonusTile11 from '../images/bonuses/BonusTile11.jpg'
 import Back from '../images/bonuses/BonusTileBack.jpg'
+import { SpecialActionTileHelp } from './help/SpecialActionTileHelp'
 
 export class SpecialActionTileDescription extends CardDescription {
   height = 2.5
@@ -28,6 +29,8 @@ export class SpecialActionTileDescription extends CardDescription {
   canLongClick(move: MaterialMove, context: ItemContext): boolean {
     return isMoveItemType(MaterialType.SpecialActionTile)(move) && move.location.type === LocationType.ActionSpace && move.itemIndex === context.index
   }
+
+  help = SpecialActionTileHelp
 }
 
 const images = {

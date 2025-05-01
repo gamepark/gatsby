@@ -1,4 +1,4 @@
-import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { CustomMoveType } from './CustomMoveType'
@@ -25,21 +25,22 @@ export class GetCharacterTilesRule extends PlayerTurnRule {
     ]
   }
 
-  afterItemMove(move: ItemMove): MaterialMove[] {
-    if (isMoveItem(move) && move.itemType === MaterialType.CharacterTile && move.location.type === LocationType.PlayerCharacterTiles) {
+  onCustomMove(): MaterialMove[] {
+    const moves: MaterialMove[] = []
+
+    for (const player of this.game.players) {
       if (
-        !this.getPlayerCharacterTiles(move.location.player!)
+        !this.getPlayerCharacterTiles(player)
           .getItems()
           .some((item) => item.id === undefined)
       ) {
-        this.endOfGameHelper.checkEndOfGame(move.location.player!)
+        moves.push(...this.endOfGameHelper.checkEndOfGame(player))
       }
     }
-    return []
-  }
 
-  onCustomMove(): MaterialMove[] {
-    if (this.remind(Memory.GameEnded)) return [this.endGame()]
+    if (moves.length > 0) {
+      return moves
+    }
 
     if (this.remind(Memory.ChooseActionToOpponent)) {
       this.forget(Memory.ChooseActionToOpponent)
@@ -50,9 +51,5 @@ export class GetCharacterTilesRule extends PlayerTurnRule {
 
   getPlayerCharacterTiles(player: number) {
     return this.material(MaterialType.CharacterTile).location(LocationType.PlayerCharacterTiles).player(player)
-  }
-
-  get playerFincanceTokenLocationId(): number {
-    return this.material(MaterialType.AscensionToken).player(this.player).getItem()?.location.id as number
   }
 }

@@ -2,6 +2,7 @@
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { DropAreaDescription, Locator, MaterialContext } from '@gamepark/react-game'
 import { Location, MaterialItem, XYCoordinates } from '@gamepark/rules-api'
+import { CabaretHelp } from '../material/help/CabaretHelp'
 
 class CabaretTokenSpaceLocator extends Locator {
   parentItemType = MaterialType.CabaretTile
@@ -29,6 +30,8 @@ export class CabaretTokenSpaceDescription extends DropAreaDescription {
   height = 1.5
   width = 1.5
   borderRadius = 1
+
+  help = CabaretHelp
 }
 
 export const cabaretTokenSpaceLocator = new CabaretTokenSpaceLocator()

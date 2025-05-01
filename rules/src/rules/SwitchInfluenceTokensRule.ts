@@ -39,7 +39,7 @@ export class SwitchInfluenceTokensRule extends PlayerTurnRule {
       (move.location.type === LocationType.RaceTrack || move.location.type === LocationType.CabaretTokenSpace)
     ) {
       const tokenId = this.material(MaterialType.InfluenceToken).index(move.itemIndex).getItem()?.id
-      if(tokenId === this.player) {
+      if (tokenId === this.player) {
         moves.push(...this.nextRuleHelper.moveToNextRule())
       }
     }

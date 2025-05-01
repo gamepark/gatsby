@@ -4,7 +4,7 @@ import { Location } from '@gamepark/rules-api'
 
 class PlayerSpecialTilesDiscardLocator extends DeckLocator {
   getCoordinates(location: Location) {
-    if(location.player === 1) {
+    if (location.player === 1) {
       return { x: -32, y: 10 }
     }
     return { x: 32, y: 10 }

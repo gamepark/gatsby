@@ -2,6 +2,7 @@
 import { TokenDescription } from '@gamepark/react-game'
 import WomanSquare from '../images/pawn/WomanSquare.jpg'
 import ManSquare from '../images/pawn/ManSquare.jpg'
+import { AscensionTokenHelp } from './help/AscensionTokenHelp'
 
 export class AscensionTokenDescription extends TokenDescription {
   height = 1.5
@@ -11,6 +12,8 @@ export class AscensionTokenDescription extends TokenDescription {
     1: WomanSquare,
     2: ManSquare
   }
+
+  help = AscensionTokenHelp
 }
 
 export const ascensionTokenDescription = new AscensionTokenDescription()

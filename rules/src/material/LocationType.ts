@@ -14,5 +14,6 @@ export enum LocationType {
   RaceFinishedDeck,
   PlayerCharacterTiles,
   PlayerCharacterTilesShowLayout,
-  PlayerSpecialTilesDiscard
+  PlayerSpecialTilesDiscard,
+  BonusCase
 }

@@ -6,6 +6,7 @@ import Cabaret2 from '../images/cabaret/Cabaret2.jpg'
 import Cabaret3 from '../images/cabaret/Cabaret3.jpg'
 import Cabaret4 from '../images/cabaret/Cabaret4.jpg'
 import Back from '../images/cabaret/CabaretBack.jpg'
+import { CabaretTileHelp } from './help/CabaretTileHelp'
 
 export class CabaretTileDescription extends CardDescription {
   height = 5.5
@@ -14,6 +15,8 @@ export class CabaretTileDescription extends CardDescription {
   backImage = Back
 
   images = images
+
+  help = CabaretTileHelp
 }
 
 const images = {

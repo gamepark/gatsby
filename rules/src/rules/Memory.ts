@@ -4,6 +4,5 @@ export enum Memory {
   LastTokenOnRaceTrackForPlayer,
   NbCasesToAdd,
   CharacterTilesLocations,
-  ChooseActionToOpponent,
-  GameEnded
+  ChooseActionToOpponent
 }

@@ -9,7 +9,7 @@ class PlayerCharacterTilesLocator extends FlexLocator {
   lineGap = { y: 4.5 }
 
   getCoordinates(location: Location) {
-    if(location.player === 1) {
+    if (location.player === 1) {
       return { x: -47, y: 8 }
     }
     return { x: 38, y: 8 }

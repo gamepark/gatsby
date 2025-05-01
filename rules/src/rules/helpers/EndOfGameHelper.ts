@@ -2,7 +2,6 @@ import { MaterialItem, MaterialRulesPart } from '@gamepark/rules-api'
 import { CharacterColor, characterScore, CharacterTile, getCharacterColor } from '../../material/CharacterTile'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
-import { Memory } from '../Memory'
 
 export class EndOfGameHelper extends MaterialRulesPart {
   checkEndOfGame(player: number) {
@@ -10,8 +9,9 @@ export class EndOfGameHelper extends MaterialRulesPart {
     const playerHasAllColors = this.checkPlayerHasAllColors(player)
     const noCharacterTilesLeft = this.checkNoCharacterTilesLeft()
     if (playerHasThreeSameColor || playerHasAllColors || noCharacterTilesLeft) {
-      this.memorize(Memory.GameEnded, true)
+      return [this.material(MaterialType.CharacterTile).moveItemsAtOnce({ rotation: false }), this.endGame()]
     }
+    return []
   }
 
   checkPlayerHasThreeSameColor(player: number) {
@@ -52,19 +52,50 @@ export class EndOfGameHelper extends MaterialRulesPart {
       .location(LocationType.PlayerSpecialTilesDiscard)
       .player(player)
       .getItems()
+    const actionSpaceId = player === 1 ? 0 : 5
+    const specialActionTileInActionSpace: MaterialItem[] = this.material(MaterialType.SpecialActionTile)
+      .location((loc) => loc.type === LocationType.ActionSpace && loc.id === actionSpaceId)
+      .getItems()
 
     let score = 0
     for (const characterTile of playerCharacterTiles) {
-      if(characterTile.id) {
+      if (characterTile.id) {
         score += characterScore[characterTile.id as CharacterTile]
       }
     }
 
-    return score + playerSpecialActionTiles.length
+    return score + playerSpecialActionTiles.length + specialActionTileInActionSpace.length
   }
 
   checkNoCharacterTilesLeft() {
-    return this.material(MaterialType.CharacterTile).location(LocationType.CharacterSpace).length === 0
+    return this.checkNoCharacterTilesLeftInCabaret() || this.checkNoCharacterTilesLeftInFincanceCenter() || this.checkNoCharacterTilesLeftInRaceTrack()
+  }
+
+  checkNoCharacterTilesLeftInCabaret() {
+    const cabaretCharacterSpacesIds = [0, 1, 2]
+    return (
+      this.material(MaterialType.CharacterTile).location(
+        (loc) => loc.type === LocationType.CharacterSpace && cabaretCharacterSpacesIds.includes(loc.id as number)
+      ).length === 0
+    )
+  }
+
+  checkNoCharacterTilesLeftInFincanceCenter() {
+    const financeCenterCharacterSpacesIds = [3, 4, 5, 6]
+    return (
+      this.material(MaterialType.CharacterTile).location(
+        (loc) => loc.type === LocationType.CharacterSpace && financeCenterCharacterSpacesIds.includes(loc.id as number)
+      ).length === 0
+    )
+  }
+
+  checkNoCharacterTilesLeftInRaceTrack() {
+    const raceTrackCharacterSpacesIds = [7, 8, 9, 10, 11]
+    return (
+      this.material(MaterialType.CharacterTile).location(
+        (loc) => loc.type === LocationType.CharacterSpace && raceTrackCharacterSpacesIds.includes(loc.id as number)
+      ).length === 0
+    )
   }
 
   rankPlayers(playerA: number, playerB: number) {

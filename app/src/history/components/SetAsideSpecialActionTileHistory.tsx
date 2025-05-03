@@ -11,7 +11,6 @@ export const SetAsideSpecialActionTileHistory = (props: MoveComponentProps) => {
   const name = usePlayerName(actionPlayer)
   const tile = move.reveal ? { id: move.reveal.id, location: { type: 0, rotation: false } } : context.game.items[MaterialType.SpecialActionTile][move.itemIndex]
 
-
   return (
     <Trans defaults="history.aside.special.action.player" values={{ player: name }}>
       <PlayMoveButton move={displayMaterialHelp(MaterialType.SpecialActionTile, tile)} local />

@@ -12,7 +12,6 @@ export const GetCharacterTilesHistory = (props: MoveComponentProps) => {
   const tile = context.game.items[MaterialType.CharacterTile][move.itemIndex]
   const locationId = getCharacterLocation(tile.location.id)
 
-
   return (
     <Trans defaults="history.get.character.player" values={{ player: name, locationId }}>
       <PlayMoveButton move={displayMaterialHelp(MaterialType.CharacterTile, tile)} local />

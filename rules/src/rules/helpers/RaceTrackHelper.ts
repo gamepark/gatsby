@@ -55,7 +55,7 @@ export class RaceTrackHelper extends MaterialRulesPart {
 
   getBonus(moveLocationId: number, moveLocationX: number) {
     const locationBonus = bonus[moveLocationId][moveLocationX]
-    if(new NextRuleHelper(this.game).addActionSpecialInNextRules(locationBonus)) {
+    if (new NextRuleHelper(this.game).addActionSpecialInNextRules(locationBonus)) {
       return locationBonus
     }
     return null

@@ -17,7 +17,9 @@ export const ChooseActionHistory = (props: MoveComponentProps) => {
     return <Trans defaults="history.choose.action.player" values={{ player: name, actionId }} />
   }
 
-  const tile: MaterialItem = context.game.items[MaterialType.SpecialActionTile].find(({ location }: MaterialItem) => location.type === LocationType.ActionSpace && location.id === actionId)
+  const tile: MaterialItem = context.game.items[MaterialType.SpecialActionTile].find(
+    ({ location }: MaterialItem) => location.type === LocationType.ActionSpace && location.id === actionId
+  )
 
   return (
     <Trans defaults="history.choose.action.special.player" values={{ player: name }}>

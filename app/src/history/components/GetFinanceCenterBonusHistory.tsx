@@ -11,7 +11,6 @@ export const GetFinanceCenterBonusHistory = (props: MoveComponentProps) => {
   const name = usePlayerName(actionPlayer)
   const bonus = isCustomMove(move) ? move.data : undefined
 
-
   return (
     <Trans defaults="history.finance.bonus.player" values={{ player: name, bonus }}>
       <PlayMoveButton move={displayLocationHelp({ type: LocationType.BonusCase })} local />

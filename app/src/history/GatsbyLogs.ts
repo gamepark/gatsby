@@ -21,16 +21,12 @@ export class GatsbyLogs implements LogDescription {
       RuleId.PlaceTokenOnCabaretOrRaceTrack,
       RuleId.PlaceTokenOnCabaret,
       RuleId.PlaceTokenOnCabaretNearToOther,
-      RuleId.PlaceTokenOnCabaretNearToLast,
+      RuleId.PlaceTokenOnCabaretNearToLast
     ]
 
-    const raceTrackRules = [
-      RuleId.PlaceTokenOnRaceTrack,
-      RuleId.PlaceTokenOnAnotherRaceTrack,
-      RuleId.PlaceTokenOnSameRaceTrack
-    ]
+    const raceTrackRules = [RuleId.PlaceTokenOnRaceTrack, RuleId.PlaceTokenOnAnotherRaceTrack, RuleId.PlaceTokenOnSameRaceTrack]
 
-    if(cabaretRules.includes(ruleId)) {
+    if (cabaretRules.includes(ruleId)) {
       if (isCustomMoveType(CustomMoveType.GetBonus)(move)) {
         return {
           Component: GetCabaretBonusHistory,
@@ -39,7 +35,7 @@ export class GatsbyLogs implements LogDescription {
       }
     }
 
-    if(raceTrackRules.includes(ruleId)) {
+    if (raceTrackRules.includes(ruleId)) {
       if (isCustomMoveType(CustomMoveType.GetBonus)(move)) {
         return {
           Component: GetRaceTrackBonusHistory,
@@ -48,7 +44,7 @@ export class GatsbyLogs implements LogDescription {
       }
     }
 
-    if(ruleId === RuleId.AdvanceInFinanceCenter) {
+    if (ruleId === RuleId.AdvanceInFinanceCenter) {
       if (isCustomMoveType(CustomMoveType.GetBonus)(move)) {
         return {
           Component: GetFinanceCenterBonusHistory,
@@ -58,13 +54,13 @@ export class GatsbyLogs implements LogDescription {
     }
 
     if (ruleId === RuleId.ChooseSpecialActionTile || ruleId === RuleId.TakeThreeSpecialActionTilesAndChooseOne) {
-      if(this.getMoveLocationType(move) === LocationType.ActionSpace) {
+      if (this.getMoveLocationType(move) === LocationType.ActionSpace) {
         return {
           Component: ChooseSpecialActionTileHistory,
           player: actionPlayer
         }
       }
-      if(this.getMoveLocationType(move) === LocationType.PlayerSpecialTilesDiscard) {
+      if (this.getMoveLocationType(move) === LocationType.PlayerSpecialTilesDiscard) {
         return {
           Component: SetAsideSpecialActionTileHistory,
           player: actionPlayer

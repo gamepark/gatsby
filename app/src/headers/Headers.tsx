@@ -5,6 +5,7 @@ import { AdvanceInFinanceCenterHeader } from './AdvanceInFinanceCenterHeader'
 import { ChooseActionForOpponentHeader } from './ChooseActionForOpponentHeader'
 import { ChooseActionHeader } from './ChooseActionHeader'
 import { ChooseSpecialActionTileHeader } from './ChooseSpecialActionTileHeader'
+import { GetCharacterTilesHeader } from './GetCharacterTilesHeader'
 import { PlaceTokenOnAnotherRaceTrackHeader } from './PlaceTokenOnAnotherRaceTrackHeader'
 import { PlaceTokenOnCabaretHeader } from './PlaceTokenOnCabaretHeader'
 import { PlaceTokenOnCabaretNearToLastHeader } from './PlaceTokenOnCabaretNearToLastHeader'
@@ -33,5 +34,6 @@ export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.PlaceTokenOnCabaretOrRaceTrack]: PlaceTokenOnCabaretOrRaceTrackHeader,
   [RuleId.ChooseActionForOpponent]: ChooseActionForOpponentHeader,
   [RuleId.ShowTwoCharacterTiles]: ShowTwoCharacterTilesHeader,
-  [RuleId.ReplaceCharacterTiles]: ReplaceCharacterTilesHeader
+  [RuleId.ReplaceCharacterTiles]: ReplaceCharacterTilesHeader,
+  [RuleId.GetCharacterTiles]: GetCharacterTilesHeader
 }

@@ -232,7 +232,7 @@ export class CabaretHelper extends MaterialRulesPart {
   getBonus(moveLocationParent: number, moveLocationId: number) {
     const tile = this.material(MaterialType.CabaretTile).index(moveLocationParent).getItem()?.id as CabaretTile
     const locationBonus = BonusByCabaretTiles[tile][moveLocationId]
-    if(new NextRuleHelper(this.game).addActionSpecialInNextRules(locationBonus)) {
+    if (new NextRuleHelper(this.game).addActionSpecialInNextRules(locationBonus)) {
       return locationBonus
     }
     return null

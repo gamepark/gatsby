@@ -4,6 +4,7 @@ import { FailuresDialog, FullscreenDialog, LiveLogContainer, LoadingScreen, Mate
 import { MaterialGame } from '@gamepark/rules-api'
 import { useEffect, useState } from 'react'
 import { GameDisplay } from './GameDisplay'
+import { GameOverHeader } from './headers/GameOverHeader'
 import { Headers } from './headers/Headers'
 
 export default function App() {
@@ -18,7 +19,7 @@ export default function App() {
     <>
       {!!game && <GameDisplay players={game.players.length} />}
       <LoadingScreen display={loading} author="Someone" artist="Somebody" publisher="Nobody" developer="You" />
-      <MaterialHeader rulesStepsHeaders={Headers} loading={loading} />
+      <MaterialHeader rulesStepsHeaders={Headers} GameOver={GameOverHeader} loading={loading} />
       <MaterialImageLoader onImagesLoad={() => setImagesLoading(false)} />
       <Menu />
       <FailuresDialog />

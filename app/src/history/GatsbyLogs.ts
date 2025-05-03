@@ -14,7 +14,7 @@ import { SetAsideSpecialActionTileHistory } from './components/SetAsideSpecialAc
 
 export class GatsbyLogs implements LogDescription {
   getMovePlayedLogDescription(move: MaterialMove, context: MoveComponentContext): MovePlayedLogDescription | undefined {
-    const ruleId: RuleId = context.game.rule.id
+    const ruleId: RuleId = context.game.rule?.id
     const actionPlayer = context.action.playerId
 
     const cabaretRules = [

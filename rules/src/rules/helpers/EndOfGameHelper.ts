@@ -67,6 +67,11 @@ export class EndOfGameHelper extends MaterialRulesPart {
     return score + playerSpecialActionTiles.length + specialActionTileInActionSpace.length
   }
 
+  getPlayerCharacterTiles(player: number) {
+    const playerCharacterTiles: MaterialItem[] = this.material(MaterialType.CharacterTile).location(LocationType.PlayerCharacterTiles).player(player).getItems()
+    return playerCharacterTiles.length
+  }
+
   checkNoCharacterTilesLeft() {
     return this.checkNoCharacterTilesLeftInCabaret() || this.checkNoCharacterTilesLeftInFincanceCenter() || this.checkNoCharacterTilesLeftInRaceTrack()
   }
@@ -103,6 +108,8 @@ export class EndOfGameHelper extends MaterialRulesPart {
     if (this.checkPlayerHasThreeSameColor(playerB) || this.checkPlayerHasAllColors(playerB)) return 1
     if (this.getScore(playerA) > this.getScore(playerB)) return -1
     if (this.getScore(playerB) > this.getScore(playerA)) return 1
+    if (this.getPlayerCharacterTiles(playerA) > this.getPlayerCharacterTiles(playerB)) return -1
+    if (this.getPlayerCharacterTiles(playerB) > this.getPlayerCharacterTiles(playerA)) return 1
     return 0
   }
 }

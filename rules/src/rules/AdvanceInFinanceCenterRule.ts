@@ -1,6 +1,7 @@
 import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
+import { CustomMoveType } from './CustomMoveType'
 import { FinanceCenterHelper } from './helpers/FinanceCenterHelper'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 import { Memory } from './Memory'
@@ -23,7 +24,10 @@ export class AdvanceInFinanceCenterRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     if (isMoveItem(move) && move.location.type === LocationType.FinanceCenter) {
-      this.financeCenterHelper.checkBonus(move.location.id as number)
+      const bonus = this.financeCenterHelper.checkBonus(move.location.id as number)
+      if (bonus !== null) {
+        moves.push(this.customMove(CustomMoveType.GetBonus, bonus))
+      }
       moves.push(...this.nextRuleHelper.moveToNextRule())
     }
     return moves

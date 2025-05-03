@@ -1,6 +1,7 @@
 import { isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
+import { CustomMoveType } from './CustomMoveType'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 import { RaceTrackHelper } from './helpers/RaceTrackHelper'
 import { Memory } from './Memory'
@@ -33,9 +34,12 @@ export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
         .getItem()
       this.memorize(Memory.LastTokenOnRaceTrackForPlayer, move.location.id, this.player)
       if (tokenPlaced) {
-        this.raceTrackHelper.getBonus(move.location.id as number, tokenPlaced.location.x!)
+        const bonus = this.raceTrackHelper.getBonus(move.location.id as number, tokenPlaced.location.x!)
+        if (bonus !== null) {
+          moves.push(this.customMove(CustomMoveType.GetBonus, bonus))
+        }
       }
-      return this.nextRuleHelper.moveToNextRule()
+      moves.push(...this.nextRuleHelper.moveToNextRule())
     }
     return moves
   }

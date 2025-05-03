@@ -1,6 +1,7 @@
 import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
+import { CustomMoveType } from './CustomMoveType'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 import { Memory } from './Memory'
 import { RuleId } from './RuleId'
@@ -9,11 +10,16 @@ export class ShowTwoCharacterTilesRule extends PlayerTurnRule {
   nextRuleHelper = new NextRuleHelper(this.game)
 
   getPlayerMoves(): MaterialMove[] {
-    return this.characterTilesInBoard.moveItems(({ location }) => ({
-      type: LocationType.PlayerCharacterTilesShowLayout,
-      rotation: location.rotation,
-      player: this.player
-    }))
+    const moves: MaterialMove[] = []
+    moves.push(
+      ...this.characterTilesInBoard.moveItems(({ location }) => ({
+        type: LocationType.PlayerCharacterTilesShowLayout,
+        rotation: location.rotation,
+        player: this.player
+      }))
+    )
+    moves.push(this.customMove(CustomMoveType.Pass))
+    return moves
   }
 
   beforeItemMove(move: ItemMove): MaterialMove[] {

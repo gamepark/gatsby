@@ -1,6 +1,7 @@
 import { isMoveItem, isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
+import { CustomMoveType } from './CustomMoveType'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 
 export class SwitchInfluenceTokensRule extends PlayerTurnRule {
@@ -18,6 +19,7 @@ export class SwitchInfluenceTokensRule extends PlayerTurnRule {
     this.getPossiblePlace().forEach((place) => {
       moves.push(...this.playerInfluenceTokens.moveItems(() => place))
     })
+    moves.push(this.customMove(CustomMoveType.Pass))
     return moves
   }
 

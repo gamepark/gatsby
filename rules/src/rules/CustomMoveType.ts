@@ -1,3 +1,5 @@
 export enum CustomMoveType {
-  EndCheckCharacterTiles = 1
+  EndCheckCharacterTiles = 1,
+  Pass,
+  GetBonus
 }

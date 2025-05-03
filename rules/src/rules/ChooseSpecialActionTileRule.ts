@@ -9,7 +9,7 @@ export class ChooseSpecialActionTileRule extends PlayerTurnRule {
     return this.specialActionTilesToShow.moveItems(() => ({ type: LocationType.SpecialActionLayout, player: this.player }))
   }
 
-  getPlayerMoves() {
+  getPlayerMoves(): MaterialMove[] {
     const id = this.player === 1 ? 0 : 5
     return this.specialActionTilesToChoose.moveItems(() => ({ type: LocationType.ActionSpace, id, x: 0 }))
   }

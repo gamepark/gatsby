@@ -24,19 +24,22 @@ export class FinanceCenterHelper extends MaterialRulesPart {
   }
 
   checkBonus(moveLocationId: number) {
-    this.getBonus(moveLocationId)
+    const bonus = this.getBonus(moveLocationId)
     const nbCases = this.remind(Memory.NbCasesToAdd)
-    if (nbCases === 2) {
-      this.getBonus(moveLocationId - 1)
-    }
+    const bonus2 = nbCases === 2 ? this.getBonus(moveLocationId - 1) : null
+    
+    return bonus ?? bonus2
   }
 
   private getBonus(moveLocationId: number) {
-    if (moveLocationId === 3 && this.checkIfCharacterTileIsNotTaked(6)) return
-    if (moveLocationId === 7 && this.checkIfCharacterTileIsNotTaked(5)) return
-    if (moveLocationId === 10 && this.checkIfCharacterTileIsNotTaked(4)) return
+    if (moveLocationId === 3 && this.checkIfCharacterTileIsNotTaked(6)) return null
+    if (moveLocationId === 7 && this.checkIfCharacterTileIsNotTaked(5)) return null
+    if (moveLocationId === 10 && this.checkIfCharacterTileIsNotTaked(4)) return null
     const locationBonus = bonus[moveLocationId]
-    new NextRuleHelper(this.game).addActionSpecialInNextRules(locationBonus)
+    if(new NextRuleHelper(this.game).addActionSpecialInNextRules(locationBonus)) {
+      return locationBonus
+    }
+    return null
   }
 
   private checkAndGetFinanceCenterCharacter(moveLocationId: number, financeCenterId: number, characterTileId: number) {

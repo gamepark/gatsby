@@ -7,6 +7,7 @@ import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { gameAnimations } from './animations/GameAnimations'
 import App from './App'
+import { GatsbyLogs } from './history/GatsbyLogs'
 import { Locators } from './locators/Locators'
 import { Material } from './material/Material'
 import translations from './translations.json'
@@ -17,6 +18,7 @@ ReactDOM.render(
   <StrictMode>
     <GameProvider
       game="gatsby"
+      logs={new GatsbyLogs()}
       Rules={GatsbyRules}
       optionsSpec={GatsbyOptionsSpec}
       GameSetup={GatsbySetup}

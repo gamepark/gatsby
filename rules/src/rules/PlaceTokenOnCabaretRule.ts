@@ -1,6 +1,7 @@
 import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
+import { CustomMoveType } from './CustomMoveType'
 import { CabaretHelper } from './helpers/CabaretHelper'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 import { Memory } from './Memory'
@@ -28,7 +29,10 @@ export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
     const moves: MaterialMove[] = []
     if (isMoveItem(move) && move.location.type === LocationType.CabaretTokenSpace) {
       this.memorize(Memory.LastTokenOnCabaretForPlayer, move.location, this.player)
-      this.cabaretHelper.getBonus(move.location.parent!, move.location.id as number)
+      const bonus = this.cabaretHelper.getBonus(move.location.parent!, move.location.id as number)
+      if (bonus !== null) {
+        moves.push(this.customMove(CustomMoveType.GetBonus, bonus))
+      }
       moves.push(...this.nextRuleHelper.moveToNextRule())
     }
     return moves

@@ -1,8 +1,10 @@
 import {
   CompetitiveRank,
+  CustomMove,
   FillGapStrategy,
   hideItemId,
   hideItemIdToOthers,
+  isCustomMoveType,
   MaterialGame,
   MaterialItem,
   MaterialMove,
@@ -16,8 +18,10 @@ import { AdvanceInFinanceCenterRule } from './rules/AdvanceInFinanceCenterRule'
 import { ChooseActionForOpponentRule } from './rules/ChooseActionForOpponentRule'
 import { ChooseActionRule } from './rules/ChooseActionRule'
 import { ChooseSpecialActionTileRule } from './rules/ChooseSpecialActionTileRule'
+import { CustomMoveType } from './rules/CustomMoveType'
 import { GetCharacterTilesRule } from './rules/GetCharacterTilesRule'
 import { EndOfGameHelper } from './rules/helpers/EndOfGameHelper'
+import { NextRuleHelper } from './rules/helpers/NextRuleHelper'
 import { PlaceTokenOnAnotherRaceTrackRule } from './rules/PlaceTokenOnAnotherRaceTrackRule'
 import { PlaceTokenOnCabaretNearToLastRule } from './rules/PlaceTokenOnCabaretNearToLastRule'
 import { PlaceTokenOnCabaretNearToOtherRule } from './rules/PlaceTokenOnCabaretNearToOtherRule'
@@ -91,6 +95,13 @@ export class GatsbyRules extends SecretMaterialRules implements TimeLimit<Materi
       [LocationType.PlayerCharacterTiles]: new PositiveSequenceStrategy(),
       [LocationType.PlayerCharacterTilesShowLayout]: new PositiveSequenceStrategy()
     }
+  }
+
+  protected onCustomMove(move: CustomMove): MaterialMove[] {
+    if (isCustomMoveType(CustomMoveType.Pass)(move)) {
+      return new NextRuleHelper(this.game).moveToNextRule()
+    }
+    return []
   }
 
   giveTime(): number {

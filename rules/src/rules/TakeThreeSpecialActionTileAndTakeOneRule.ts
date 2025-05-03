@@ -1,18 +1,20 @@
-import { isMoveItem, ItemMove, MaterialMove, MoveItem, PlayMoveContext } from '@gamepark/rules-api'
+import { CustomMove, isMoveItem, ItemMove, MaterialMove, PlayMoveContext } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { ChooseSpecialActionTileRule } from './ChooseSpecialActionTileRule'
+import { CustomMoveType } from './CustomMoveType'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 
 export class TakeThreeSpecialActionTileAndTakeOneRule extends ChooseSpecialActionTileRule {
   nextRuleHelper = new NextRuleHelper(this.game)
   nbTilesToShow = 3
 
-  getPlayerMoves(): MoveItem[] {
-    const moves: MoveItem[] = super.getPlayerMoves()
+  getPlayerMoves(): MaterialMove[] {
+    const moves: MaterialMove[] = super.getPlayerMoves()
     if (this.playerSpecialActionTile.length) {
       moves.push(...this.specialActionTilesToChoose.moveItems(() => ({ type: LocationType.PlayerSpecialTilesDiscard, player: this.player })))
     }
+    moves.push(this.customMove(CustomMoveType.Pass))
     return moves
   }
 
@@ -30,6 +32,12 @@ export class TakeThreeSpecialActionTileAndTakeOneRule extends ChooseSpecialActio
       moves.push(...this.specialActionTilesToChoose.moveItems(() => ({ type: LocationType.SpecialActionDiscard })))
       moves.push(...this.nextRuleHelper.moveToNextRule())
     }
+    return moves
+  }
+
+  onCustomMove(move: CustomMove): MaterialMove[] {
+    const moves = super.onCustomMove(move)
+    moves.push(...this.specialActionTilesToChoose.moveItems(() => ({ type: LocationType.SpecialActionDiscard })))
     return moves
   }
 

@@ -45,12 +45,12 @@ export class GatsbySetup extends MaterialGameSetup<number, MaterialType, Locatio
   }
 
   private setupCharacterTiles() {
-    //const returned = [0, 2, 3, 6, 7, 11]
+    const returned = [0, 2, 3, 6, 7, 11]
     shuffle(characterTiles)
       .slice(0, 12)
       .forEach((tile, index) => {
         this.material(MaterialType.CharacterTile).createItem({
-          location: { type: LocationType.CharacterSpace, id: index },
+          location: { type: LocationType.CharacterSpace, id: index, rotation: !returned.includes(index) },
           id: tile
         })
       })

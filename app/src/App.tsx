@@ -18,7 +18,13 @@ export default function App() {
   return (
     <>
       {!!game && <GameDisplay players={game.players.length} />}
-      <LoadingScreen display={loading} author="Someone" artist="Somebody" publisher="Nobody" developer="You" />
+      <LoadingScreen
+        display={loading}
+        author={['Bruno Cathala', 'Ludovic Maublanc']}
+        artist="Christine Alcouffe"
+        publisher="Catch Up Games"
+        developer="David Sylvestre"
+      />
       <MaterialHeader rulesStepsHeaders={Headers} GameOver={GameOverHeader} loading={loading} />
       <MaterialImageLoader onImagesLoad={() => setImagesLoading(false)} />
       <Menu />

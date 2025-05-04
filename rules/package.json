@@ -1,6 +1,6 @@
 {
   "name": "@gamepark/gatsby",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The rules of Gatsby adapted for Game Park",
   "sideEffects": false,
   "main": "dist/index.js",
@@ -24,7 +24,7 @@
     "lodash": ">=4.17"
   },
   "devDependencies": {
-    "@gamepark/rules-api": "~6.32.0",
+    "@gamepark/rules-api": "~6.33.0",
     "@types/lodash": "^4.17.7",
     "i18next": "^22.0.3",
     "lodash": "^4.17.21"

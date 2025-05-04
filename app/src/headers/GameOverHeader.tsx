@@ -12,7 +12,6 @@ export const GameOverHeader = () => {
   const winWithThreeSameColor = new EndOfGameHelper(rules.game).checkPlayerHasThreeSameColor(firstPlayer.id as number)
   const winWithAllColor = new EndOfGameHelper(rules.game).checkPlayerHasAllColors(firstPlayer.id as number)
 
-  console.log(rules)
   if (winWithThreeSameColor) {
     return <Trans defaults="header.end.same.color.player" values={{ player: winnerName }} />
   }

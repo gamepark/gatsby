@@ -34,5 +34,5 @@ export const GameOverHeader = () => {
     return <Trans defaults="header.end.characters.player" values={{ player: winnerName, winnerCharacters, loserCharacters }} />
   }
 
-  return <Trans defaults="header.end.tie" />
+  return <Trans defaults="result.comp.tie.all" />
 }

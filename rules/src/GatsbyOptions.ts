@@ -1,9 +1,10 @@
-import { OptionsSpec } from '@gamepark/rules-api'
+import { getEnumValues, OptionsSpec } from '@gamepark/rules-api'
+import { PlayerRole } from './PlayerRole'
 
 /**
  * This is the options for each player in the game.
  */
-type PlayerOptions = { id: number }
+type PlayerOptions = { id: PlayerRole }
 
 /**
  * This is the type of object that the game receives when a new game is started.
@@ -21,7 +22,7 @@ export const GatsbyOptionsSpec: OptionsSpec<GatsbyOptions> = {
   players: {
     id: {
       label: (t) => t('player.id'),
-      values: [1, 2],
+      values: getEnumValues(PlayerRole),
       valueSpec: (id) => ({ label: (t) => t(`player.${id}`) })
     }
   }

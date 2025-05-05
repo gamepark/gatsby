@@ -13,7 +13,7 @@ export const GetFinanceCenterBonusHistory = (props: MoveComponentProps) => {
 
   return (
     <Trans defaults="history.finance.bonus.player" values={{ player: name, bonus }}>
-      <PlayMoveButton move={displayLocationHelp({ type: LocationType.BonusCase })} local />
+      <PlayMoveButton move={displayLocationHelp({ type: LocationType.BonusCase })} transient />
     </Trans>
   )
 }

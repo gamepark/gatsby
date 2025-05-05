@@ -14,7 +14,7 @@ export const GetCharacterTilesHistory = (props: MoveComponentProps) => {
 
   return (
     <Trans defaults="history.get.character.player" values={{ player: name, locationId }}>
-      <PlayMoveButton move={displayMaterialHelp(MaterialType.CharacterTile, tile)} local />
+      <PlayMoveButton move={displayMaterialHelp(MaterialType.CharacterTile, tile)} transient />
     </Trans>
   )
 }

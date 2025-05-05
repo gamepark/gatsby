@@ -13,7 +13,7 @@ export const ChooseSpecialActionTileHistory = (props: MoveComponentProps) => {
 
   return (
     <Trans defaults="history.choose.special.action.player" values={{ player: name }}>
-      <PlayMoveButton move={displayMaterialHelp(MaterialType.SpecialActionTile, tile)} local />
+      <PlayMoveButton move={displayMaterialHelp(MaterialType.SpecialActionTile, tile)} transient />
     </Trans>
   )
 }

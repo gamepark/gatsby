@@ -24,7 +24,7 @@ export const ChooseActionForOpponentHistory = (props: MoveComponentProps) => {
 
   return (
     <Trans defaults="history.choose.action.special.opponent.player" values={{ player: name, opponent }}>
-      <PlayMoveButton move={displayMaterialHelp(MaterialType.SpecialActionTile, tile)} local />
+      <PlayMoveButton move={displayMaterialHelp(MaterialType.SpecialActionTile, tile)} transient />
     </Trans>
   )
 }

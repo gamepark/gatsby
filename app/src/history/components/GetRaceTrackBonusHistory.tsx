@@ -13,7 +13,7 @@ export const GetRaceTrackBonusHistory = (props: MoveComponentProps) => {
 
   return (
     <Trans defaults="history.race.bonus.player" values={{ player: name, bonus }}>
-      <PlayMoveButton move={displayLocationHelp({ type: LocationType.BonusCase })} local />
+      <PlayMoveButton move={displayLocationHelp({ type: LocationType.BonusCase })} transient />
     </Trans>
   )
 }

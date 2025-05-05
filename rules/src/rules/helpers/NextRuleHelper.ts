@@ -16,13 +16,13 @@ export class NextRuleHelper extends MaterialRulesPart {
     const nextRules: RuleId[] | undefined = this.remind(Memory.NextRules) ?? []
     if (nextRules.length > 1) {
       this.memorize(Memory.NextRules, nextRules.slice(1))
-      return [this.startPlayerTurn(nextRules[0], this.player!)]
+      return [this.startRule(nextRules[0])]
     }
     if (nextRules.length > 0) {
       this.forget(Memory.NextRules)
-      return [this.startPlayerTurn(nextRules[0], this.player!)]
+      return [this.startRule(nextRules[0])]
     }
-    return [this.startPlayerTurn(RuleId.GetCharacterTiles, this.player!)]
+    return [this.startRule(RuleId.GetCharacterTiles)]
   }
 
   addActionSpecialInNextRules(locationBonus: string | RuleId) {

@@ -16,4 +16,8 @@ export class ChooseActionForOpponentRule extends ChooseActionRule {
     }
     return []
   }
+
+  getStartRule(ruleId: number): MaterialMove {
+    return this.startPlayerTurn(ruleId, this.nextPlayer)
+  }
 }

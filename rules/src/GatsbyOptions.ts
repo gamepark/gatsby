@@ -25,5 +25,6 @@ export const GatsbyOptionsSpec: OptionsSpec<GatsbyOptions> = {
       values: getEnumValues(PlayerRole),
       valueSpec: (id) => ({ label: (t) => t(`player.${id}`) })
     }
-  }
+  },
+  subscriberRequired: true
 }

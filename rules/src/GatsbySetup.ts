@@ -31,7 +31,7 @@ export class GatsbySetup extends MaterialGameSetup<number, MaterialType, Locatio
     this.setupPlayers()
   }
 
-  private setupCabaretTiles() {
+  setupCabaretTiles() {
     shuffle(cabaretTiles).forEach((tile, index) => {
       const id = index * 10 + sample([1, 3, 5, 7])
       this.material(MaterialType.CabaretTile).createItem({ location: { type: LocationType.CabaretSpace, id }, id: tile })

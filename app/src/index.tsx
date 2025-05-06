@@ -11,6 +11,7 @@ import { GatsbyLogs } from './history/GatsbyLogs'
 import { Locators } from './locators/Locators'
 import { Material } from './material/Material'
 import translations from './translations.json'
+import { Tutorial } from './tutorial/Tutorial'
 
 setupTranslation(translations, { debug: false })
 
@@ -23,6 +24,7 @@ ReactDOM.render(
       optionsSpec={GatsbyOptionsSpec}
       GameSetup={GatsbySetup}
       material={Material}
+      tutorial={new Tutorial()}
       locators={Locators}
       animations={gameAnimations}
     >

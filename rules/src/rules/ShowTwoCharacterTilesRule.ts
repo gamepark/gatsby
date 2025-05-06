@@ -18,7 +18,9 @@ export class ShowTwoCharacterTilesRule extends PlayerTurnRule {
         player: this.player
       }))
     )
-    moves.push(this.customMove(CustomMoveType.Pass))
+    if (this.characterTilesInShowingLayout.length === 0) {
+      moves.push(this.customMove(CustomMoveType.Pass))
+    }
     return moves
   }
 

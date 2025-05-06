@@ -20,17 +20,6 @@ export class ChooseSpecialActionTileRule extends PlayerTurnRule {
       moves.push(...this.specialActionTilesToChoose.moveItems(() => ({ type: LocationType.SpecialActionDiscard })))
       moves.push(this.startRule(RuleId.PlaceTokenOnCabaretOnStarCase))
     }
-    if (isMoveItem(move) && move.location.type === LocationType.SpecialActionDiscard) {
-      const tilesInDeck = this.material(MaterialType.SpecialActionTile).location(LocationType.SpecialActionDeck).length
-      if (tilesInDeck === 0) {
-        moves.push(this.material(MaterialType.SpecialActionTile).location(LocationType.SpecialActionDiscard).shuffle())
-        moves.push(
-          this.material(MaterialType.SpecialActionTile)
-            .location(LocationType.SpecialActionDiscard)
-            .moveItemsAtOnce({ type: LocationType.SpecialActionDeck, rotation: true })
-        )
-      }
-    }
     return moves
   }
 

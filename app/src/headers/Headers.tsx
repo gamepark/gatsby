@@ -14,7 +14,6 @@ import { PlaceTokenOnCabaretOnStarCaseHeader } from './PlaceTokenOnCabaretOnStar
 import { PlaceTokenOnCabaretOrRaceTrackHeader } from './PlaceTokenOnCabaretOrRaceTrackHeader'
 import { PlaceTokenOnRaceTrackHeader } from './PlaceTokenOnRaceTrackHeader'
 import { PlaceTokenOnSameRaceTrackHeader } from './PlaceTokenOnSameRaceTrackHeader'
-import { ReplaceCharacterTilesHeader } from './ReplaceCharacterTilesHeader'
 import { ShowTwoCharacterTilesHeader } from './ShowTwoCharacterTilesHeader'
 import { SwitchInfluenceTokensHeader } from './SwitchInfluenceTokensHeader'
 
@@ -34,6 +33,6 @@ export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.PlaceTokenOnCabaretOrRaceTrack]: PlaceTokenOnCabaretOrRaceTrackHeader,
   [RuleId.ChooseActionForOpponent]: ChooseActionForOpponentHeader,
   [RuleId.ShowTwoCharacterTiles]: ShowTwoCharacterTilesHeader,
-  [RuleId.ReplaceCharacterTiles]: ReplaceCharacterTilesHeader,
+  [RuleId.ReplaceCharacterTiles]: ShowTwoCharacterTilesHeader,
   [RuleId.GetCharacterTiles]: GetCharacterTilesHeader
 }

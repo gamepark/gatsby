@@ -11,8 +11,8 @@ export const PlaceTokenOnCabaretNearToLastHeader = () => {
   const name = usePlayerName(activePlayer)
 
   if (itsMe) {
-    return <Trans defaults="header.cabaret.near.to.last.you" />
+    return <Trans defaults="header.cabaret.you" />
   }
 
-  return <Trans defaults="header.cabaret.near.to.last.player" values={{ player: name }} />
+  return <Trans defaults="header.cabaret.player" values={{ player: name }} />
 }

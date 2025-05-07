@@ -19,11 +19,29 @@ const BaseComponents = {
 export class Tutorial extends MaterialTutorial<number, MaterialType, LocationType> {
   version = 1
 
+  players = [
+    { id: me },
+    {
+      id: opponent,
+      name: 'James',
+      avatar: {
+        topType: 'ShortHairShortWaved',
+        accessoriesType: 'Blank',
+        hairColor: 'Blonde',
+        facialHairType: 'MoustacheFancy',
+        facialHairColor: 'Blonde',
+        clotheType: 'BlazerSweater',
+        eyeType: 'Wink',
+        eyebrowType: 'Default',
+        mouthType: 'Smile',
+        skinColor: 'Light'
+      }
+    }
+  ]
+
   options = {
     players: [{ id: me }, { id: opponent }]
   }
-
-  players = [{ id: me }, { id: opponent }]
   setup = new TutorialSetup()
 
   steps: TutorialStep[] = [

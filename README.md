@@ -166,7 +166,7 @@ Then, run:
 ```
 rclone config
 > n (For "New remote)
-name> game-template
+name> gatsby
 Storage> s3 (Amazon S3 Compliant Storage Provider)
 provider> Other
 env_auth> false

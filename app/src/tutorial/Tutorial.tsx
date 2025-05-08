@@ -191,7 +191,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => <Trans defaults="tuto.step.13" components={BaseComponents} />,
-        position: {y: -20}
+        position: { y: -20 }
       },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.AscensionToken).location(LocationType.FinanceCenter).player(me)],

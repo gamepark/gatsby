@@ -62,12 +62,11 @@ export class GatsbySetup extends MaterialGameSetup<number, MaterialType, Locatio
         location: { type: LocationType.FinanceCenter, id: 0, player },
         id: player
       })
-      for (let i = 0; i < 21; i++) {
-        this.material(MaterialType.InfluenceToken).createItem({
-          location: { type: LocationType.PlayerInfluenceTokenPile, player },
-          id: player
-        })
-      }
+      this.material(MaterialType.InfluenceToken).createItem({
+        location: { type: LocationType.PlayerInfluenceTokenPile, player },
+        id: player,
+        quantity: 20
+      })
     }
   }
 

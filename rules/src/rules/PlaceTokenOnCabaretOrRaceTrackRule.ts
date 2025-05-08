@@ -13,10 +13,15 @@ export class PlaceTokenOnCabaretOrRaceTrackRule extends PlayerTurnRule {
   cabaretHelper = new CabaretHelper(this.game)
 
   onRuleStart(): MaterialMove[] {
-    if (this.playerInfluenceTokens.length === 0 || this.getPlayerMoves().length === 0) {
+    if (this.getPlayerMoves().length === 0) {
       return this.nextRuleHelper.moveToNextRule()
     }
-    return []
+    return [
+      this.material(MaterialType.InfluenceToken).createItem({
+        location: { type: LocationType.PlayerInfluenceTokenPile, player: this.player },
+        id: this.player
+      })
+    ]
   }
 
   getPlayerMoves() {

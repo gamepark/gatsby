@@ -104,6 +104,8 @@ export class EndOfGameHelper extends MaterialRulesPart {
   }
 
   rankPlayers(playerA: number, playerB: number) {
+    if (this.checkPlayerHasThreeSameColor(playerA) && this.checkPlayerHasThreeSameColor(playerB)) return 0
+    if (this.checkPlayerHasAllColors(playerA) && this.checkPlayerHasAllColors(playerB)) return 0
     if (this.checkPlayerHasThreeSameColor(playerA) || this.checkPlayerHasAllColors(playerA)) return -1
     if (this.checkPlayerHasThreeSameColor(playerB) || this.checkPlayerHasAllColors(playerB)) return 1
     if (this.getScore(playerA) > this.getScore(playerB)) return -1

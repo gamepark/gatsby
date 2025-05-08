@@ -1,6 +1,5 @@
 import {
   CompetitiveRank,
-  CompetitiveScore,
   CustomMove,
   FillGapStrategy,
   hideItemId,
@@ -43,7 +42,7 @@ import { TakeThreeSpecialActionTileAndTakeOneRule } from './rules/TakeThreeSpeci
  */
 export class GatsbyRules
   extends SecretMaterialRules
-  implements TimeLimit<MaterialGame, MaterialMove>, CompetitiveRank<MaterialGame, MaterialMove, number>, CompetitiveScore<MaterialGame, MaterialMove, number>
+  implements TimeLimit<MaterialGame, MaterialMove>, CompetitiveRank<MaterialGame, MaterialMove, number>
 {
   endOfGameHelper = new EndOfGameHelper(this.game)
   rules = {
@@ -116,15 +115,11 @@ export class GatsbyRules
     return this.endOfGameHelper.rankPlayers(playerA, playerB)
   }
 
-  getScore(playerId: number): number {
+  getScore(playerId: number): number | undefined {
     if (this.endOfGameHelper.checkIfPlayerIsDeterminateByScore(this.players[0], this.players[1])) {
       return this.endOfGameHelper.getScore(playerId)
     }
-    return 0
-  }
-
-  getTieBreaker(_: number, playerId: number): number | undefined {
-    return this.endOfGameHelper.getPlayerCharacterTiles(playerId)
+    return undefined
   }
 }
 

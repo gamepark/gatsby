@@ -30,7 +30,7 @@ export class RaceTrackHelper extends MaterialRulesPart {
       .location(LocationType.RaceTrack)
       .getItems()
       .map((item) => item.location)
-
+    let increment = 0
     for (const { id, x } of playerTokens) {
       if ((id < 3 && x === 4) || (id > 2 && x === 2)) {
         const characterTile = this.material(MaterialType.CharacterTile).location(
@@ -46,7 +46,8 @@ export class RaceTrackHelper extends MaterialRulesPart {
 
         const raceFinishedOverlayTiles = this.material(MaterialType.RaceFinishedOverlayTile).location(LocationType.RaceFinishedDeck)
         if (raceFinishedOverlayTiles.length > 0) {
-          moves.push(raceFinishedOverlayTiles.maxBy((item) => item.location.x!).moveItem(() => ({ type: LocationType.RaceTrack, id, x: 2 })))
+          moves.push(raceFinishedOverlayTiles.filter(({ location }) => location.x === increment).moveItem(() => ({ type: LocationType.RaceTrack, id, x: 2 })))
+          increment += 1
         }
       }
     }

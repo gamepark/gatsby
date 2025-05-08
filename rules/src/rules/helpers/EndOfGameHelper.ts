@@ -112,4 +112,11 @@ export class EndOfGameHelper extends MaterialRulesPart {
     if (this.getPlayerCharacterTiles(playerB) > this.getPlayerCharacterTiles(playerA)) return 1
     return 0
   }
+
+  checkIfPlayerIsDeterminateByScore(playerA: number, playerB: number) {
+    const onePlayerHasThreeSameColor = this.checkPlayerHasThreeSameColor(playerA) || this.checkPlayerHasThreeSameColor(playerB)
+    const onePlayerHasAllColors = this.checkPlayerHasAllColors(playerA) || this.checkPlayerHasAllColors(playerB)
+
+    return !onePlayerHasThreeSameColor && !onePlayerHasAllColors
+  }
 }

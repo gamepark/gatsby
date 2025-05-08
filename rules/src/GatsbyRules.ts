@@ -1,5 +1,6 @@
 import {
   CompetitiveRank,
+  CompetitiveScore,
   CustomMove,
   FillGapStrategy,
   hideItemId,
@@ -40,7 +41,10 @@ import { TakeThreeSpecialActionTileAndTakeOneRule } from './rules/TakeThreeSpeci
  * This class implements the rules of the board game.
  * It must follow Game Park "Rules" API so that the Game Park server can enforce the rules.
  */
-export class GatsbyRules extends SecretMaterialRules implements TimeLimit<MaterialGame, MaterialMove>, CompetitiveRank<MaterialGame, MaterialMove, number> {
+export class GatsbyRules
+  extends SecretMaterialRules
+  implements TimeLimit<MaterialGame, MaterialMove>, CompetitiveRank<MaterialGame, MaterialMove, number>, CompetitiveScore<MaterialGame, MaterialMove, number>
+{
   endOfGameHelper = new EndOfGameHelper(this.game)
   rules = {
     [RuleId.ChooseSpecialActionTile]: ChooseSpecialActionTileRule,
@@ -110,6 +114,17 @@ export class GatsbyRules extends SecretMaterialRules implements TimeLimit<Materi
 
   rankPlayers(playerA: number, playerB: number): number {
     return this.endOfGameHelper.rankPlayers(playerA, playerB)
+  }
+
+  getScore(playerId: number): number {
+    if (this.endOfGameHelper.checkIfPlayerIsDeterminateByScore(this.players[0], this.players[1])) {
+      return this.endOfGameHelper.getScore(playerId)
+    }
+    return 0
+  }
+
+  getTieBreaker(_: number, playerId: number): number | undefined {
+    return this.endOfGameHelper.getPlayerCharacterTiles(playerId)
   }
 }
 

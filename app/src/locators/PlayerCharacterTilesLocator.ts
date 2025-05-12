@@ -10,7 +10,7 @@ class PlayerCharacterTilesLocator extends FlexLocator {
 
   getCoordinates(location: Location) {
     if (location.player === PlayerRole.Dorothy) {
-      return { x: -41, y: 10 }
+      return { x: -30, y: 10 }
     }
     return { x: 30, y: 10 }
   }

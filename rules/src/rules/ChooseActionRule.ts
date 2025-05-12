@@ -1,8 +1,8 @@
-import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { ActionsForSpecialActionTiles, SpecialActionTile } from '../material/SpecialActionTile'
-import { ActionType, actionTypes, rulesForAction } from './helpers/ActionHelper'
+import { ActionHelper, ActionType, actionTypes, rulesForAction } from './helpers/ActionHelper'
 import { Memory } from './Memory'
 import { RuleId } from './RuleId'
 
@@ -19,34 +19,7 @@ export class ChooseActionRule extends PlayerTurnRule {
   }
 
   getPossiblePlaces() {
-    const res: Location[] = []
-    for (const actionType of actionTypes) {
-      const actionTokenIsNotAlreadyInSpace =
-        this.material(MaterialType.ActionToken).location((loc) => loc.type === LocationType.ActionSpace && loc.id === actionType).length === 0
-      if (actionTokenIsNotAlreadyInSpace) {
-        res.push({ type: LocationType.ActionSpace, id: actionType })
-      }
-    }
-
-    const firstPlayerSpecialActionSpace = this.getSpecialActionSpace(1, 0)
-    const secondPlayerSpecialActionSpace = this.getSpecialActionSpace(2, 5)
-
-    if (firstPlayerSpecialActionSpace) res.push(firstPlayerSpecialActionSpace)
-    if (secondPlayerSpecialActionSpace) res.push(secondPlayerSpecialActionSpace)
-
-    return res
-  }
-
-  getSpecialActionSpace(player: number, id: number) {
-    if (this.playerWhoPlayActions !== player) return null
-
-    const actionTokenIsNotAlreadyInSpace =
-      this.material(MaterialType.ActionToken).location((loc) => loc.type === LocationType.ActionSpace && loc.id === id).length === 0
-    const specialActionTileIsInSpace = this.getSpecialActionTile(id).length === 1
-    if (actionTokenIsNotAlreadyInSpace && specialActionTileIsInSpace) {
-      return { type: LocationType.ActionSpace, id: id, x: 1 }
-    }
-    return null
+    return new ActionHelper(this.game, this.playerWhoPlayActions).getPossiblePlaces()
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {

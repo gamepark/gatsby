@@ -12,6 +12,7 @@ import { PlaceTokenOnCabaretNearToLastHeader } from './PlaceTokenOnCabaretNearTo
 import { PlaceTokenOnCabaretNearToOtherHeader } from './PlaceTokenOnCabaretNearToOtherHeader'
 import { PlaceTokenOnCabaretOnStarCaseHeader } from './PlaceTokenOnCabaretOnStarCaseHeader'
 import { PlaceTokenOnCabaretOrRaceTrackHeader } from './PlaceTokenOnCabaretOrRaceTrackHeader'
+import { PlaceTokenOnRaceTrackAnywhereHeader } from './PlaceTokenOnRaceTrackAnywhereHeader'
 import { PlaceTokenOnRaceTrackHeader } from './PlaceTokenOnRaceTrackHeader'
 import { PlaceTokenOnSameRaceTrackHeader } from './PlaceTokenOnSameRaceTrackHeader'
 import { ShowTwoCharacterTilesHeader } from './ShowTwoCharacterTilesHeader'
@@ -34,5 +35,6 @@ export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.ChooseActionForOpponent]: ChooseActionForOpponentHeader,
   [RuleId.ShowTwoCharacterTiles]: ShowTwoCharacterTilesHeader,
   [RuleId.ReplaceCharacterTiles]: ShowTwoCharacterTilesHeader,
-  [RuleId.GetCharacterTiles]: GetCharacterTilesHeader
+  [RuleId.GetCharacterTiles]: GetCharacterTilesHeader,
+  [RuleId.PlaceTokenOnRaceTrackAnywhere]: PlaceTokenOnRaceTrackAnywhereHeader
 }

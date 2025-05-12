@@ -18,7 +18,7 @@ export enum SpecialActionTile {
 export const specialActionTiles = getEnumValues(SpecialActionTile)
 
 export const ActionsForSpecialActionTiles = {
-  [SpecialActionTile.SpecialActionTile1]: [RuleId.PlaceTokenOnRaceTrack],
+  [SpecialActionTile.SpecialActionTile1]: [RuleId.PlaceTokenOnRaceTrackAnywhere],
   [SpecialActionTile.SpecialActionTile2]: [RuleId.SwitchInfluenceTokens, RuleId.PlaceTokenOnRaceTrack],
   [SpecialActionTile.SpecialActionTile3]: [RuleId.PlaceTokenOnRaceTrack, RuleId.PlaceTokenOnAnotherRaceTrack, RuleId.PlaceTokenOnAnotherRaceTrack],
   [SpecialActionTile.SpecialActionTile4]: [RuleId.PlaceTokenOnRaceTrack, RuleId.PlaceTokenOnSameRaceTrack],

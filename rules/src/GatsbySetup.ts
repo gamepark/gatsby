@@ -3,7 +3,7 @@ import { sample, shuffle } from 'lodash'
 import { GatsbyOptions } from './GatsbyOptions'
 import { GatsbyRules } from './GatsbyRules'
 import { cabaretTiles } from './material/CabaretTile'
-import { characterTiles } from './material/CharacterTile'
+import { characterScore, characterTiles } from './material/CharacterTile'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { specialActionTiles } from './material/SpecialActionTile'
@@ -48,14 +48,26 @@ export class GatsbySetup extends MaterialGameSetup<number, MaterialType, Locatio
 
   private setupCharacterTiles() {
     const returned = [0, 2, 3, 6, 7, 11]
-    shuffle(characterTiles)
-      .slice(0, 12)
-      .forEach((tile, index) => {
-        this.material(MaterialType.CharacterTile).createItem({
-          location: { type: LocationType.CharacterSpace, id: index, rotation: !returned.includes(index) },
-          id: tile
-        })
+    const tilesToAdd = shuffle(characterTiles).slice(0, 12)
+
+    if (characterScore[tilesToAdd[6]] > characterScore[tilesToAdd[3]]) {
+      const oldTileAt6Index = tilesToAdd[6]
+      tilesToAdd[6] = tilesToAdd[3]
+      tilesToAdd[3] = oldTileAt6Index
+    }
+
+    if (characterScore[tilesToAdd[11]] > characterScore[tilesToAdd[7]]) {
+      const oldTileAt11Index = tilesToAdd[11]
+      tilesToAdd[11] = tilesToAdd[7]
+      tilesToAdd[7] = oldTileAt11Index
+    }
+
+    tilesToAdd.forEach((tile, index) => {
+      this.material(MaterialType.CharacterTile).createItem({
+        location: { type: LocationType.CharacterSpace, id: index, rotation: !returned.includes(index) },
+        id: tile
       })
+    })
   }
 
   private setupPlayers() {

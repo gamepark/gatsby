@@ -35,18 +35,33 @@ export class RaceTrackHelper extends MaterialRulesPart {
     return res
   }
 
+  getPossibleRacePlaceWithX() {
+    const res: Location[] = []
+    for (let i = 0; i < 5; i++) {
+      const raceIsNotFinished =
+        this.material(MaterialType.RaceFinishedOverlayTile).location((loc) => loc.type === LocationType.RaceTrack && loc.id === i).length === 0
+      if (raceIsNotFinished) {
+        const max = i < 3 ? 5 : 3
+        for (let j = 0; j < max; j++) {
+          const noTokenOnThisPlace =
+            this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === i && loc.x === j).length === 0
+          if (noTokenOnThisPlace) {
+            res.push({ type: LocationType.RaceTrack, id: i, x: j })
+          }
+        }
+      }
+    }
+    return res
+  }
+
   checkAndGetRaceTrackCharacters() {
     const moves: MaterialMove[] = []
-    const playerTokens = this.material(MaterialType.InfluenceToken)
-      .location(LocationType.RaceTrack)
-      .getItems()
-      .map((item) => item.location)
     let increment = 0
-    for (const { id, x } of playerTokens) {
-      if ((id < 3 && x === 4) || (id > 2 && x === 2)) {
-        const characterTile = this.material(MaterialType.CharacterTile).location(
-          (loc) => loc.type === LocationType.CharacterSpace && loc.id === 7 + (id as number)
-        )
+    for (let id = 0; id < 5; id++) {
+      console.log(id)
+      const nbTokensInTrack = this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === id).length
+      if ((id < 3 && nbTokensInTrack === 5) || (id > 2 && nbTokensInTrack === 3)) {
+        const characterTile = this.material(MaterialType.CharacterTile).location((loc) => loc.type === LocationType.CharacterSpace && loc.id === 7 + id)
         const tokensInTrack = this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === id)
         const tokensInTrackIds = tokensInTrack.getItems().map((item) => item.id as number)
         const nbTokensPlayer1 = tokensInTrackIds.filter((n) => n === 1).length

@@ -28,6 +28,7 @@ import { PlaceTokenOnCabaretNearToOtherRule } from './rules/PlaceTokenOnCabaretN
 import { PlaceTokenOnCabaretOnStarCaseRule } from './rules/PlaceTokenOnCabaretOnStarCaseRule'
 import { PlaceTokenOnCabaretOrRaceTrackRule } from './rules/PlaceTokenOnCabaretOrRaceTrackRule'
 import { PlaceTokenOnCabaretRule } from './rules/PlaceTokenOnCabaretRule'
+import { PlaceTokenOnRaceTrackAnywhereRule } from './rules/PlaceTokenOnRaceTrackAnywhereRule'
 import { PlaceTokenOnRaceTrackRule } from './rules/PlaceTokenOnRaceTrackRule'
 import { PlaceTokenOnSameRaceTrackRule } from './rules/PlaceTokenOnSameRaceTrackRule'
 import { ReplaceCharacterTilesRule } from './rules/ReplaceCharacterTilesRule'
@@ -51,6 +52,7 @@ export class GatsbyRules extends SecretMaterialRules implements TimeLimit<Materi
     [RuleId.AdvanceInFinanceCenter]: AdvanceInFinanceCenterRule,
     [RuleId.ChooseAction]: ChooseActionRule,
     [RuleId.PlaceTokenOnRaceTrack]: PlaceTokenOnRaceTrackRule,
+    [RuleId.PlaceTokenOnRaceTrackAnywhere]: PlaceTokenOnRaceTrackAnywhereRule,
     [RuleId.PlaceTokenOnAnotherRaceTrack]: PlaceTokenOnAnotherRaceTrackRule,
     [RuleId.PlaceTokenOnSameRaceTrack]: PlaceTokenOnSameRaceTrackRule,
     [RuleId.TakeThreeSpecialActionTilesAndChooseOne]: TakeThreeSpecialActionTileAndTakeOneRule,

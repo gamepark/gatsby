@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { TokenDescription } from '@gamepark/react-game'
-import { MaterialItem } from '../../../../rules-api'
+import { MaterialItem } from '@gamepark/rules-api'
 import ManRound from '../images/pawn/ManRound.jpg'
 import WomanRound from '../images/pawn/WomanRound.jpg'
 import { ActionTokenHelp } from './help/ActionTokenHelp'

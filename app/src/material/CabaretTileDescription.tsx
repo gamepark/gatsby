@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { CabaretTile } from '@gamepark/gatsby/material/CabaretTile'
-import { CardDescription } from '@gamepark/react-game'
+import { CabaretHelper } from '@gamepark/gatsby/rules/helpers/CabaretHelper'
+import { RuleId } from '@gamepark/gatsby/rules/RuleId'
+import { CardDescription, ItemContext } from '@gamepark/react-game'
+import { Location, MaterialItem } from '@gamepark/rules-api'
 import Cabaret1 from '../images/cabaret/Cabaret1.jpg'
 import Cabaret2 from '../images/cabaret/Cabaret2.jpg'
 import Cabaret3 from '../images/cabaret/Cabaret3.jpg'
@@ -17,6 +20,23 @@ export class CabaretTileDescription extends CardDescription {
   images = images
 
   help = CabaretTileHelp
+
+  getLocations(_: MaterialItem, context: ItemContext): Location[] {
+    const cabaretHelper = new CabaretHelper(context.rules.game)
+    switch (context.rules.game.rule!.id) {
+      case RuleId.PlaceTokenOnCabaret:
+        return cabaretHelper.getPossiblePlace()
+      case RuleId.PlaceTokenOnCabaretNearToOther:
+      case RuleId.PlaceTokenOnCabaretOrRaceTrack:
+        return cabaretHelper.getPossiblePlaceNearToOtherTokens()
+      case RuleId.PlaceTokenOnCabaretNearToLast:
+        return cabaretHelper.getPossiblePlaceNearToLast()
+      case RuleId.PlaceTokenOnCabaretOnStarCase:
+        return cabaretHelper.getPossibleStarPlace()
+      default:
+        return []
+    }
+  }
 }
 
 const images = {

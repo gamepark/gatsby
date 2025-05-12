@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { DropAreaDescription, Locator, MaterialContext } from '@gamepark/react-game'
-import { Location, MaterialItem, XYCoordinates } from '@gamepark/rules-api'
+import { isMoveItemType, Location, MaterialItem, MaterialMove, XYCoordinates } from '@gamepark/rules-api'
 import { CabaretHelp } from '../material/help/CabaretHelp'
 
 class CabaretTokenSpaceLocator extends Locator {
@@ -32,6 +32,15 @@ export class CabaretTokenSpaceDescription extends DropAreaDescription {
   borderRadius = 1
 
   help = CabaretHelp
+
+  canShortClick(move: MaterialMove, location: Location): boolean {
+    return (
+      isMoveItemType(MaterialType.InfluenceToken)(move) &&
+      move.location.type === location.type &&
+      move.location.parent === location.parent &&
+      move.location.id === location.id
+    )
+  }
 }
 
 export const cabaretTokenSpaceLocator = new CabaretTokenSpaceLocator()

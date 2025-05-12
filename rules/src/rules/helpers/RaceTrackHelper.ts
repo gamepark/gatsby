@@ -1,6 +1,7 @@
 import { Location, MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
+import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
 import { NextRuleHelper } from './NextRuleHelper'
 
@@ -10,6 +11,16 @@ export class RaceTrackHelper extends MaterialRulesPart {
   constructor(game: MaterialGame, player = game.rule?.player) {
     super(game)
     this.player = player
+  }
+
+  getPossiblePaceOnAnotherRaceTrack() {
+    const last: number = this.remind(Memory.LastTokenOnRaceTrackForPlayer, this.player)
+    return this.getPossibleRacePlace().filter((place) => place.id !== last)
+  }
+
+  getPossiblePaceOnSameRaceTrack() {
+    const last: number = this.remind(Memory.LastTokenOnRaceTrackForPlayer, this.player)
+    return this.getPossibleRacePlace().filter((place) => place.id === last)
   }
 
   getPossibleRacePlace() {

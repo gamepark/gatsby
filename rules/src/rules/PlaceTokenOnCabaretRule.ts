@@ -1,4 +1,4 @@
-import { isMoveItem, ItemMove, Location, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { isMoveItem, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { CustomMoveType } from './CustomMoveType'
@@ -44,18 +44,7 @@ export class PlaceTokenOnCabaretRule extends PlayerTurnRule {
   }
 
   getPossiblePlace() {
-    const res: Location[] = []
-    this.material(MaterialType.CabaretTile)
-      .getIndexes()
-      .forEach((tile) => {
-        for (let i = 0; i < 9; i++) {
-          const hasNotAlreadyTokenPlaced = this.cabaretHelper.checkIfPlaceIsEmpty({ id: i, parent: tile } as Location)
-          if (hasNotAlreadyTokenPlaced) {
-            res.push({ type: LocationType.CabaretTokenSpace, id: i, parent: tile })
-          }
-        }
-      })
-    return res
+    return this.cabaretHelper.getPossiblePlace()
   }
 
   get playerInfluenceTokens() {

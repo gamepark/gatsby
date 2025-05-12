@@ -1,13 +1,30 @@
 /** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
-import { DropAreaDescription, ListLocator, LocationDescription } from '@gamepark/react-game'
-import { Location, XYCoordinates } from '@gamepark/rules-api'
+import { RaceTrackHelper } from '@gamepark/gatsby/rules/helpers/RaceTrackHelper'
+import { RuleId } from '@gamepark/gatsby/rules/RuleId'
+import { DropAreaDescription, ListLocator, LocationDescription, MaterialContext } from '@gamepark/react-game'
+import { isMoveItemType, Location, MaterialMove, XYCoordinates } from '@gamepark/rules-api'
 import { RaceTrackHelp } from '../material/help/RaceTrackHelp'
 
 class RaceTrackLocator extends ListLocator {
   parentItemType = MaterialType.GameBoard
   gap = { x: 2.18 }
   maxCount = 5
+
+  getLocations(context: MaterialContext): Partial<Location>[] {
+    const raceTrackHelper = new RaceTrackHelper(context.rules.game)
+    switch (context.rules.game.rule!.id) {
+      case RuleId.PlaceTokenOnRaceTrack:
+      case RuleId.PlaceTokenOnCabaretOrRaceTrack:
+        return raceTrackHelper.getPossibleRacePlace()
+      case RuleId.PlaceTokenOnAnotherRaceTrack:
+        return raceTrackHelper.getPossiblePaceOnAnotherRaceTrack()
+      case RuleId.PlaceTokenOnSameRaceTrack:
+        return raceTrackHelper.getPossiblePaceOnSameRaceTrack()
+      default:
+        return []
+    }
+  }
 
   getPositionOnParent(location: Location): XYCoordinates {
     const line: number = location.id
@@ -31,6 +48,14 @@ export class RaceTrackDescription extends DropAreaDescription {
   borderRadius = 0.3
 
   help = RaceTrackHelp
+
+  canShortClick(move: MaterialMove, location: Location): boolean {
+    return (
+      isMoveItemType(MaterialType.InfluenceToken)(move) &&
+      move.location.type === location.type &&
+      move.location.id === location.id
+    )
+  }
 }
 
 export class RaceTrackSpaceDescription extends DropAreaDescription {

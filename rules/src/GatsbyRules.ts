@@ -40,10 +40,7 @@ import { TakeThreeSpecialActionTileAndTakeOneRule } from './rules/TakeThreeSpeci
  * This class implements the rules of the board game.
  * It must follow Game Park "Rules" API so that the Game Park server can enforce the rules.
  */
-export class GatsbyRules
-  extends SecretMaterialRules
-  implements TimeLimit<MaterialGame, MaterialMove>, CompetitiveRank<MaterialGame, MaterialMove, number>
-{
+export class GatsbyRules extends SecretMaterialRules implements TimeLimit<MaterialGame, MaterialMove>, CompetitiveRank<MaterialGame, MaterialMove, number> {
   endOfGameHelper = new EndOfGameHelper(this.game)
   rules = {
     [RuleId.ChooseSpecialActionTile]: ChooseSpecialActionTileRule,

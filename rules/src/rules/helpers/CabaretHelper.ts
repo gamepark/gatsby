@@ -1,7 +1,9 @@
 import { Location, MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
+import { uniqWith } from 'lodash'
 import { CabaretTile, BonusByCabaretTiles, checkIfLocationIsStarCase } from '../../material/CabaretTile'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
+import { Memory } from '../Memory'
 import { NextRuleHelper } from './NextRuleHelper'
 
 interface CasesIdFromRotation {
@@ -19,12 +21,51 @@ export class CabaretHelper extends MaterialRulesPart {
     this.player = player
   }
 
+  getPossiblePlace() {
+    const res: Location[] = []
+    this.material(MaterialType.CabaretTile)
+      .getIndexes()
+      .forEach((tile) => {
+        for (let i = 0; i < 9; i++) {
+          const hasNotAlreadyTokenPlaced = this.checkIfPlaceIsEmpty({ id: i, parent: tile } as Location)
+          if (hasNotAlreadyTokenPlaced) {
+            res.push({ type: LocationType.CabaretTokenSpace, id: i, parent: tile })
+          }
+        }
+      })
+    return res
+  }
+
+  getPossiblePlaceNearToLast() {
+    const last: Location | undefined = this.remind(Memory.LastTokenOnCabaretForPlayer, this.player)
+    if (last) {
+      return this.getPlacesNear(last.id as number, last.parent!).filter((place) => this.checkIfPlaceIsEmpty(place))
+    }
+    return []
+  }
+
+  getPossibleStarPlace() {
+    const res: Location[] = []
+    this.material(MaterialType.CabaretTile)
+      .getIndexes()
+      .forEach((tileIndex) => {
+        for (let i = 0; i < 9; i++) {
+          const tile = this.material(MaterialType.CabaretTile).index(tileIndex).getItem()?.id as CabaretTile
+          const isStarCase = checkIfLocationIsStarCase(tile, i)
+          if (isStarCase) {
+            res.push({ type: LocationType.CabaretTokenSpace, id: i, parent: tileIndex })
+          }
+        }
+      })
+    return res
+  }
+
   getPossiblePlaceNearToOtherTokens() {
     const places: Location[] = []
     this.tokensInCabaretTiles.getItems().forEach((item) => {
       places.push(...this.getPlacesNear(item.location.id as number, item.location.parent!).filter((place) => this.checkIfPlaceIsEmpty(place)))
     })
-    return places
+    return uniqWith(places, (a, b) => a.parent === b.parent && a.id === b.id)
   }
 
   get tokensInCabaretTiles() {

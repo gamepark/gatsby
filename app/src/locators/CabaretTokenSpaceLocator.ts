@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { DropAreaDescription, Locator, MaterialContext } from '@gamepark/react-game'
 import { isMoveItemType, Location, MaterialItem, MaterialMove, XYCoordinates } from '@gamepark/rules-api'
@@ -30,6 +31,13 @@ export class CabaretTokenSpaceDescription extends DropAreaDescription {
   height = 1.5
   width = 1.5
   borderRadius = 1
+  extraCss = css`
+    background-color: rgba(0, 255, 0, 0.3);
+
+    &:hover {
+      background-color: rgba(0, 255, 0, 0.6) !important;
+    }
+  `
 
   help = CabaretHelp
 

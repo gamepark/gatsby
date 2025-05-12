@@ -5,7 +5,7 @@ export class SpecialActionLayoutLocator extends ListLocator {
   gap = { y: 1.5 }
   getCoordinates(location: Location): Partial<Coordinates> {
     const locationY = location.y ?? 0
-    return { x: -32, y: -11 + locationY * this.gap.y }
+    return { x: -30.5, y: -9.5 + locationY * this.gap.y }
   }
 }
 

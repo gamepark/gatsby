@@ -16,6 +16,7 @@ class ActionSpaceLocator extends DeckLocator {
 export class ActionSpaceDescription extends DropAreaDescription {
   width = 8
   height = 5.5
+  borderRadius = 0.3
 }
 
 export const actionSpaceLocator = new ActionSpaceLocator()

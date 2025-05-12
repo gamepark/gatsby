@@ -7,9 +7,9 @@ class PlayerCharacterTilesShowLayoutLocator extends ListLocator {
   maxCount = 2
   getCoordinates(location: Location) {
     if (location.player === 1) {
-      return { x: -34, y: 0 }
+      return { x: -34, y: -4, z: 5 }
     }
-    return { x: 30, y: 0 }
+    return { x: 30, y: -4, z: 5 }
   }
 
   locationDescription = new PlayerCharacterTilesShowLayoutDescription()
@@ -18,6 +18,7 @@ class PlayerCharacterTilesShowLayoutLocator extends ListLocator {
 export class PlayerCharacterTilesShowLayoutDescription extends DropAreaDescription {
   height = 4
   width = 8.5
+  borderRadius = 0.5
 }
 
 export const playerCharacterTilesShowLayoutLocator = new PlayerCharacterTilesShowLayoutLocator()

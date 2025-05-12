@@ -1,18 +1,26 @@
 /** @jsxImportSource @emotion/react */
+import { PlayerRole } from '@gamepark/gatsby/PlayerRole'
 import { FlexLocator } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 
 class PlayerCharacterTilesLocator extends FlexLocator {
-  gap = { x: 3 }
-
-  lineSize = 4
-  lineGap = { y: 4.5 }
+  lineSize = 2
+  lineGap = { y: -4.5 }
+  maxLines = 3
 
   getCoordinates(location: Location) {
-    if (location.player === 1) {
-      return { x: -47, y: 8 }
+    if (location.player === PlayerRole.Dorothy) {
+      return { x: -41, y: 10 }
     }
-    return { x: 38, y: 8 }
+    return { x: 30, y: 10 }
+  }
+
+  getGap(location: Location) {
+    if (location.player === PlayerRole.Dorothy) {
+      return { x: -4.5 }
+    } else {
+      return { x: 4.5 }
+    }
   }
 }
 

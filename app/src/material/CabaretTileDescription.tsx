@@ -2,7 +2,7 @@
 import { CabaretTile } from '@gamepark/gatsby/material/CabaretTile'
 import { CabaretHelper } from '@gamepark/gatsby/rules/helpers/CabaretHelper'
 import { RuleId } from '@gamepark/gatsby/rules/RuleId'
-import { CardDescription, ItemContext } from '@gamepark/react-game'
+import { CardDescription, ItemContext, MaterialContext } from '@gamepark/react-game'
 import { Location, MaterialItem } from '@gamepark/rules-api'
 import Cabaret1 from '../images/cabaret/Cabaret1.jpg'
 import Cabaret2 from '../images/cabaret/Cabaret2.jpg'
@@ -22,6 +22,10 @@ export class CabaretTileDescription extends CardDescription {
   help = CabaretTileHelp
 
   getLocations(_: MaterialItem, context: ItemContext): Location[] {
+    return this.getCabaretMoves(context).filter((location) => location.parent === context.index)
+  }
+
+  getCabaretMoves(context: MaterialContext) {
     const cabaretHelper = new CabaretHelper(context.rules.game)
     switch (context.rules.game.rule!.id) {
       case RuleId.PlaceTokenOnCabaret:

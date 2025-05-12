@@ -68,7 +68,7 @@ export class GatsbyRules extends SecretMaterialRules implements TimeLimit<Materi
     [MaterialType.CharacterTile]: {
       [LocationType.CharacterSpace]: hideIdIfRotated,
       [LocationType.PlayerCharacterTiles]: hideItemIdToOthersIfRotated,
-      [LocationType.PlayerCharacterTilesShowLayout]: hideItemIdToOthers
+      [LocationType.PlayerCharacterTilesShowLayout]: hideItemIdToOthersIfRotated
     },
     [MaterialType.SpecialActionTile]: {
       [LocationType.SpecialActionDeck]: hideItemId,

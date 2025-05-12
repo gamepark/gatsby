@@ -7,6 +7,7 @@ import { characterTiles } from './material/CharacterTile'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { specialActionTiles } from './material/SpecialActionTile'
+import { PlayerRole } from './PlayerRole'
 import { RuleId } from './rules/RuleId'
 
 /**
@@ -15,8 +16,9 @@ import { RuleId } from './rules/RuleId'
 export class GatsbySetup extends MaterialGameSetup<number, MaterialType, LocationType, GatsbyOptions> {
   Rules = GatsbyRules
 
-  setupMaterial(_options: GatsbyOptions) {
-    this.material(MaterialType.ActionToken).createItem({ location: { type: LocationType.ActionTokenIdle }, id: 1 })
+  setupMaterial() {
+    const dorothyStarts = this.players[0] === PlayerRole.Dorothy
+    this.material(MaterialType.ActionToken).createItem({ location: { type: LocationType.ActionSpace, id: dorothyStarts ? 0 : 5, rotation: dorothyStarts } })
 
     for (let i = 0; i < 4; i++) {
       this.material(MaterialType.RaceFinishedOverlayTile).createItem({ location: { type: LocationType.RaceFinishedDeck } })

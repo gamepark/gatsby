@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { TokenDescription } from '@gamepark/react-game'
-import WomanRound from '../images/pawn/WomanRound.jpg'
+import { MaterialItem } from '../../../../rules-api'
 import ManRound from '../images/pawn/ManRound.jpg'
+import WomanRound from '../images/pawn/WomanRound.jpg'
 import { ActionTokenHelp } from './help/ActionTokenHelp'
 
 export class ActionTokenDescription extends TokenDescription {
@@ -9,11 +10,10 @@ export class ActionTokenDescription extends TokenDescription {
   width = 4
   borderRadius = 2
 
+  image = WomanRound
   backImage = ManRound
 
-  images = {
-    1: WomanRound
-  }
+  isFlipped = (item: MaterialItem) => item.location.rotation === true
 
   help = ActionTokenHelp
 }

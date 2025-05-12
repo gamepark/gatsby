@@ -2,7 +2,6 @@ import { LocationType } from '@gamepark/gatsby/material/LocationType'
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { Locator } from '@gamepark/react-game'
 import { actionSpaceLocator } from './ActionSpaceLocator'
-import { actionTokenIdleLocator } from './ActionTokenIdleLocator'
 import { bonusCaseLocator } from './bonusCaseLocator'
 import { cabaretSpaceLocator } from './CabaretSpaceLocator'
 import { cabaretTokenSpaceLocator } from './CabaretTokenSpaceLocator'
@@ -30,7 +29,6 @@ export const Locators: Partial<Record<LocationType, Locator<number, MaterialType
   [LocationType.RaceTrack]: raceTrackLocator,
   [LocationType.CabaretTokenSpace]: cabaretTokenSpaceLocator,
   [LocationType.ActionSpace]: actionSpaceLocator,
-  [LocationType.ActionTokenIdle]: actionTokenIdleLocator,
   [LocationType.SpecialActionDiscard]: specialActionTileDiscardLocator,
   [LocationType.SpecialActionDeck]: specialActionTileDeckLocator,
   [LocationType.SpecialActionLayout]: specialActionLayoutLocator,

@@ -71,10 +71,6 @@ export class GatsbyRules
       [LocationType.PlayerCharacterTiles]: hideItemIdToOthersIfRotated,
       [LocationType.PlayerCharacterTilesShowLayout]: hideItemIdToOthers
     },
-    [MaterialType.ActionToken]: {
-      [LocationType.ActionTokenIdle]: hideIdIfRotated,
-      [LocationType.ActionSpace]: hideIdIfRotated
-    },
     [MaterialType.SpecialActionTile]: {
       [LocationType.SpecialActionDeck]: hideItemId,
       [LocationType.SpecialActionDiscard]: hideItemId,

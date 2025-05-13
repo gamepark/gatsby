@@ -1,4 +1,4 @@
-import { CustomMove, isMoveItem, ItemMove, MaterialMove, PlayMoveContext } from '@gamepark/rules-api'
+import { CustomMove, isMoveItemType, ItemMove, MaterialMove } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { ChooseSpecialActionTileRule } from './ChooseSpecialActionTileRule'
@@ -18,21 +18,28 @@ export class TakeThreeSpecialActionTileAndTakeOneRule extends ChooseSpecialActio
     return moves
   }
 
-  beforeItemMove(move: ItemMove, _context?: PlayMoveContext): MaterialMove[] {
+  beforeItemMove(move: ItemMove): MaterialMove[] {
+    if (isMoveItemType(MaterialType.SpecialActionTile)(move) && move.location.type === LocationType.ActionSpace) {
+      const previousTile = this.playerSpecialActionTile
+      if (previousTile.length) {
+        return [previousTile.moveItem({ type: LocationType.PlayerSpecialTilesDiscard, player: this.player })]
+      } else {
+        return this.endRule()
+      }
+    }
+    return []
+  }
+
+  afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
-    if (isMoveItem(move) && move.location.type === LocationType.ActionSpace) {
-      moves.push(...this.playerSpecialActionTile.moveItems(() => ({ type: LocationType.PlayerSpecialTilesDiscard, player: this.player })))
+    if (isMoveItemType(MaterialType.SpecialActionTile)(move) && move.location.type === LocationType.PlayerSpecialTilesDiscard) {
+      return this.endRule()
     }
     return moves
   }
 
-  afterItemMove(move: ItemMove, _context?: PlayMoveContext): MaterialMove[] {
-    const moves: MaterialMove[] = []
-    if (isMoveItem(move) && (move.location.type === LocationType.ActionSpace || move.location.type === LocationType.PlayerSpecialTilesDiscard)) {
-      moves.push(...this.specialActionTilesToChoose.moveItems(() => ({ type: LocationType.SpecialActionDiscard })))
-      moves.push(...this.nextRuleHelper.moveToNextRule())
-    }
-    return moves
+  endRule() {
+    return [...this.specialActionTilesToChoose.moveItems({ type: LocationType.SpecialActionDiscard }), ...this.nextRuleHelper.moveToNextRule()]
   }
 
   onCustomMove(move: CustomMove): MaterialMove[] {

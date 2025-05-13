@@ -2,6 +2,7 @@
 import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/gatsby/material/LocationType'
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
+import { CabaretHelper } from '@gamepark/gatsby/rules/helpers/CabaretHelper'
 import { RuleId } from '@gamepark/gatsby/rules/RuleId'
 import { MaterialTutorial, Picture, TutorialStep } from '@gamepark/react-game'
 import { isMoveItemType, isStartRule } from '@gamepark/rules-api'
@@ -75,13 +76,21 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
           this.location(LocationType.ActionSpace).id(2).location,
           this.location(LocationType.ActionSpace).id(3).location,
           this.location(LocationType.ActionSpace).id(4).location
-        ]
+        ],
+        margin: { left: 1, bottom: 1, right: 1 }
       })
     },
     {
       popup: {
         text: () => <Trans defaults="tuto.step.4" components={BaseComponents} />
       },
+      focus: (game) => ({
+        materials: [this.material(game, MaterialType.SpecialActionTile)],
+        locations: [this.location(LocationType.ActionSpace).id(5).location],
+        margin: { left: 1, bottom: 1, right: 1, top: 1 }
+      })
+    },
+    {
       move: {
         player: opponent,
         filter: (move, _) => {
@@ -91,13 +100,15 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.4" components={BaseComponents} />
-      }
-    },
-    {
-      popup: {
         text: () => <Trans defaults="tuto.step.5" components={BaseComponents} />
       },
+      focus: (game) => ({
+        materials: [this.material(game, MaterialType.InfluenceToken).player(opponent)],
+        locations: new CabaretHelper(game).getPossibleStarPlace(),
+        margin: { left: 1, bottom: 1, right: 1, top: 1 }
+      })
+    },
+    {
       move: {
         player: opponent,
         filter: (move, _) => {
@@ -108,11 +119,6 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
             move.location.id === 5
           )
         }
-      }
-    },
-    {
-      popup: {
-        text: () => <Trans defaults="tuto.step.5" components={BaseComponents} />
       }
     },
     {
@@ -143,7 +149,8 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
         materials: [
           this.material(game, MaterialType.CabaretTile).location(LocationType.CabaretSpace),
           this.material(game, MaterialType.CharacterTile).location((loc) => loc.type === LocationType.CharacterSpace && loc.id < 3)
-        ]
+        ],
+        margin: { bottom: 1 }
       })
     },
     {
@@ -151,6 +158,11 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
         text: () => <Trans defaults="tuto.step.9" components={BaseComponents} />,
         position: { x: 15, y: 0 }
       },
+      focus: (game) => ({
+        materials: [this.material(game, MaterialType.InfluenceToken).player(me)],
+        locations: [{ type: LocationType.CabaretTokenSpace, id: 4, parent: 2 }],
+        margin: { bottom: 1, top: 4 }
+      }),
       move: {
         filter: (move, _) => {
           return (
@@ -297,23 +309,17 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => <Trans defaults="tuto.step.21" components={BaseComponents} />
-      },
+      }
+    },
+    {
       move: {
         player: opponent,
-        filter: (move, _) => {
+        filter: (move) => {
           return isMoveItemType(MaterialType.ActionToken)(move) && move.location.type === LocationType.ActionSpace && move.location.id === 1
         }
       }
     },
     {
-      popup: {
-        text: () => <Trans defaults="tuto.step.21" components={BaseComponents} />
-      }
-    },
-    {
-      popup: {
-        text: () => <Trans defaults="tuto.step.22" components={BaseComponents} />
-      },
       move: {
         player: opponent,
         filter: (move, _) => {
@@ -327,9 +333,6 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       }
     },
     {
-      popup: {
-        text: () => <Trans defaults="tuto.step.22" components={BaseComponents} />
-      },
       move: {
         player: opponent,
         filter: (move, _) => {
@@ -382,7 +385,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => <Trans defaults="tuto.step.27" components={BaseComponents} />,
-        position: { x: -60, y: 0 }
+        position: { x: -40, y: 0 }
       },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.CharacterTile).location((loc) => loc.type === LocationType.CharacterSpace && loc.id > 6)],
@@ -392,7 +395,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => <Trans defaults="tuto.step.28" components={BaseComponents} />,
-        position: { x: -60, y: 0 }
+        position: { x: -40, y: 0 }
       },
       focus: () => ({
         locations: [
@@ -408,7 +411,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => <Trans defaults="tuto.step.29" components={BaseComponents} />,
-        position: { x: -60, y: 0 }
+        position: { x: -40, y: 0 }
       },
       focus: () => ({
         locations: [

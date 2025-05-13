@@ -26,7 +26,7 @@ export class CabaretTileDescription extends CardDescription {
   }
 
   getCabaretMoves(context: MaterialContext) {
-    if (!context.rules.game.rule) return []
+    if (!context.rules.game.rule || context.rules.getActivePlayer() !== context.player) return []
     const cabaretHelper = new CabaretHelper(context.rules.game)
     switch (context.rules.game.rule.id) {
       case RuleId.PlaceTokenOnCabaret:

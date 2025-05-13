@@ -13,8 +13,8 @@ class RaceTrackLocator extends ListLocator {
   maxCount = 5
 
   getLocations(context: MaterialContext): Partial<Location>[] {
+    if (!context.rules.game.rule || context.rules.getActivePlayer() !== context.player) return []
     const raceTrackHelper = new RaceTrackHelper(context.rules.game)
-    if (!context.rules.game.rule) return []
     switch (context.rules.game.rule.id) {
       case RuleId.PlaceTokenOnRaceTrack:
       case RuleId.PlaceTokenOnCabaretOrRaceTrack:

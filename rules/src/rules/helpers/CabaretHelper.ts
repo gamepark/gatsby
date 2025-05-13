@@ -324,7 +324,7 @@ const tokenPlacesNearToOtherTiles = [
     },
     [Rotation.Rotation5]: {
       [TileIndex.TileIndex0]: [2, 1, 0],
-      [TileIndex.TileIndex2]: [0, 3, 6]
+      [TileIndex.TileIndex2]: [6, 3, 0]
     },
     [Rotation.Rotation7]: {
       [TileIndex.TileIndex0]: [0, 3, 6],

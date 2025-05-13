@@ -3,7 +3,7 @@ import { PlaceTokenOnRaceTrackRule } from './PlaceTokenOnRaceTrackRule'
 
 export class PlaceTokenOnRaceTrackAnywhereRule extends PlaceTokenOnRaceTrackRule {
   getPossiblePlace() {
-    return this.raceTrackHelper.getPossibleRacePlaceWithX()
+    return this.raceTrackHelper.getPossibleRacePlaceAnywhere()
   }
 
   onRuleEnd(): MaterialMove[] {

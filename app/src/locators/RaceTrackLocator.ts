@@ -24,7 +24,7 @@ class RaceTrackLocator extends ListLocator {
       case RuleId.PlaceTokenOnSameRaceTrack:
         return raceTrackHelper.getPossiblePaceOnSameRaceTrack()
       case RuleId.PlaceTokenOnRaceTrackAnywhere:
-        return raceTrackHelper.getPossibleRacePlaceWithX()
+        return raceTrackHelper.getPossibleRacePlaceAnywhere()
       default:
         return []
     }

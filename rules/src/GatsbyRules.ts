@@ -1,7 +1,6 @@
 import {
   CompetitiveRank,
   CustomMove,
-  FillGapStrategy,
   hideItemId,
   hideItemIdToOthers,
   isCustomMoveType,
@@ -85,9 +84,6 @@ export class GatsbyRules extends SecretMaterialRules implements TimeLimit<Materi
     },
     [MaterialType.RaceFinishedOverlayTile]: {
       [LocationType.RaceFinishedDeck]: new PositiveSequenceStrategy()
-    },
-    [MaterialType.InfluenceToken]: {
-      [LocationType.RaceTrack]: new FillGapStrategy()
     },
     [MaterialType.CharacterTile]: {
       [LocationType.PlayerCharacterTiles]: new PositiveSequenceStrategy(),

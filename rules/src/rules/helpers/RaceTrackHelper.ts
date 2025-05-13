@@ -29,13 +29,23 @@ export class RaceTrackHelper extends MaterialRulesPart {
       const raceIsNotFinished =
         this.material(MaterialType.RaceFinishedOverlayTile).location((loc) => loc.type === LocationType.RaceTrack && loc.id === i).length === 0
       if (raceIsNotFinished) {
-        res.push({ type: LocationType.RaceTrack, id: i })
+        const max = i < 3 ? 5 : 3
+        let x = undefined
+        for (let j = 0; j < max; j++) {
+          const noTokenOnThisPlace =
+            this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === i && loc.x === j).length === 0
+          if (noTokenOnThisPlace) {
+            x = j
+            break
+          }
+        }
+        res.push({ type: LocationType.RaceTrack, id: i, x })
       }
     }
     return res
   }
 
-  getPossibleRacePlaceWithX() {
+  getPossibleRacePlaceAnywhere() {
     const res: Location[] = []
     for (let i = 0; i < 5; i++) {
       const raceIsNotFinished =

@@ -15,10 +15,10 @@ class CabaretTokenSpaceLocator extends Locator {
   getPositionOnParent(location: Location): XYCoordinates {
     const line = Math.floor(location.id / 3)
     const column = location.id - 3 * line
-    const baseX = 16.4
+    const baseX = 18
     const deltaX = 32.4
     const x = baseX + deltaX * column
-    const baseY = 16.4
+    const baseY = 18
     const deltaY = 32.4
     const y = baseY + deltaY * line
     return { x, y }

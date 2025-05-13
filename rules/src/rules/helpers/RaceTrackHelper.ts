@@ -58,7 +58,6 @@ export class RaceTrackHelper extends MaterialRulesPart {
     const moves: MaterialMove[] = []
     let increment = 0
     for (let id = 0; id < 5; id++) {
-      console.log(id)
       const nbTokensInTrack = this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === id).length
       if ((id < 3 && nbTokensInTrack === 5) || (id > 2 && nbTokensInTrack === 3)) {
         const characterTile = this.material(MaterialType.CharacterTile).location((loc) => loc.type === LocationType.CharacterSpace && loc.id === 7 + id)

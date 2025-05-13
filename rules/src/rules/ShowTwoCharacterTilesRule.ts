@@ -38,7 +38,11 @@ export class ShowTwoCharacterTilesRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove): MaterialMove[] {
     if (isMoveItem(move) && move.location.type === LocationType.PlayerCharacterTilesShowLayout) {
       if (this.characterTilesInShowingLayout.length === 2) {
-        return [this.startRule(RuleId.ReplaceCharacterTiles)]
+        const moves: MaterialMove[] = [this.startRule(RuleId.ReplaceCharacterTiles)]
+        if (this.characterTilesInShowingLayout.getItems().every((item) => item.location.rotation)) {
+          moves.push(this.characterTilesInShowingLayout.shuffle())
+        }
+        return moves
       }
     }
     return []

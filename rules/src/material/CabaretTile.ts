@@ -11,9 +11,9 @@ export enum CabaretTile {
 export const cabaretTiles = getEnumValues(CabaretTile)
 
 export const BonusByCabaretTiles = {
-  [CabaretTile.CabaretTile1]: [RuleId.ChooseActionForOpponent, '', '', '', RuleId.AdvanceInFinanceCenter, '', 'S', '', RuleId.ShowTwoCharacterTiles],
-  [CabaretTile.CabaretTile2]: [RuleId.ShowTwoCharacterTiles, '', '', '', RuleId.AdvanceInFinanceCenter, 'S', '', '', RuleId.SwitchInfluenceTokens],
-  [CabaretTile.CabaretTile3]: [RuleId.SwitchInfluenceTokens, '', RuleId.AdvanceInFinanceCenter, '', 'S', '', '', '', RuleId.ChooseActionForOpponent],
+  [CabaretTile.CabaretTile1]: [RuleId.ChooseActionForOpponent, '', '', '', RuleId.ChooseIfAdvanceInFinanceCenterOrNot, '', 'S', '', RuleId.ShowTwoCharacterTiles],
+  [CabaretTile.CabaretTile2]: [RuleId.ShowTwoCharacterTiles, '', '', '', RuleId.ChooseIfAdvanceInFinanceCenterOrNot, 'S', '', '', RuleId.SwitchInfluenceTokens],
+  [CabaretTile.CabaretTile3]: [RuleId.SwitchInfluenceTokens, '', RuleId.ChooseIfAdvanceInFinanceCenterOrNot, '', 'S', '', '', '', RuleId.ChooseActionForOpponent],
   [CabaretTile.CabaretTile4]: [RuleId.SwitchInfluenceTokens, '', 'S', '', RuleId.ChooseActionForOpponent, '', '', '', RuleId.ShowTwoCharacterTiles]
 }
 

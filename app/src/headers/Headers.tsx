@@ -4,6 +4,7 @@ import { ComponentType } from 'react'
 import { AdvanceInFinanceCenterHeader } from './AdvanceInFinanceCenterHeader'
 import { ChooseActionForOpponentHeader } from './ChooseActionForOpponentHeader'
 import { ChooseActionHeader } from './ChooseActionHeader'
+import { ChooseIfAdvanceInFinanceCenterOrNotHeader } from './ChooseIfAdvanceInFinanceCenterOrNotHeader'
 import { ChooseSpecialActionTileHeader } from './ChooseSpecialActionTileHeader'
 import { GetCharacterTilesHeader } from './GetCharacterTilesHeader'
 import { PlaceTokenOnAnotherRaceTrackHeader } from './PlaceTokenOnAnotherRaceTrackHeader'
@@ -36,5 +37,6 @@ export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.ShowTwoCharacterTiles]: ShowTwoCharacterTilesHeader,
   [RuleId.ReplaceCharacterTiles]: ShowTwoCharacterTilesHeader,
   [RuleId.GetCharacterTiles]: GetCharacterTilesHeader,
-  [RuleId.PlaceTokenOnRaceTrackAnywhere]: PlaceTokenOnRaceTrackAnywhereHeader
+  [RuleId.PlaceTokenOnRaceTrackAnywhere]: PlaceTokenOnRaceTrackAnywhereHeader,
+  [RuleId.ChooseIfAdvanceInFinanceCenterOrNot]: ChooseIfAdvanceInFinanceCenterOrNotHeader
 }

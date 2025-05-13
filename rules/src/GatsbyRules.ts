@@ -16,6 +16,7 @@ import { MaterialType } from './material/MaterialType'
 import { AdvanceInFinanceCenterRule } from './rules/AdvanceInFinanceCenterRule'
 import { ChooseActionForOpponentRule } from './rules/ChooseActionForOpponentRule'
 import { ChooseActionRule } from './rules/ChooseActionRule'
+import { ChooseIfAdvanceInFinanceCenterOrNotRule } from './rules/ChooseIfAdvanceInFinanceCenterOrNotRule'
 import { ChooseSpecialActionTileRule } from './rules/ChooseSpecialActionTileRule'
 import { CustomMoveType } from './rules/CustomMoveType'
 import { GetCharacterTilesRule } from './rules/GetCharacterTilesRule'
@@ -49,6 +50,7 @@ export class GatsbyRules extends SecretMaterialRules implements TimeLimit<Materi
     [RuleId.PlaceTokenOnCabaretNearToOther]: PlaceTokenOnCabaretNearToOtherRule,
     [RuleId.PlaceTokenOnCabaretNearToLast]: PlaceTokenOnCabaretNearToLastRule,
     [RuleId.AdvanceInFinanceCenter]: AdvanceInFinanceCenterRule,
+    [RuleId.ChooseIfAdvanceInFinanceCenterOrNot]: ChooseIfAdvanceInFinanceCenterOrNotRule,
     [RuleId.ChooseAction]: ChooseActionRule,
     [RuleId.PlaceTokenOnRaceTrack]: PlaceTokenOnRaceTrackRule,
     [RuleId.PlaceTokenOnRaceTrackAnywhere]: PlaceTokenOnRaceTrackAnywhereRule,

@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom'
 import { gameAnimations } from './animations/GameAnimations'
 import App from './App'
 import { GatsbyLogs } from './history/GatsbyLogs'
+import Background from './images/Background.jpg'
 import { Locators } from './locators/Locators'
 import { Material } from './material/Material'
 import translations from './translations.json'
@@ -27,6 +28,7 @@ ReactDOM.render(
       tutorial={new Tutorial()}
       locators={Locators}
       animations={gameAnimations}
+      theme={{ root: { background: { image: Background, overlay: 'rgba(0, 0, 0, 0.5)' } } }}
     >
       <App />
     </GameProvider>

@@ -1,7 +1,6 @@
 import { isMoveItemType, ItemMove, MaterialMove } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
-import { SpecialActionTile } from '../material/SpecialActionTile'
 import { ChooseSpecialActionTileRule } from './ChooseSpecialActionTileRule'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 
@@ -17,31 +16,24 @@ export class TakeThreeSpecialActionTileAndTakeOneRule extends ChooseSpecialActio
     return moves
   }
 
-  beforeItemMove(move: ItemMove): MaterialMove[] {
-    if (isMoveItemType(MaterialType.SpecialActionTile)(move) && move.location.type === LocationType.ActionSpace) {
-      const previousTile = this.playerSpecialActionTile
-      if (previousTile.length) {
-        return [previousTile.moveItem({ type: LocationType.PlayerSpecialTilesDiscard, player: this.player })]
-      } else {
-        return this.endRule(this.specialActionTilesToChoose.index(move.itemIndex).getItem()?.id as SpecialActionTile)
+  afterItemMove(move: ItemMove): MaterialMove[] {
+    if (isMoveItemType(MaterialType.SpecialActionTile)(move)) {
+      if (move.location.type === LocationType.ActionSpace) {
+        const previousTile = this.playerSpecialActionTile.index((index) => index !== move.itemIndex)
+        if (previousTile.length) {
+          return [previousTile.moveItem({ type: LocationType.PlayerSpecialTilesDiscard, player: this.player })]
+        } else {
+          return this.endRule()
+        }
+      } else if (move.location.type === LocationType.PlayerSpecialTilesDiscard) {
+        return this.endRule()
       }
     }
     return []
   }
 
-  afterItemMove(move: ItemMove): MaterialMove[] {
-    const moves: MaterialMove[] = []
-    if (isMoveItemType(MaterialType.SpecialActionTile)(move) && move.location.type === LocationType.PlayerSpecialTilesDiscard) {
-      return this.endRule()
-    }
-    return moves
-  }
-
-  endRule(choosenId: SpecialActionTile | undefined = undefined) {
-    return [
-      ...this.specialActionTilesToChoose.filter((item) => item.id !== choosenId).moveItems({ type: LocationType.SpecialActionDiscard }),
-      ...this.nextRuleHelper.moveToNextRule()
-    ]
+  endRule() {
+    return [...this.specialActionTilesToChoose.moveItems({ type: LocationType.SpecialActionDiscard }), ...this.nextRuleHelper.moveToNextRule()]
   }
 
   get playerSpecialActionTile() {

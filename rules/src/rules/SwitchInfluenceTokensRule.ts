@@ -16,9 +16,15 @@ export class SwitchInfluenceTokensRule extends PlayerTurnRule {
 
   getPlayerMoves() {
     const moves: MaterialMove[] = []
-    this.getPossiblePlace().forEach((place) => {
-      moves.push(...this.playerInfluenceTokens.moveItems(() => place))
-    })
+    const tokens = this.playerInfluenceTokens
+    for (const index of tokens.getIndexes()) {
+      const token = tokens.index(index)
+      for (const location of this.getOpponentTokensLocations()) {
+        if (location.type !== LocationType.RaceTrack || location.id !== token.getItem()!.location.id) {
+          moves.push(token.moveItem(location))
+        }
+      }
+    }
     moves.push(this.customMove(CustomMoveType.Pass))
     return moves
   }
@@ -48,7 +54,7 @@ export class SwitchInfluenceTokensRule extends PlayerTurnRule {
     return moves
   }
 
-  getPossiblePlace() {
+  getOpponentTokensLocations() {
     return this.material(MaterialType.InfluenceToken)
       .location((loc) => loc.type === LocationType.CabaretTokenSpace || loc.type === LocationType.RaceTrack)
       .id(this.nextPlayer)

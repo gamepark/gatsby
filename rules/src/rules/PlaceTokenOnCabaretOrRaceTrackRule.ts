@@ -5,7 +5,6 @@ import { CustomMoveType } from './CustomMoveType'
 import { CabaretHelper } from './helpers/CabaretHelper'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 import { RaceTrackHelper } from './helpers/RaceTrackHelper'
-import { Memory } from './Memory'
 
 export class PlaceTokenOnCabaretOrRaceTrackRule extends PlayerTurnRule {
   nextRuleHelper = new NextRuleHelper(this.game)
@@ -41,7 +40,6 @@ export class PlaceTokenOnCabaretOrRaceTrackRule extends PlayerTurnRule {
         .location((loc) => loc.type === LocationType.RaceTrack && loc.id === move.location.id)
         .maxBy((item) => item.location.x!)
         .getItem()
-      this.memorize(Memory.LastTokenOnRaceTrackForPlayer, move.location.id, this.player)
       if (tokenPlaced) {
         const bonus = this.raceTrackHelper.getBonus(move.location.id as number, tokenPlaced.location.x!)
         if (bonus !== null) {
@@ -51,7 +49,6 @@ export class PlaceTokenOnCabaretOrRaceTrackRule extends PlayerTurnRule {
       moves.push(...this.nextRuleHelper.moveToNextRule())
     }
     if (isMoveItemType(MaterialType.InfluenceToken)(move) && move.location.type === LocationType.CabaretTokenSpace) {
-      this.memorize(Memory.LastTokenOnCabaretForPlayer, move.location, this.player)
       const bonus = this.cabaretHelper.getBonus(move.location.parent!, move.location.id as number)
       if (bonus !== null) {
         moves.push(this.customMove(CustomMoveType.GetBonus, bonus))

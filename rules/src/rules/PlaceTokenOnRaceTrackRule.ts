@@ -11,6 +11,7 @@ export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
   raceTrackHelper = new RaceTrackHelper(this.game)
 
   onRuleStart(): MaterialMove[] {
+    this.forget(Memory.LastTokenOnRaceTrackForPlayer, this.player)
     if (this.getPossiblePlace().length === 0) {
       return this.nextRuleHelper.moveToNextRule()
     }
@@ -37,7 +38,8 @@ export class PlaceTokenOnRaceTrackRule extends PlayerTurnRule {
         .location((loc) => loc.type === LocationType.RaceTrack && loc.id === move.location.id)
         .maxBy((item) => item.location.x!)
         .getItem()
-      this.memorize(Memory.LastTokenOnRaceTrackForPlayer, move.location.id, this.player)
+      const lasts: number[] | undefined = this.remind(Memory.LastTokenOnRaceTrackForPlayer, this.player) ?? []
+      this.memorize(Memory.LastTokenOnRaceTrackForPlayer, [...lasts, move.location.id], this.player)
       if (tokenPlaced) {
         const bonus = this.raceTrackHelper.getBonus(move.location.id as number, tokenPlaced.location.x!)
         if (bonus !== null) {

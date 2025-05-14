@@ -14,13 +14,13 @@ export class RaceTrackHelper extends MaterialRulesPart {
   }
 
   getPossiblePaceOnAnotherRaceTrack() {
-    const last: number = this.remind(Memory.LastTokenOnRaceTrackForPlayer, this.player)
-    return this.getPossibleRacePlace().filter((place) => place.id !== last)
+    const lasts: number[] | undefined = this.remind(Memory.LastTokenOnRaceTrackForPlayer, this.player) ?? []
+    return this.getPossibleRacePlace().filter((place) => !lasts.includes(place.id as number))
   }
 
   getPossiblePaceOnSameRaceTrack() {
-    const last: number = this.remind(Memory.LastTokenOnRaceTrackForPlayer, this.player)
-    return this.getPossibleRacePlace().filter((place) => place.id === last)
+    const lasts: number[] | undefined = this.remind(Memory.LastTokenOnRaceTrackForPlayer, this.player) ?? []
+    return this.getPossibleRacePlace().filter((place) => place.id === lasts[lasts.length - 1])
   }
 
   getPossibleRacePlace() {
@@ -34,6 +34,7 @@ export class RaceTrackHelper extends MaterialRulesPart {
         for (let j = 0; j < max; j++) {
           const noTokenOnThisPlace =
             this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === i && loc.x === j).length === 0
+          console.log(i, j, noTokenOnThisPlace)
           if (noTokenOnThisPlace) {
             x = j
             break

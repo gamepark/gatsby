@@ -31,15 +31,9 @@ export class PlaceTokenOnCabaretOrRaceTrackRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     if (isMoveItemType(MaterialType.InfluenceToken)(move) && move.location.type === LocationType.RaceTrack) {
-      const tokenPlaced = this.material(MaterialType.InfluenceToken)
-        .location((loc) => loc.type === LocationType.RaceTrack && loc.id === move.location.id)
-        .maxBy((item) => item.location.x!)
-        .getItem()
-      if (tokenPlaced) {
-        const bonus = this.raceTrackHelper.getBonus(move.location.id as number, tokenPlaced.location.x!)
-        if (bonus !== null) {
-          moves.push(this.customMove(CustomMoveType.GetBonus, bonus))
-        }
+      const bonus = this.raceTrackHelper.getBonus(move.location.id as number, move.location.x!)
+      if (bonus !== null) {
+        moves.push(this.customMove(CustomMoveType.GetBonus, bonus))
       }
       moves.push(...this.nextRuleHelper.moveToNextRule())
     }

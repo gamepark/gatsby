@@ -18,8 +18,4 @@ export class PlaceTokenOnSameRaceTrackRule extends PlaceTokenOnRaceTrackRule {
   getPossiblePlace() {
     return this.raceTrackHelper.getPossiblePaceOnSameRaceTrack()
   }
-
-  onRuleEnd(): MaterialMove[] {
-    return []
-  }
 }

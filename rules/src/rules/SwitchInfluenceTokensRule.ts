@@ -20,7 +20,8 @@ export class SwitchInfluenceTokensRule extends PlayerTurnRule {
     for (const index of tokens.getIndexes()) {
       const token = tokens.index(index)
       for (const location of this.getOpponentTokensLocations()) {
-        if (location.type !== LocationType.RaceTrack || location.id !== token.getItem()!.location.id) {
+        const initialLocation = token.getItem()!.location
+        if (location.type !== LocationType.RaceTrack || initialLocation.type !== LocationType.RaceTrack || location.id !== initialLocation.id) {
           moves.push(token.moveItem(location))
         }
       }

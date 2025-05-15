@@ -34,7 +34,6 @@ export class RaceTrackHelper extends MaterialRulesPart {
         for (let j = 0; j < max; j++) {
           const noTokenOnThisPlace =
             this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === i && loc.x === j).length === 0
-          console.log(i, j, noTokenOnThisPlace)
           if (noTokenOnThisPlace) {
             x = j
             break
@@ -81,8 +80,6 @@ export class RaceTrackHelper extends MaterialRulesPart {
           characterTile.moveItem(({ location }) => ({ type: LocationType.PlayerCharacterTiles, rotation: location.rotation, player: playerWoWinCharacter }))
         )
         moves.push(...tokensInTrack.moveItems((item) => ({ type: LocationType.PlayerInfluenceTokenPile, player: item.id })))
-        moves.push(this.material(MaterialType.InfluenceToken).location(LocationType.PlayerInfluenceTokenPile).player(1).deleteItem(nbTokensPlayer1))
-        moves.push(this.material(MaterialType.InfluenceToken).location(LocationType.PlayerInfluenceTokenPile).player(2).deleteItem(nbTokensPlayer2))
 
         const raceFinishedOverlayTiles = this.material(MaterialType.RaceFinishedOverlayTile).location(LocationType.RaceFinishedDeck)
         if (raceFinishedOverlayTiles.length > 0) {

@@ -79,7 +79,7 @@ export class GatsbySetup extends MaterialGameSetup<number, MaterialType, Locatio
       this.material(MaterialType.InfluenceToken).createItem({
         location: { type: LocationType.PlayerInfluenceTokenPile, player },
         id: player,
-        quantity: 20
+        quantity: 30
       })
     }
   }

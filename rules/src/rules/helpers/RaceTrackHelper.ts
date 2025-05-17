@@ -26,10 +26,9 @@ export class RaceTrackHelper extends MaterialRulesPart {
   getPossibleRacePlace() {
     const res: Location[] = []
     for (let i = 0; i < 5; i++) {
-      const raceIsNotFinished =
-        this.material(MaterialType.RaceFinishedOverlayTile).location((loc) => loc.type === LocationType.RaceTrack && loc.id === i).length === 0
+      const max = i < 3 ? 5 : 3
+      const raceIsNotFinished = this.checkIfRaceIsNotFinished(i, max)
       if (raceIsNotFinished) {
-        const max = i < 3 ? 5 : 3
         let x = undefined
         for (let j = 0; j < max; j++) {
           const noTokenOnThisPlace =
@@ -48,10 +47,9 @@ export class RaceTrackHelper extends MaterialRulesPart {
   getPossibleRacePlaceAnywhere() {
     const res: Location[] = []
     for (let i = 0; i < 5; i++) {
-      const raceIsNotFinished =
-        this.material(MaterialType.RaceFinishedOverlayTile).location((loc) => loc.type === LocationType.RaceTrack && loc.id === i).length === 0
+      const max = i < 3 ? 5 : 3
+      const raceIsNotFinished = this.checkIfRaceIsNotFinished(i, max)
       if (raceIsNotFinished) {
-        const max = i < 3 ? 5 : 3
         for (let j = 0; j < max; j++) {
           const noTokenOnThisPlace =
             this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === i && loc.x === j).length === 0
@@ -62,6 +60,13 @@ export class RaceTrackHelper extends MaterialRulesPart {
       }
     }
     return res
+  }
+
+  checkIfRaceIsNotFinished(raceId: number, numberOfPlaces: number): boolean {
+    return (
+      this.material(MaterialType.RaceFinishedOverlayTile).location((loc) => loc.type === LocationType.RaceTrack && loc.id === raceId).length === 0 &&
+      this.material(MaterialType.InfluenceToken).location((loc) => loc.type === LocationType.RaceTrack && loc.id === raceId).length < numberOfPlaces
+    )
   }
 
   checkAndGetRaceTrackCharacters() {

@@ -18,7 +18,7 @@ const BaseComponents = {
 }
 
 export class Tutorial extends MaterialTutorial<number, MaterialType, LocationType> {
-  version = 1
+  version = 2
 
   players = [
     { id: me },
@@ -215,7 +215,9 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       popup: {
         text: () => <Trans defaults="tuto.step.14" components={BaseComponents} />
       },
-      move: {}
+      move: {
+        filter: isMoveItemType(MaterialType.CharacterTile)
+      }
     },
     {
       move: {}

@@ -2,10 +2,11 @@
 import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/gatsby/material/LocationType'
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
+import { CustomMoveType } from '@gamepark/gatsby/rules/CustomMoveType'
 import { CabaretHelper } from '@gamepark/gatsby/rules/helpers/CabaretHelper'
 import { RuleId } from '@gamepark/gatsby/rules/RuleId'
 import { MaterialTutorial, Picture, TutorialStep } from '@gamepark/react-game'
-import { isMoveItemType, isStartRule } from '@gamepark/rules-api'
+import { isCustomMoveType, isMoveItemType, isStartRule } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
 import Switch from '../images/bonusCases/Bonus3.png'
 import Special from '../images/bonusCases/Bonus6.png'
@@ -209,7 +210,9 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
         materials: [this.material(game, MaterialType.AscensionToken).location(LocationType.FinanceCenter).player(me)],
         scale: 0.7
       }),
-      move: {}
+      move: {
+        filter: isCustomMoveType(CustomMoveType.Advance)
+      }
     },
     {
       popup: {

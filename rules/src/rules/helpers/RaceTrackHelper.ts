@@ -87,8 +87,9 @@ export class RaceTrackHelper extends MaterialRulesPart {
         moves.push(...tokensInTrack.moveItems((item) => ({ type: LocationType.PlayerInfluenceTokenPile, player: item.id })))
 
         const raceFinishedOverlayTiles = this.material(MaterialType.RaceFinishedOverlayTile).location(LocationType.RaceFinishedDeck)
-        if (raceFinishedOverlayTiles.length > 0) {
-          moves.push(raceFinishedOverlayTiles.filter(({ location }) => location.x === increment).moveItem(() => ({ type: LocationType.RaceTrack, id, x: 2 })))
+        const overlayTile = raceFinishedOverlayTiles.filter(({ location }) => location.x === increment)
+        if (overlayTile.length > 0) {
+          moves.push(overlayTile.moveItem(() => ({ type: LocationType.RaceTrack, id, x: 2 })))
           increment += 1
         }
       }

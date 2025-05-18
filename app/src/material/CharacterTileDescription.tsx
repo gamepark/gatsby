@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { CharacterTile } from '@gamepark/gatsby/material/CharacterTile'
-import { CardDescription } from '@gamepark/react-game'
+import { LocationType } from '@gamepark/gatsby/material/LocationType'
+import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
+import { CardDescription, ItemContext } from '@gamepark/react-game'
+import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import CharacterYellow1 from '../images/character/CharacterYellow1.jpg'
 import CharacterYellow2 from '../images/character/CharacterYellow2.jpg'
 import CharacterYellow3 from '../images/character/CharacterYellow3.jpg'
@@ -28,6 +31,12 @@ export class CharacterTileDescription extends CardDescription {
   images = images
 
   help = CharacterTileHelp
+
+  canShortClick(move: MaterialMove, context: ItemContext): boolean {
+    return (
+      isMoveItemType(MaterialType.CharacterTile)(move) && move.location.type === LocationType.PlayerCharacterTilesShowLayout && move.itemIndex === context.index
+    )
+  }
 }
 
 const images = {

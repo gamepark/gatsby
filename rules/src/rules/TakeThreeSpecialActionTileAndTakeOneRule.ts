@@ -1,7 +1,8 @@
-import { isMoveItemType, ItemMove, MaterialMove } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, isMoveItemType, ItemMove, MaterialMove } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { ChooseSpecialActionTileRule } from './ChooseSpecialActionTileRule'
+import { CustomMoveType } from './CustomMoveType'
 import { NextRuleHelper } from './helpers/NextRuleHelper'
 
 export class TakeThreeSpecialActionTileAndTakeOneRule extends ChooseSpecialActionTileRule {
@@ -11,7 +12,7 @@ export class TakeThreeSpecialActionTileAndTakeOneRule extends ChooseSpecialActio
   getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = super.getPlayerMoves()
     if (this.playerSpecialActionTile.length) {
-      moves.push(...this.specialActionTilesToChoose.moveItems(() => ({ type: LocationType.PlayerSpecialTilesDiscard, player: this.player })))
+      moves.push(this.customMove(CustomMoveType.KeepTile))
     }
     return moves
   }
@@ -30,6 +31,13 @@ export class TakeThreeSpecialActionTileAndTakeOneRule extends ChooseSpecialActio
       }
     }
     return []
+  }
+
+  onCustomMove(move: CustomMove): MaterialMove[] {
+    if (isCustomMoveType(CustomMoveType.KeepTile)(move)) {
+      return [this.specialActionTilesToChoose.moveItem(() => ({ type: LocationType.PlayerSpecialTilesDiscard, player: this.player }))]
+    }
+    return super.onCustomMove(move)
   }
 
   endRule() {

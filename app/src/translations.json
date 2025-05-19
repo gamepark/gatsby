@@ -278,7 +278,7 @@
       "header.cabaret.star.player": "{player} peut placer un jeton d'influence au cabaret sur une case étoile",
       "header.finance.center.you": "Vous avancez dans le centre financier",
       "header.finance.center.player": "{player} avance dans le centre financier",
-      "header.finance.center.choose.you": "Vous pouvez <advance>Avancer dans le centre financier</advance> or <pass>Passer</pass>",
+      "header.finance.center.choose.you": "Vous pouvez <advance>Avancer dans le centre financier</advance> ou <pass>Passer</pass>",
       "header.finance.center.choose.player": "{player} peut avancer dans le centre financier",
       "header.race.track.you": "Vous pouvez placer un jeton d'influence sur une piste de course",
       "header.race.track.player": "{player} peut placer un jeton d'influence sur une piste de course",

@@ -94,10 +94,10 @@ export class GatsbyRules extends SecretMaterialRules implements TimeLimit<Materi
   }
 
   protected onCustomMove(move: CustomMove): MaterialMove[] {
-    if (isCustomMoveType(CustomMoveType.Pass)(move)) {
+    if (isCustomMoveType(CustomMoveType.Pass)(move) && this.game.rule?.id !== RuleId.ChooseActionForOpponent) {
       return new NextRuleHelper(this.game).moveToNextRule()
     }
-    return []
+    return super.onCustomMove(move)
   }
 
   giveTime(): number {

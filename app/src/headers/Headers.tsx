@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { RuleId } from '@gamepark/gatsby/rules/RuleId'
 import { ComponentType } from 'react'
 import { AdvanceInFinanceCenterHeader } from './AdvanceInFinanceCenterHeader'

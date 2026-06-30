@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { GatsbyRules } from '@gamepark/gatsby/GatsbyRules'
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { Trans } from 'react-i18next'
@@ -11,8 +10,8 @@ export const AdvanceInFinanceCenterHeader = () => {
   const name = usePlayerName(activePlayer)
 
   if (itsMe) {
-    return <Trans defaults="header.finance.center.you" />
+    return <Trans i18nKey="header.finance.center.you" />
   }
 
-  return <Trans defaults="header.finance.center.player" values={{ player: name }} />
+  return <Trans i18nKey="header.finance.center.player" values={{ player: name }} />
 }

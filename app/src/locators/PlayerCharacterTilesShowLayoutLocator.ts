@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { DropAreaDescription, ListLocator } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 

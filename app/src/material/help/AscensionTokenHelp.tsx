@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { MaterialHelpProps } from '@gamepark/react-game'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
@@ -15,7 +14,7 @@ export const AscensionTokenHelp: FC<MaterialHelpProps> = () => {
     <>
       <h2>{t(`help.ascensiontoken`)}</h2>
       <p>
-        <Trans defaults="help.ascensiontoken.description" components={components} />
+        <Trans i18nKey="help.ascensiontoken.description" components={components} />
       </p>
     </>
   )

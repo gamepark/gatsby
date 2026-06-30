@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { GatsbyRules } from '@gamepark/gatsby/GatsbyRules'
 import { CustomMoveType } from '@gamepark/gatsby/rules/CustomMoveType'
 import { PlayMoveButton, useLegalMove, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
@@ -16,7 +15,7 @@ export const ChooseActionForOpponentHeader = () => {
   if (itsMe) {
     return (
       <Trans
-        defaults="header.action.opponent.you"
+        i18nKey="header.action.opponent.you"
         components={{
           pass: <PlayMoveButton move={pass} />
         }}
@@ -24,5 +23,5 @@ export const ChooseActionForOpponentHeader = () => {
     )
   }
 
-  return <Trans defaults="header.action.opponent.player" values={{ player: name }} />
+  return <Trans i18nKey="header.action.opponent.player" values={{ player: name }} />
 }

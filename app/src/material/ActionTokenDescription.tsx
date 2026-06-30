@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { TokenDescription } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 import ManRound from '../images/pawn/ManRound.jpg'

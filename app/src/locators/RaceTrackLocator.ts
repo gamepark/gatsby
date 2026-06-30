@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { RaceTrackHelper } from '@gamepark/gatsby/rules/helpers/RaceTrackHelper'

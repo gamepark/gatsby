@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { faHandBackFist } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -54,14 +53,14 @@ export class SpecialActionTileDescription extends CardDescription {
 
     if (place) {
       return (
-        <ItemMenuButton label={<Trans defaults="button.take" />} y={-1} x={3} move={place} css={itemBtn}>
+        <ItemMenuButton label={<Trans i18nKey="button.take" />} y={-1} x={3} move={place} css={itemBtn}>
           <FontAwesomeIcon icon={faHandBackFist} css={pointerCursorCss} width="0.8em" />
         </ItemMenuButton>
       )
     }
     if (keep && isInActionSpace) {
       return (
-        <ItemMenuButton label={<Trans defaults="button.keep" />} y={-1} x={3} move={keep} css={itemBtn}>
+        <ItemMenuButton label={<Trans i18nKey="button.keep" />} y={-1} x={3} move={keep} css={itemBtn}>
           <FontAwesomeIcon icon={faHandBackFist} css={pointerCursorCss} width="1em" />
         </ItemMenuButton>
       )

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Picture } from '@gamepark/react-game'
 import { Trans, useTranslation } from 'react-i18next'
@@ -21,42 +20,42 @@ export const BonusHelp = () => {
     <>
       <h2>{t(`help.bonus`)}</h2>
       <p>
-        <Trans defaults="help.bonus.description" components={components} />
+        <Trans i18nKey="help.bonus.description" components={components} />
       </p>
       <p css={flex}>
         <Picture src={Bonus1} css={mini} />
         <span>
-          <Trans defaults="help.bonus.bonus.1" components={components} />
+          <Trans i18nKey="help.bonus.bonus.1" components={components} />
         </span>
       </p>
       <p css={flex}>
         <Picture src={Bonus2} css={mini} />
         <span>
-          <Trans defaults="help.bonus.bonus.2" components={components} />
+          <Trans i18nKey="help.bonus.bonus.2" components={components} />
         </span>
       </p>
       <p css={flex}>
         <Picture src={Bonus3} css={mini} />
         <span>
-          <Trans defaults="help.bonus.bonus.3" components={components} />
+          <Trans i18nKey="help.bonus.bonus.3" components={components} />
         </span>
       </p>
       <p css={flex}>
         <Picture src={Bonus4} css={mini} />
         <span>
-          <Trans defaults="help.bonus.bonus.4" components={components} />
+          <Trans i18nKey="help.bonus.bonus.4" components={components} />
         </span>
       </p>
       <p css={flex}>
         <Picture src={Bonus5} css={mini} />
         <span>
-          <Trans defaults="help.bonus.bonus.5" components={components} />
+          <Trans i18nKey="help.bonus.bonus.5" components={components} />
         </span>
       </p>
       <p css={flex}>
         <Picture src={Bonus6} css={mini} />
         <span>
-          <Trans defaults="help.bonus.bonus.6" components={components} />
+          <Trans i18nKey="help.bonus.bonus.6" components={components} />
         </span>
       </p>
     </>

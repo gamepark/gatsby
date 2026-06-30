@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { ActionHelper } from '@gamepark/gatsby/rules/helpers/ActionHelper'
 import { RuleId } from '@gamepark/gatsby/rules/RuleId'

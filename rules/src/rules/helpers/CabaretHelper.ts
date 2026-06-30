@@ -1,5 +1,5 @@
 import { Location, MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
-import { uniqWith } from 'lodash'
+import { uniqWith } from 'es-toolkit'
 import { CabaretTile, BonusByCabaretTiles, checkIfLocationIsStarCase } from '../../material/CabaretTile'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { GatsbyRules } from '@gamepark/gatsby/GatsbyRules'
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { Trans } from 'react-i18next'
@@ -11,8 +10,8 @@ export const PlaceTokenOnCabaretNearToOtherHeader = () => {
   const name = usePlayerName(activePlayer)
 
   if (itsMe) {
-    return <Trans defaults="header.cabaret.you" />
+    return <Trans i18nKey="header.cabaret.you" />
   }
 
-  return <Trans defaults="header.cabaret.player" values={{ player: name }} />
+  return <Trans i18nKey="header.cabaret.player" values={{ player: name }} />
 }

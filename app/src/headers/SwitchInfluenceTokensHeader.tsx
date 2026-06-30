@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { GatsbyRules } from '@gamepark/gatsby/GatsbyRules'
 import { CustomMoveType } from '@gamepark/gatsby/rules/CustomMoveType'
 import { PlayMoveButton, useLegalMove, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
@@ -16,7 +15,7 @@ export const SwitchInfluenceTokensHeader = () => {
   if (itsMe) {
     return (
       <Trans
-        defaults="header.switch.tokens.you"
+        i18nKey="header.switch.tokens.you"
         components={{
           pass: <PlayMoveButton move={pass} />
         }}
@@ -24,5 +23,5 @@ export const SwitchInfluenceTokensHeader = () => {
     )
   }
 
-  return <Trans defaults="header.switch.tokens.player" values={{ player: name }} />
+  return <Trans i18nKey="header.switch.tokens.player" values={{ player: name }} />
 }

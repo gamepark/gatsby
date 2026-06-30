@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { GatsbyRules } from '@gamepark/gatsby/GatsbyRules'
 import { CustomMoveType } from '@gamepark/gatsby/rules/CustomMoveType'
 import { PlayMoveButton, useLegalMove, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
@@ -16,7 +15,7 @@ export const ShowTwoCharacterTilesHeader = () => {
   if (itsMe) {
     return (
       <Trans
-        defaults="header.show.character.you"
+        i18nKey="header.show.character.you"
         components={{
           pass: <PlayMoveButton move={pass} />
         }}
@@ -24,5 +23,5 @@ export const ShowTwoCharacterTilesHeader = () => {
     )
   }
 
-  return <Trans defaults="header.show.character.player" values={{ player: name }} />
+  return <Trans i18nKey="header.show.character.player" values={{ player: name }} />
 }

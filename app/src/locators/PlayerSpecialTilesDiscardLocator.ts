@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { PlayerRole } from '@gamepark/gatsby/PlayerRole'
 import { DeckLocator } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'

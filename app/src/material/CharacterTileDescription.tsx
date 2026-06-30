@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { CharacterTile } from '@gamepark/gatsby/material/CharacterTile'
 import { LocationType } from '@gamepark/gatsby/material/LocationType'
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'

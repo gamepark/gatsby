@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { PlayerRole } from '@gamepark/gatsby/PlayerRole'
 import { PileLocator } from '@gamepark/react-game'
 import { Location, MaterialItem } from '@gamepark/rules-api'

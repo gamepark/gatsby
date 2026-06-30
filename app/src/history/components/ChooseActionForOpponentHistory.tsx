@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { LocationType } from '@gamepark/gatsby/material/LocationType'
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { actionTypes } from '@gamepark/gatsby/rules/helpers/ActionHelper'
@@ -15,7 +14,7 @@ export const ChooseActionForOpponentHistory = (props: MoveComponentProps) => {
   const actionId: number = move.location.id
 
   if (actionTypes.includes(actionId)) {
-    return <Trans defaults="history.choose.action.opponent.player" values={{ player: name, actionId, opponent }} />
+    return <Trans i18nKey="history.choose.action.opponent.player" values={{ player: name, actionId, opponent }} />
   }
 
   const tile: MaterialItem = context.game.items[MaterialType.SpecialActionTile].find(
@@ -23,7 +22,7 @@ export const ChooseActionForOpponentHistory = (props: MoveComponentProps) => {
   )
 
   return (
-    <Trans defaults="history.choose.action.special.opponent.player" values={{ player: name, opponent }}>
+    <Trans i18nKey="history.choose.action.special.opponent.player" values={{ player: name, opponent }}>
       <PlayMoveButton move={displayMaterialHelp(MaterialType.SpecialActionTile, tile)} transient />
     </Trans>
   )

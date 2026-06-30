@@ -1,7 +1,6 @@
-/** @jsxImportSource @emotion/react */
 import { pointerWithin } from '@dnd-kit/core'
 import { css } from '@emotion/react'
-import { GameTable } from '@gamepark/react-game'
+import { DevToolsHub, GameTable } from '@gamepark/react-game'
 import { FC } from 'react'
 import { PlayerPanels } from './panels/PlayerPanels'
 
@@ -23,6 +22,7 @@ export const GameDisplay: FC<GameDisplayProps> = () => {
         collisionAlgorithm={pointerWithin}
       >
         <PlayerPanels />
+        {process.env.NODE_ENV === 'development' && <DevToolsHub fabBottom="calc(5em)" />}
       </GameTable>
     </>
   )

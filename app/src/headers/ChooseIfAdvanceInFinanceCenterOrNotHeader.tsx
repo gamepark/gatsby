@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { GatsbyRules } from '@gamepark/gatsby/GatsbyRules'
 import { CustomMoveType } from '@gamepark/gatsby/rules/CustomMoveType'
 import { PlayMoveButton, useLegalMove, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
@@ -17,7 +16,7 @@ export const ChooseIfAdvanceInFinanceCenterOrNotHeader = () => {
   if (itsMe) {
     return (
       <Trans
-        defaults="header.finance.center.choose.you"
+        i18nKey="header.finance.center.choose.you"
         components={{
           pass: <PlayMoveButton move={pass} />,
           advance: <PlayMoveButton move={advance} />
@@ -26,5 +25,5 @@ export const ChooseIfAdvanceInFinanceCenterOrNotHeader = () => {
     )
   }
 
-  return <Trans defaults="header.finance.center.choose.player" values={{ player: name }} />
+  return <Trans i18nKey="header.finance.center.choose.player" values={{ player: name }} />
 }

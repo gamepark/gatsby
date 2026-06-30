@@ -1,5 +1,5 @@
 import { MaterialGameSetup } from '@gamepark/rules-api'
-import { sample, shuffle } from 'lodash'
+import { sample, shuffle } from 'es-toolkit'
 import { GatsbyOptions } from './GatsbyOptions'
 import { GatsbyRules } from './GatsbyRules'
 import { cabaretTiles } from './material/CabaretTile'

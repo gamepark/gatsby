@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/gatsby/material/LocationType'
 import { linkButtonCss, MaterialHelpProps, Picture, PlayMoveButton } from '@gamepark/react-game'
@@ -24,7 +23,7 @@ export const GameBoardHelp: FC<MaterialHelpProps> = () => {
       <h2>{t(`help.board`)}</h2>
       <p>
         <Trans
-          defaults="help.board.description"
+          i18nKey="help.board.description"
           components={{
             ...components,
             cabaret: <PlayMoveButton css={linkButtonCss} move={displayLocationHelp({ type: LocationType.CabaretTokenSpace })} transient />,
@@ -37,33 +36,33 @@ export const GameBoardHelp: FC<MaterialHelpProps> = () => {
       <p css={flex}>
         <Picture src={Action1} css={mini} />
         <span>
-          <Trans defaults="help.board.actions.1" components={components} />
+          <Trans i18nKey="help.board.actions.1" components={components} />
         </span>
       </p>
       <p css={flex}>
         <Picture src={Action2} css={mini} />
         <span>
-          <Trans defaults="help.board.actions.2" components={components} />
+          <Trans i18nKey="help.board.actions.2" components={components} />
         </span>
       </p>
       <p css={flex}>
         <Picture src={Action3} css={mini} />
         <span>
-          <Trans defaults="help.board.actions.3" components={components} />
+          <Trans i18nKey="help.board.actions.3" components={components} />
         </span>
       </p>
       <p css={flex}>
         <Picture src={Action4} css={mini} />
         <span>
-          <Trans defaults="help.board.actions.4" components={components} />
+          <Trans i18nKey="help.board.actions.4" components={components} />
         </span>
       </p>
       <p>
-        <Trans defaults="help.board.actions.special" components={components} />
+        <Trans i18nKey="help.board.actions.special" components={components} />
       </p>
       <p>
         <Trans
-          defaults="help.board.bonus"
+          i18nKey="help.board.bonus"
           components={{
             ...components,
             bonus: <PlayMoveButton css={linkButtonCss} move={displayLocationHelp({ type: LocationType.BonusCase })} transient />

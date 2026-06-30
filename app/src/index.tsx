@@ -1,22 +1,19 @@
-/** @jsxImportSource @emotion/react */
 import { GatsbyOptionsSpec } from '@gamepark/gatsby/GatsbyOptions'
 import { GatsbyRules } from '@gamepark/gatsby/GatsbyRules'
 import { GatsbySetup } from '@gamepark/gatsby/GatsbySetup'
-import { GameProvider, setupTranslation } from '@gamepark/react-game'
+import { GameProvider } from '@gamepark/react-game'
 import { StrictMode } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { gameAnimations } from './animations/GameAnimations'
 import App from './App'
 import { GatsbyLogs } from './history/GatsbyLogs'
 import Background from './images/Background.jpg'
 import { Locators } from './locators/Locators'
 import { Material } from './material/Material'
-import translations from './translations.json'
+import { GatsbyScoring } from './scoring/GatsbyScoring'
 import { Tutorial } from './tutorial/Tutorial'
 
-setupTranslation(translations, { debug: false })
-
-ReactDOM.render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <GameProvider
       game="gatsby"
@@ -28,10 +25,10 @@ ReactDOM.render(
       tutorial={new Tutorial()}
       locators={Locators}
       animations={gameAnimations}
+      scoring={GatsbyScoring}
       theme={{ root: { background: { image: Background, overlay: 'rgba(0, 0, 0, 0.5)' } } }}
     >
       <App />
     </GameProvider>
-  </StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 )

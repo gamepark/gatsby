@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { LocationType } from '@gamepark/gatsby/material/LocationType'
 import { MoveComponentProps, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
 import { isCustomMove, MaterialMoveBuilder } from '@gamepark/rules-api'
@@ -12,7 +11,7 @@ export const GetRaceTrackBonusHistory = (props: MoveComponentProps) => {
   const bonus = isCustomMove(move) ? move.data : undefined
 
   return (
-    <Trans defaults="history.race.bonus.player" values={{ player: name, bonus }}>
+    <Trans i18nKey="history.race.bonus.player" values={{ player: name, bonus }}>
       <PlayMoveButton move={displayLocationHelp({ type: LocationType.BonusCase })} transient />
     </Trans>
   )

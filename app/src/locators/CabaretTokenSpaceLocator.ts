@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { DropAreaDescription, Locator, MaterialContext } from '@gamepark/react-game'

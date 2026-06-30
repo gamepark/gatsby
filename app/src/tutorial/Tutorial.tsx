@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/gatsby/material/LocationType'
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
@@ -49,17 +48,17 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
   steps: TutorialStep[] = [
     {
       popup: {
-        text: () => <Trans defaults="tuto.welcome" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.welcome" components={BaseComponents} />
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.1" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.1" components={BaseComponents} />
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.2" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.2" components={BaseComponents} />,
         position: { x: -50, y: -20 }
       },
       focus: (game) => ({
@@ -68,7 +67,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.3" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.3" components={BaseComponents} />
       },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.ActionToken)],
@@ -83,7 +82,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.4" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.4" components={BaseComponents} />
       },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.SpecialActionTile)],
@@ -101,7 +100,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.5" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.5" components={BaseComponents} />
       },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.InfluenceToken).player(opponent)],
@@ -124,7 +123,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.6" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.6" components={BaseComponents} />
       },
       focus: () => ({
         locations: [this.location(LocationType.ActionSpace).id(2).location],
@@ -138,12 +137,12 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.7" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.7" components={BaseComponents} />
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.8" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.8" components={BaseComponents} />,
         position: { x: 45, y: 30 }
       },
       focus: (game) => ({
@@ -156,7 +155,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.9" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.9" components={BaseComponents} />,
         position: { x: 15, y: 0 }
       },
       focus: (game) => ({
@@ -178,12 +177,12 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.10" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.10" components={BaseComponents} />
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.11" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.11" components={BaseComponents} />,
         position: { x: 60, y: 0 }
       },
       focus: (game) => ({
@@ -193,7 +192,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.12" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.12" components={BaseComponents} />,
         position: { x: 60, y: 0 }
       },
       focus: (game) => ({
@@ -203,7 +202,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.13" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.13" components={BaseComponents} />,
         position: { y: -20 }
       },
       focus: (game) => ({
@@ -216,7 +215,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.14" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.14" components={BaseComponents} />
       },
       move: {
         filter: isMoveItemType(MaterialType.CharacterTile)
@@ -227,7 +226,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.15" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.15" components={BaseComponents} />
       },
       move: {
         interrupt: (move) => isStartRule(move) && move.id === RuleId.AdvanceInFinanceCenter
@@ -235,12 +234,12 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.16" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.16" components={BaseComponents} />
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.17" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.17" components={BaseComponents} />,
         position: { x: 30 }
       },
       focus: (game) => ({
@@ -259,7 +258,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.18" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.18" components={BaseComponents} />,
         position: { x: 30 }
       },
       focus: (game) => ({
@@ -280,7 +279,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       popup: {
         text: () => (
           <Trans
-            defaults="tuto.step.19"
+            i18nKey="tuto.step.19"
             components={{
               ...BaseComponents,
               gearing: <Picture src={Star} css={mini} />,
@@ -305,7 +304,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.20" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.20" components={BaseComponents} />
       },
       move: {
         interrupt: (move) => isStartRule(move) && move.id === RuleId.ChooseAction
@@ -313,7 +312,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.21" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.21" components={BaseComponents} />
       }
     },
     {
@@ -352,12 +351,12 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.22" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.22" components={BaseComponents} />
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.23" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.23" components={BaseComponents} />
       },
       focus: () => ({
         locations: [this.location(LocationType.ActionSpace).id(3).location],
@@ -371,25 +370,25 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.24" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.24" components={BaseComponents} />,
         position: { y: -10 }
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.25" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.25" components={BaseComponents} />,
         position: { y: -10 }
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.26" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.26" components={BaseComponents} />,
         position: { y: -10 }
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.27" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.27" components={BaseComponents} />,
         position: { x: -40, y: 0 }
       },
       focus: (game) => ({
@@ -399,7 +398,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.28" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.28" components={BaseComponents} />,
         position: { x: -40, y: 0 }
       },
       focus: () => ({
@@ -415,7 +414,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.29" components={BaseComponents} />,
+        text: () => <Trans i18nKey="tuto.step.29" components={BaseComponents} />,
         position: { x: -40, y: 0 }
       },
       focus: () => ({
@@ -433,7 +432,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       popup: {
         text: () => (
           <Trans
-            defaults="tuto.step.30"
+            i18nKey="tuto.step.30"
             components={{
               ...BaseComponents,
               special: <Picture src={Special} css={small} />
@@ -448,12 +447,12 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.31" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.31" components={BaseComponents} />
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.32" components={BaseComponents} />
+        text: () => <Trans i18nKey="tuto.step.32" components={BaseComponents} />
       }
     }
   ]

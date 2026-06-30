@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { GatsbyRules } from '@gamepark/gatsby/GatsbyRules'
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { Trans } from 'react-i18next'
@@ -11,8 +10,8 @@ export const ChooseSpecialActionTileHeader = () => {
   const name = usePlayerName(activePlayer)
 
   if (itsMe) {
-    return <Trans defaults="header.choose.special.action.you" />
+    return <Trans i18nKey="header.choose.special.action.you" />
   }
 
-  return <Trans defaults="header.choose.special.action.player" values={{ player: name }} />
+  return <Trans i18nKey="header.choose.special.action.player" values={{ player: name }} />
 }

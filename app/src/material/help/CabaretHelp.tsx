@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Picture } from '@gamepark/react-game'
 import { Trans, useTranslation } from 'react-i18next'
@@ -16,11 +15,11 @@ export const CabaretHelp = () => {
     <>
       <h2>{t(`help.cabaret`)}</h2>
       <p>
-        <Trans defaults="help.cabaret.description.1" components={components} />
+        <Trans i18nKey="help.cabaret.description.1" components={components} />
       </p>
       <p>
         <Trans
-          defaults="help.cabaret.description.2"
+          i18nKey="help.cabaret.description.2"
           components={{
             ...components,
             star: <Picture src={StarCase} css={mini} />
@@ -29,7 +28,7 @@ export const CabaretHelp = () => {
       </p>
       <p>
         <Trans
-          defaults="help.cabaret.description.3"
+          i18nKey="help.cabaret.description.3"
           components={{
             ...components,
             star: <Picture src={StarCase} css={mini} />
@@ -37,7 +36,7 @@ export const CabaretHelp = () => {
         />
       </p>
       <p>
-        <Trans defaults="help.cabaret.description.4" components={components} />
+        <Trans i18nKey="help.cabaret.description.4" components={components} />
       </p>
     </>
   )

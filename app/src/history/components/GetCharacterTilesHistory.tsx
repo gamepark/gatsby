@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/gatsby/material/MaterialType'
 import { MoveComponentProps, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
 import { MaterialMoveBuilder } from '@gamepark/rules-api'
@@ -13,7 +12,7 @@ export const GetCharacterTilesHistory = (props: MoveComponentProps) => {
   const locationId = getCharacterLocation(tile.location.id)
 
   return (
-    <Trans defaults="history.get.character.player" values={{ player: name, locationId }}>
+    <Trans i18nKey="history.get.character.player" values={{ player: name, locationId }}>
       <PlayMoveButton move={displayMaterialHelp(MaterialType.CharacterTile, tile)} transient />
     </Trans>
   )

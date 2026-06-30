@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { CabaretTile } from '@gamepark/gatsby/material/CabaretTile'
 import { CabaretHelper } from '@gamepark/gatsby/rules/helpers/CabaretHelper'
 import { RuleId } from '@gamepark/gatsby/rules/RuleId'

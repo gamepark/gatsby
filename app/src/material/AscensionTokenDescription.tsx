@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { TokenDescription } from '@gamepark/react-game'
 import WomanSquare from '../images/pawn/WomanSquare.jpg'
 import ManSquare from '../images/pawn/ManSquare.jpg'

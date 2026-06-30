@@ -22,7 +22,7 @@ export class PlaceTokenOnCabaretOrRaceTrackRule extends PlayerTurnRule {
     const moves: MaterialMove[] = []
 
     this.getPossiblePlaces().forEach((place) => {
-      moves.push(this.playerInfluenceTokens.moveItem(() => place))
+      moves.push(this.playerInfluenceTokens.moveItem(() => place, 1))
     })
     moves.push(this.customMove(CustomMoveType.Pass))
     return moves

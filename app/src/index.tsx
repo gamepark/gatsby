@@ -1,4 +1,4 @@
-import { GatsbyOptionsSpec } from '@gamepark/gatsby/GatsbyOptions'
+import { GatsbyOptionsSpecV2 } from '@gamepark/gatsby/GatsbyOptions'
 import { GatsbyRules } from '@gamepark/gatsby/GatsbyRules'
 import { GatsbySetup } from '@gamepark/gatsby/GatsbySetup'
 import { GameProvider } from '@gamepark/react-game'
@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')!).render(
       game="gatsby"
       logs={new GatsbyLogs()}
       Rules={GatsbyRules}
-      optionsSpec={GatsbyOptionsSpec}
+      optionsSpec={GatsbyOptionsSpecV2}
       GameSetup={GatsbySetup}
       material={Material}
       tutorial={new Tutorial()}

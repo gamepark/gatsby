@@ -1,3 +1,3 @@
 export { GatsbyRules } from './GatsbyRules'
-export { GatsbyOptionsSpec } from './GatsbyOptions'
+export { GatsbyOptionsSpecV2 } from './GatsbyOptions'
 export { GatsbySetup } from './GatsbySetup'
